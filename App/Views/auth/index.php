@@ -2,16 +2,11 @@
     <div class="loginWrapper">
       <div class="loginHeader">
       <img src=" http://<?php echo APP_HOST; ?>/public/icons/logo.png" alt="Logo" />
-       
-        <p>Faça o Registro e comece a usar!</p>
+      
+        <p>Faça Login e comece a usar!</p>
       </div>
-      <form>
-        <label>
-          <span>
-            Nome Completo
-          </span>
-          <input type="text" placeholder="Digite o  seu Nome" />
-        </label>
+      <form action="http://<?php echo APP_HOST; ?>/home/index">
+
 
         <label>
           <span>Email</span>
@@ -23,18 +18,11 @@
           <input type="password" placeholder="***************" />
         </label>
 
-        <button class="buttonSubmit">Registrar Usuario</button>
+        <button class="buttonSubmit">Entrar na plataforma</button>
       </form>
-      
-
-      <a href="http://<?php echo APP_HOST; ?>/">
-        Ja Possui conta? Faça Login
+      <a href="http://<?php echo APP_HOST; ?>/register">
+        Não possui conta? Cria uma agora!
       </a>
     </div>
   </div>
 
-
-</body>
-
-
-</html>

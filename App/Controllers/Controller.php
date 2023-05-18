@@ -11,18 +11,25 @@ abstract class Controller
 
     public function __construct($app)
     {
-        $this->setViewParam('nameController',$app->getControllerName());
+        $this->setViewParam('nameController', $app->getControllerName());
     }
 
     public function render($view)
     {
         $viewVar = $this->getViewVar();
         $Sessao  = Sessao::class;
+        if ($view != "/auth/index" && $view != "/auth/register") {
 
-        require_once PATH . '/App/Views/layouts/header.php';
-        require_once PATH . '/App/Views/layouts/menu.php';
-        require_once PATH . '/App/Views/' . $view . '.php';
-        require_once PATH . '/App/Views/layouts/footer.php';
+            require_once PATH . '/App/Views/layouts/header.php';
+            require_once PATH . '/App/Views/layouts/menu.php';
+            require_once PATH . '/App/Views/' . $view . '.php';
+            require_once PATH . '/App/Views/layouts/footer.php';
+        }else {
+            require_once PATH . '/App/Views/layouts/header.php';
+            require_once PATH . '/App/Views/' . $view . '.php';
+
+            
+        }
     }
 
     public function redirect($view)

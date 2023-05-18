@@ -8,6 +8,6 @@
     <title><?php echo TITLE; ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <link href="http://<?php echo APP_HOST; ?>/public/css/main.css" rel="stylesheet">
+    <link href="http://<?php echo APP_HOST; ?>/public/css/style.css" rel="stylesheet">
 </head>
 <body>

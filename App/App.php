@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Controllers\HomeController;
+use App\Controllers\PostController;
 use Exception;
 
 class App
@@ -20,7 +21,7 @@ class App
          */
         define('APP_HOST'       , $_SERVER['HTTP_HOST'] . "/mvc");
         define('PATH'           , realpath('./'));
-        define('TITLE'          , "Aplicação MVC em PHP - FATEC");
+        define('TITLE'          , "Blog");
         define('DB_HOST'        , "localhost");
         define('DB_USER'        , "root");
         define('DB_PASSWORD'    , "");
