@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Controllers\HomeController;
+use App\Controllers\AuthController;
 use App\Controllers\PostController;
 use Exception;
 
@@ -21,11 +22,11 @@ class App
          */
         define('APP_HOST'       , $_SERVER['HTTP_HOST'] . "/mvc");
         define('PATH'           , realpath('./'));
-        define('TITLE'          , "Blog");
+        define('TITLE'          , "TechWise");
         define('DB_HOST'        , "localhost");
         define('DB_USER'        , "root");
         define('DB_PASSWORD'    , "");
-        define('DB_NAME'        , "exemplomvc");
+        define('DB_NAME'        , "techwise");
         define('DB_DRIVER'      , "mysql");
 
         $this->url();
@@ -57,14 +58,14 @@ class App
             $this->controllerName = ucwords($this->controller) . 'Controller';
             $this->controllerName = preg_replace('/[^a-zA-Z]/i', '', $this->controllerName);
         } else {
-            $this->controllerName = "HomeController";
+            $this->controllerName = "AuthController";
         }
 
         $this->controllerFile   = $this->controllerName . '.php';
         $this->action           = preg_replace('/[^a-zA-Z]/i', '', $this->action);
 
         if (!$this->controller) {
-            $this->controller = new HomeController($this);
+            $this->controller = new AuthController($this);
             $this->controller->index();
         }
 

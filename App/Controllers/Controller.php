@@ -19,7 +19,6 @@ abstract class Controller
         $viewVar = $this->getViewVar();
         $Sessao  = Sessao::class;
         if ($view != "/auth/index" && $view != "/auth/register") {
-
             require_once PATH . '/App/Views/layouts/header.php';
             require_once PATH . '/App/Views/layouts/menu.php';
             require_once PATH . '/App/Views/' . $view . '.php';
@@ -27,8 +26,6 @@ abstract class Controller
         }else {
             require_once PATH . '/App/Views/layouts/header.php';
             require_once PATH . '/App/Views/' . $view . '.php';
-
-            
         }
     }
 
