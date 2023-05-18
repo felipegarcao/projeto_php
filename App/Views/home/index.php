@@ -16,7 +16,7 @@
                 </ul>
             </a>
 
-            <a href="">
+            <a href="http://<?php echo APP_HOST; ?>/posts/detalhes">
                 <strong>Como utilizar Hooks</strong>
                 <p>Pensando em sincronização em vez de ciclos de vida.</p>
                 <ul>
@@ -31,7 +31,7 @@
                 </ul>
             </a>
 
-            <a href="">
+            <a href="http://<?php echo APP_HOST; ?>/posts/detalhes">
                 <strong>Como utilizar Hooks</strong>
                 <p>Pensando em sincronização em vez de ciclos de vida.</p>
                 <ul>
@@ -47,7 +47,7 @@
             </a>
 
 
-            <a href="">
+            <a href="http://<?php echo APP_HOST; ?>/posts/detalhes">
                 <strong>Como utilizar Hooks</strong>
                 <p>Pensando em sincronização em vez de ciclos de vida.</p>
                 <ul>
@@ -62,7 +62,7 @@
                 </ul>
             </a>
 
-            <a href="">
+            <a href="http://<?php echo APP_HOST; ?>/posts/detalhes">
                 <strong>Como utilizar Hooks</strong>
                 <p>Pensando em sincronização em vez de ciclos de vida.</p>
                 <ul>
