@@ -1,7 +1,7 @@
 <div class="loginContainer">
     <div class="loginWrapper">
       <div class="loginHeader">
-      <img src=" http://<?php echo APP_HOST; ?>/public/icons/logo.png" alt="Logo" />
+      <img src="http://<?php echo APP_HOST; ?>/public/icons/logo.png" alt="Logo" />
       
         <p>Faça Login e comece a usar!</p>
       </div>

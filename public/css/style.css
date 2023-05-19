@@ -30,6 +30,75 @@ html {
     justify-content: space-between;
     align-items: center;
   }
+
+  .container-popover {
+    position: relative;
+    /* width: 200px;
+    height: 200px; */
+  }
+  
+  .popover-trigger {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .popover-btn {
+    background-color: #f9f9f9;
+    border: none;
+    padding: 10px;
+    border-radius: 99999px;
+  }
+  
+  .popover-content {
+    position: absolute;
+    top: calc(100% + 0px);
+    left: 50%;
+    transform: translateX(-50%);
+    color: #f9f9f9;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: none;
+    opacity: 0;
+    transition: opacity 1s ease-out;
+    pointer-events: none;
+    background-color: #282C34;
+    width: 150px;
+    text-align: center;
+    font-size: 12px;
+  }
+
+  .popover-content a {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .popover-content a:last-child {
+    margin-bottom: 0px;
+  }
+  
+  .popover-trigger:hover .popover-content {
+    display: block;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .popover-content:hover {
+    display: block;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  
+  .popover-content:hover .popover-content {
+    display: block;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  
+  .popover-trigger:not(:hover) .popover-content {
+    transition-delay: 0.3s;
+  }
+  
   
   /*
   ================ HEADER =================
@@ -137,6 +206,9 @@ html {
   .posts ul li {
     margin-right: 3rem;
     color: #bbbbbb;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
   
   /* Detalhes */
@@ -422,6 +494,22 @@ html {
     list-style: none;
     margin-top: 1rem;
   }
+
+  .detalhesPostInfo ul li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #bbbbbb;
+    font-size: 14px;
+  }
+
+  .cardContainer  strong {
+    display: block;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    transition: color 0.3s;
+    color: #f8f8f8;
+  }
   
   .actions {
     display: flex;
@@ -447,4 +535,24 @@ html {
   }
   
   
-  
+/* MODAL */
+
+
+.modal-content {
+  background-color: #282C34 !important;
+}
+
+.modal-content .actions {
+  padding: 1rem;
+}
+
+.modal-body form textarea {
+  background: #202024;
+  color: #D7D7D7;
+  border: 0;
+  padding: 1rem;
+  font-size: 12px;
+  resize: none;
+  margin-bottom: 2rem;
+  width: 100%;
+}

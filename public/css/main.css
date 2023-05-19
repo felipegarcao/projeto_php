@@ -136,4 +136,9 @@ a {
 .posts ul li {
   margin-right: 3rem;
   color: #BBBBBB;
+  display: flex;
+
+  align-items: center;
 }
+
+

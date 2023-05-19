@@ -1,21 +1,21 @@
 
 
 <div class="container containerSolicitacao">
-    <h1>Solicitações</h1>
+    <h1>Meus Posts</h1>
     <div class="cardContainer">
         <div class="flag aceito">
             <span>Aprovado</span>
         </div>
         <header>
-            <h3>Titulo da Postagem</h3>
+            <strong>Titulo da Postagem</strong>
             <div class="detalhesPostInfo">
                 <ul>
                     <li>
-                        📆
-                        16/05/2023
+                    <img src="http://<?php echo APP_HOST; ?>/public/icons/calendar.png" alt="calendario" />
+                        <time>16/05/2023</time>
                     </li>
                     <li>
-                        🙅‍♂️
+                         <img src="http://<?php echo APP_HOST; ?>/public/icons/user.png" alt="user" />
                         16/05/2023
                     </li>
                 </ul>
@@ -36,15 +36,15 @@
             <span>Pendente</span>
         </div>
         <header>
-            <h3>Titulo da Postagem</h3>
+            <strong>Titulo da Postagem</strong>
             <div class="detalhesPostInfo">
                 <ul>
                     <li>
-                        📆
+                         <img src="http://<?php echo APP_HOST; ?>/public/icons/calendar.png" alt="calendario" />
                         16/05/2023
                     </li>
                     <li>
-                        🙅‍♂️
+                         <img src="http://<?php echo APP_HOST; ?>/public/icons/user.png" alt="user" />
                         16/05/2023
                     </li>
                 </ul>
@@ -65,15 +65,15 @@
             <span>Negado</span>
         </div>
         <header>
-            <h3>Titulo da Postagem</h3>
+            <strong>Titulo da Postagem</strong>
             <div class="detalhesPostInfo">
                 <ul>
                     <li>
-                        📆
+                         <img src="http://<?php echo APP_HOST; ?>/public/icons/calendar.png" alt="calendario" />
                         16/05/2023
                     </li>
                     <li>
-                        🙅‍♂️
+                         <img src="http://<?php echo APP_HOST; ?>/public/icons/user.png" alt="user" />
                         16/05/2023
                     </li>
                 </ul>

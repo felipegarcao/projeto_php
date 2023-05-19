@@ -6,11 +6,11 @@
         <h1>Titulo</h1>
         <ul>
           <li>
-            📆
-            16/05/2023
+            <img src="http://<?php echo APP_HOST; ?>/public/icons/user.png" alt="user" />
+            Luis Felipe Garção silva
           </li>
           <li>
-            🙅‍♂️
+            <img src="http://<?php echo APP_HOST; ?>/public/icons/calendar.png" alt="calendario" />
             16/05/2023
           </li>
         </ul>
@@ -18,7 +18,17 @@
 
       <article>
         <div class="postContent">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto similique necessitatibus aperiam architecto quasi, illo unde, quam dolores nesciunt tempore eveniet impedit, in rerum nisi minus? Veritatis modi perspiciatis in.Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto similique necessitatibus aperiam architecto quasi, illo unde, quam dolores nesciunt tempore eveniet impedit, in rerum nisi minus? Veritatis modi perspiciatis in.Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto similique necessitatibus aperiam architecto quasi, illo unde, quam dolores nesciunt tempore eveniet impedit, in rerum nisi minus? Veritatis modi perspiciatis in.Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto similique necessitatibus aperiam architecto quasi, illo unde, quam dolores nesciunt tempore eveniet impedit, in rerum nisi minus? Veritatis modi perspiciatis in.Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto similique necessitatibus aperiam architecto quasi, illo unde, quam dolores nesciunt tempore eveniet impedit, in rerum nisi minus? Veritatis modi perspiciatis in.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto similique necessitatibus aperiam architecto
+          quasi, illo unde, quam dolores nesciunt tempore eveniet impedit, in rerum nisi minus? Veritatis modi
+          perspiciatis in.Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto similique necessitatibus
+          aperiam architecto quasi, illo unde, quam dolores nesciunt tempore eveniet impedit, in rerum nisi minus?
+          Veritatis modi perspiciatis in.Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto similique
+          necessitatibus aperiam architecto quasi, illo unde, quam dolores nesciunt tempore eveniet impedit, in rerum
+          nisi minus? Veritatis modi perspiciatis in.Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
+          similique necessitatibus aperiam architecto quasi, illo unde, quam dolores nesciunt tempore eveniet impedit,
+          in rerum nisi minus? Veritatis modi perspiciatis in.Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Iusto similique necessitatibus aperiam architecto quasi, illo unde, quam dolores nesciunt tempore eveniet
+          impedit, in rerum nisi minus? Veritatis modi perspiciatis in.
         </div>
       </article>
 
@@ -46,18 +56,20 @@
             <div class="postsTop">
               <ul>
                 <li>
-                  🙅‍♂️
+                  <img src="http://<?php echo APP_HOST; ?>/public/icons/user.png" alt="user" />
                   Luis Felipe Garção Silva
                 </li>
                 <li>
-                  📆
+                  <img src="http://<?php echo APP_HOST; ?>/public/icons/calendar.png" alt="calendario" />
                   16/05/2023
                 </li>
 
               </ul>
             </div>
 
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius saepe molestias pariatur tempora beatae possimus voluptatum aut sequi magni laborum atque eos iste, accusamus fugiat illo quia ipsum nihil animi?</p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius saepe molestias pariatur tempora beatae
+              possimus voluptatum aut sequi magni laborum atque eos iste, accusamus fugiat illo quia ipsum nihil animi?
+            </p>
 
           </div>
 

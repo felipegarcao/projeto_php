@@ -8,4 +8,12 @@ class PostsController extends Controller
     {
         $this->render('/posts/detalhes');
     }
+
+    public function meusposts() {
+        $this->render('/posts/meus-posts');
+    }
+
+    public function solicitacoes() {
+        $this->render('/posts/solicitacoes');
+    }
 }   
