@@ -1,28 +1,27 @@
 <div class="loginContainer">
-    <div class="loginWrapper">
-      <div class="loginHeader">
+  <div class="loginWrapper">
+    <div class="loginHeader">
       <img src="http://<?php echo APP_HOST; ?>/public/icons/logo.png" alt="Logo" />
-      
-        <p>Faça Login e comece a usar!</p>
-      </div>
-      <form action="http://<?php echo APP_HOST; ?>/home/index">
-
-
-        <label>
-          <span>Email</span>
-          <input type="email" placeholder="Digite seu e-mail" />
-        </label>
-
-        <label>
-          <span>Sua Senha</span>
-          <input type="password" placeholder="***************" />
-        </label>
-
-        <button class="buttonSubmit">Entrar na plataforma</button>
-      </form>
-      <a href="http://<?php echo APP_HOST; ?>/user/cadastro">
-        Não possui conta? Cria uma agora!
-      </a>
+      <p>Faça Login e comece a usar!</p>
     </div>
+    <form action="http://<?php echo APP_HOST; ?>/login/realizar" method="POST">
+      <label>
+        <span>Email</span>
+        <input type="email" name="email" placeholder="Digite seu e-mail" required />
+      </label>
+      <label>
+        <span>Sua Senha</span>
+        <input type="password" name="password" placeholder="***************" required />
+      </label>
+      <button class="buttonSubmit" type="submit">Entrar na plataforma</button>
+    </form>
+    <a href="http://<?php echo APP_HOST; ?>/user/cadastro">
+      Não possui conta? Crie uma agora!
+    </a>
+    <?php if (isset($_SESSION['erro'])): ?>
+      <p class="error"><?php echo $_SESSION['erro']; ?></p>
+    <?php endif; ?>
   </div>
+</div>
+
 

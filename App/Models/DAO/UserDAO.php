@@ -36,6 +36,28 @@ class UserDAO extends BaseDAO
 
         
     }
+
+
+    public function realizar(string $email): ?User
+    {
+        $resultado = $this->select("SELECT * FROM user WHERE email = :email", [':email' => $email]);
+        $userData = $resultado->fetch();
+
+        if (!$userData) {
+            return null;
+        }
+
+        $user = new User();
+        $user->setIdUser($userData['idUser'])
+            ->setName($userData['name'])
+            ->setEmail($userData['email'])
+            ->setPassword($userData['password']);
+
+        return $user;
+    }
+
+
+
     public function verificaEmail($email)
     {
         try {

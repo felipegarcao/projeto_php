@@ -124,4 +124,10 @@ class User
 		$this->type = $type;
 		return $this;
 	}
+
+	public function verifyPassword(string $password): bool
+    {
+        // Use a função password_verify() para verificar a correspondência da senha
+        return password_verify($password, $this->password);
+    }
 }

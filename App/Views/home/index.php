@@ -1,3 +1,8 @@
+<?php
+
+session_start(); // Inicie a sessão
+?>
+
 <body>
   <main class="container">
     <div class="posts">
