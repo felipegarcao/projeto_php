@@ -4,7 +4,7 @@ namespace App;
 
 use App\Controllers\HomeController;
 use App\Controllers\AuthController;
-use App\Controllers\PostController;
+use App\Controllers\UserController;
 use Exception;
 
 class App
@@ -58,14 +58,14 @@ class App
             $this->controllerName = ucwords($this->controller) . 'Controller';
             $this->controllerName = preg_replace('/[^a-zA-Z]/i', '', $this->controllerName);
         } else {
-            $this->controllerName = "AuthController";
+            $this->controllerName = "UserController";
         }
 
         $this->controllerFile   = $this->controllerName . '.php';
         $this->action           = preg_replace('/[^a-zA-Z]/i', '', $this->action);
 
         if (!$this->controller) {
-            $this->controller = new AuthController($this);
+            $this->controller = new UserController($this);
             $this->controller->index();
         }
 

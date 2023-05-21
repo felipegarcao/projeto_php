@@ -20,7 +20,7 @@
 
         <button class="buttonSubmit">Entrar na plataforma</button>
       </form>
-      <a href="http://<?php echo APP_HOST; ?>/register">
+      <a href="http://<?php echo APP_HOST; ?>/user/cadastro">
         Não possui conta? Cria uma agora!
       </a>
     </div>
