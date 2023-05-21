@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 18-Maio-2023 às 15:42
+-- Tempo de geração: 21-Maio-2023 às 18:44
 -- Versão do servidor: 10.4.28-MariaDB
 -- versão do PHP: 8.2.4
 
@@ -30,12 +30,12 @@ SET time_zone = "+00:00";
 CREATE TABLE `article` (
   `idArticle` int(11) NOT NULL,
   `idUser` int(11) NOT NULL,
-  `text` varchar(200) NOT NULL,
-  `image` varchar(45) DEFAULT NULL,
-  `feedback` varchar(200) DEFAULT NULL,
-  `status` varchar(45) NOT NULL,
+  `text` text NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `feedback` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL,
   `idCategory` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -45,8 +45,16 @@ CREATE TABLE `article` (
 
 CREATE TABLE `category` (
   `idCategory` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `name` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `category`
+--
+
+INSERT INTO `category` (`idCategory`, `name`) VALUES
+(2, 'aaaaaaaa'),
+(3, 'aaaaaaaamor');
 
 -- --------------------------------------------------------
 
@@ -55,11 +63,11 @@ CREATE TABLE `category` (
 --
 
 CREATE TABLE `comment` (
-  `idComment` int(11) NOT NULL,
-  `text` varchar(200) NOT NULL,
+  `idLike` int(11) NOT NULL,
+  `text` text NOT NULL,
   `User_idUser` int(11) NOT NULL,
   `Article_idArticle` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -71,7 +79,7 @@ CREATE TABLE `like` (
   `idLike` int(11) NOT NULL,
   `idUser` int(11) NOT NULL,
   `idArticle` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -81,13 +89,20 @@ CREATE TABLE `like` (
 
 CREATE TABLE `user` (
   `idUser` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `email` varchar(150) NOT NULL,
-  `password` varchar(45) NOT NULL,
-  `avatar` varchar(100) DEFAULT NULL,
-  `description` varchar(200) DEFAULT NULL,
-  `type` varchar(5) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `name` varchar(150) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `avatar` varchar(255) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `type` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `user`
+--
+
+INSERT INTO `user` (`idUser`, `name`, `email`, `password`, `avatar`, `description`, `type`) VALUES
+(8, 'Nicole', 'nicolealvesraimundo@gmail.com', '$2y$10$KhFLl6M2w6bSrNkucW0t7eLBmgQCt31rk8En60RPyUVyeGBZyvm2e', NULL, NULL, NULL);
 
 --
 -- Índices para tabelas despejadas
@@ -98,8 +113,8 @@ CREATE TABLE `user` (
 --
 ALTER TABLE `article`
   ADD PRIMARY KEY (`idArticle`),
-  ADD KEY `fk_Article_User_idx` (`idUser`),
-  ADD KEY `fk_Article_Category1_idx` (`idCategory`);
+  ADD KEY `idUser` (`idUser`),
+  ADD KEY `idCategory` (`idCategory`);
 
 --
 -- Índices para tabela `category`
@@ -111,23 +126,57 @@ ALTER TABLE `category`
 -- Índices para tabela `comment`
 --
 ALTER TABLE `comment`
-  ADD PRIMARY KEY (`idComment`),
-  ADD KEY `fk_Comment_User1_idx` (`User_idUser`),
-  ADD KEY `fk_Comment_Article1_idx` (`Article_idArticle`);
+  ADD PRIMARY KEY (`idLike`),
+  ADD KEY `User_idUser` (`User_idUser`),
+  ADD KEY `Article_idArticle` (`Article_idArticle`);
 
 --
 -- Índices para tabela `like`
 --
 ALTER TABLE `like`
   ADD PRIMARY KEY (`idLike`),
-  ADD KEY `fk_Like_User1_idx` (`idUser`),
-  ADD KEY `fk_Like_Article1_idx` (`idArticle`);
+  ADD KEY `idUser` (`idUser`),
+  ADD KEY `idArticle` (`idArticle`);
 
 --
 -- Índices para tabela `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`idUser`);
+
+--
+-- AUTO_INCREMENT de tabelas despejadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `article`
+--
+ALTER TABLE `article`
+  MODIFY `idArticle` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `category`
+--
+ALTER TABLE `category`
+  MODIFY `idCategory` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de tabela `comment`
+--
+ALTER TABLE `comment`
+  MODIFY `idLike` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `like`
+--
+ALTER TABLE `like`
+  MODIFY `idLike` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `user`
+--
+ALTER TABLE `user`
+  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Restrições para despejos de tabelas
@@ -137,22 +186,22 @@ ALTER TABLE `user`
 -- Limitadores para a tabela `article`
 --
 ALTER TABLE `article`
-  ADD CONSTRAINT `fk_Article_Category1` FOREIGN KEY (`idCategory`) REFERENCES `category` (`idCategory`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Article_User` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `article_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`),
+  ADD CONSTRAINT `article_ibfk_2` FOREIGN KEY (`idCategory`) REFERENCES `category` (`idCategory`);
 
 --
 -- Limitadores para a tabela `comment`
 --
 ALTER TABLE `comment`
-  ADD CONSTRAINT `fk_Comment_Article1` FOREIGN KEY (`Article_idArticle`) REFERENCES `article` (`idArticle`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Comment_User1` FOREIGN KEY (`User_idUser`) REFERENCES `user` (`idUser`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`User_idUser`) REFERENCES `user` (`idUser`),
+  ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`Article_idArticle`) REFERENCES `article` (`idArticle`);
 
 --
 -- Limitadores para a tabela `like`
 --
 ALTER TABLE `like`
-  ADD CONSTRAINT `fk_Like_Article1` FOREIGN KEY (`idArticle`) REFERENCES `article` (`idArticle`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Like_User1` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `like_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`),
+  ADD CONSTRAINT `like_ibfk_2` FOREIGN KEY (`idArticle`) REFERENCES `article` (`idArticle`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

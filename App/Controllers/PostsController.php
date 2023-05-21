@@ -16,4 +16,9 @@ class PostsController extends Controller
     public function solicitacoes() {
         $this->render('/posts/solicitacoes');
     }
+
+    
+    public function cadastrar() {
+        $this->render('/posts/cadastrar');
+    }
 }   
