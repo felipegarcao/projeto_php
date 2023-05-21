@@ -15,6 +15,14 @@ class UserController extends Controller
         $this->render('/user/login');
     }
 
+    public function perfil() {
+        $this->render('/user/perfil');
+    }
+
+    public function author() {
+        $this->render('/user/author');
+    }
+
     public function realizar()
     {
         $email = $_POST['email'];
