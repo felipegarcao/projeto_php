@@ -42,22 +42,20 @@ class UserDAO extends BaseDAO
     {
         $resultado = $this->select("SELECT * FROM user WHERE email = :email", [':email' => $email]);
         $userData = $resultado->fetch();
-
+    
         if (!$userData) {
             return null;
         }
-
+    
         $user = new User();
         $user->setIdUser($userData['idUser'])
             ->setName($userData['name'])
             ->setEmail($userData['email'])
-            ->setPassword($userData['password']);
-
+            ->setPassword($userData['password']); // Aqui, verifique se a senha está sendo definida corretamente, de preferência usando uma função de hash segura, como password_hash().
+    
         return $user;
     }
-
-
-
+    
     public function verificaEmail($email)
     {
         try {

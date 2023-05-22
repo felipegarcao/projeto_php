@@ -23,25 +23,33 @@ class UserController extends Controller
         $this->render('/user/author');
     }
 
+
     public function realizar()
     {
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-
-        $userDAO = new UserDAO();
-        $user = $userDAO->realizar($email);
-
-        if (!$user || !$user->verifyPassword($password)) {
+        if (!isset($_POST['email']) || !isset($_POST['password'])) {
             $_SESSION['erro'] = "Credenciais inválidas. Verifique o email e a senha informados.";
-            $this->redirect('/user');
+            $this->redirect('/user/login');
         }
-
-        // Autenticação bem-sucedida, gravar informações de usuário na sessão ou tomar a ação apropriada.
-
+    
+        $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+        $password = $_POST['password'];
+    
+        $userDAO = new UserDAO(); // Verifique se a classe UserDAO está definida corretamente.
+    
+        $user = $userDAO->realizar($email);
+    
+        if (!$user || !password_verify($password, $user->getPassword())) {
+            $_SESSION['erro'] = "Credenciais inválidas. Verifique o email e a senha informados.";
+            $this->redirect('/user/login');
+        }
+    
+        // Autenticação bem-sucedida, armazene as informações do usuário na sessão ou execute ação apropriada.
+    
         unset($_SESSION['erro']);
         $_SESSION['user'] = $user; // Armazene as informações do usuário na sessão, se necessário.
         $this->redirect('/home');
     }
+    
     public function cadastro()
     {
         $this->render('/user/cadastro');
