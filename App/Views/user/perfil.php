@@ -9,16 +9,12 @@
         </div>
       </div>
 
-
-
-
       <label>
         <span>
           Nome
         </span>
         <input type="text" placeholder="Digite seu Nome" />
       </label>
-
 
       <label>
         <span>

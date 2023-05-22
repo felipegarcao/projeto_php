@@ -19,6 +19,10 @@
             Meus Posts
           </a>
 
+          <a href="http://<?php echo APP_HOST; ?>/posts/cadastrar">
+            Cadastrar
+          </a>
+
           <!-- caso seja adm -->
 
           <a href="http://<?php echo APP_HOST; ?>/posts/solicitacoes">

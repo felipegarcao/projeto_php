@@ -1,5 +1,5 @@
 
-<div class="loginContainer customContainer">
+<div class="loginContainer" style="flex-direction: column; margin-top: 2rem; height: calc(100vh - 230px)">
   <h2>Cadastro de Post</h2>
   <div class="containerCadastroPost">
     <h4>Informações</h4>
@@ -24,7 +24,7 @@
         <span>
           Conteudo
         </span>
-        <textarea rows="15"></textarea>
+        <textarea rows="8"></textarea>
       </label>
 
       <button type="submit" class="buttonSubmit">Cadastrar</button>
