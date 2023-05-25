@@ -15,6 +15,14 @@ class UserDAO extends BaseDAO
         return $resultado->fetchObject(User::class);
     }
 
+    public function getByEmail(string $email)
+    {
+        $resultado = $this->select("SELECT idUser, email, password FROM user WHERE email = '$email'");
+
+        return $resultado->fetch();
+    }
+
+
     public function salvar(User $user)
     {
         try {
@@ -38,22 +46,22 @@ class UserDAO extends BaseDAO
     }
 
 
-    public function realizar(string $email): ?User
+    public function verificar(string $email): ?User
     {
-        $resultado = $this->select("SELECT * FROM user WHERE email = :email", [':email' => $email]);
-        $userData = $resultado->fetch();
+        try {
+            $resultado = $this->getByEmail($email);
+
+            $user = new User();
+            $user->setIdUser($resultado['idUser'])
+            ->setEmail($resultado['email'])
+            ->setPassword($resultado['password']); // Aqui, verifique se a senha está sendo definida corretamente, de preferência usando uma função de hash segura, como password_hash().
     
-        if (!$userData) {
-            return null;
+            return $user;
+
+        } catch (\Exception $e) {
+            throw new \Exception("Erro no login. " . $e->getMessage(), 500);
         }
-    
-        $user = new User();
-        $user->setIdUser($userData['idUser'])
-            ->setName($userData['name'])
-            ->setEmail($userData['email'])
-            ->setPassword($userData['password']); // Aqui, verifique se a senha está sendo definida corretamente, de preferência usando uma função de hash segura, como password_hash().
-    
-        return $user;
+        
     }
     
     public function verificaEmail($email)

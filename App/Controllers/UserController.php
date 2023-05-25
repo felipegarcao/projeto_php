@@ -15,41 +15,71 @@ class UserController extends Controller
         $this->render('/user/login');
     }
 
-    public function perfil() {
+    public function perfil()
+    {
         $this->render('/user/perfil');
     }
 
-    public function author() {
+    public function author()
+    {
         $this->render('/user/author');
     }
 
 
-    public function realizar()
+    public function validar()
     {
+        //if (!isset($_POST['email']) || !isset($_POST['password'])) {
+            //     Sessao::gravaErro("T faltano dado porra.");
+            //     $this->redirect('/user/login');
+            // } else {
+            //         $email = $_POST['email'];
+            //         $password = $_POST['password'];
+            //         session_start();
+            //         $userDAO = new UserDAO(); // Verifique se a classe UserDAO está definida corretamente.
+
+            //         $user = $userDAO->verificar($email);
+            //         echo "alalaala";
+            //         var_dump($user);
+
+            //         if (!$user || password_verify($password,$user->getPassword())) {
+            //             $_SESSION['erro'] = "Credenciais inválidas. Verifique o email e a senha informados.";
+            //             $this->redirect('/user/login');
+            //         } else {
+            //             echo "<script> console.log('oii'); </script>";
+            //             $_SESSION['idUser'] = $user->getIdUser(); // Armazene as informações do usuário na sessão, se necessário.
+            //             $this->redirect('/home');
+            //         }
+            //             // Autenticação bem-sucedida, armazene as informações do usuário na sessão ou execute ação apropriada.
+
+            //     }  
+            
+        //}
+
         if (!isset($_POST['email']) || !isset($_POST['password'])) {
-            $_SESSION['erro'] = "Credenciais inválidas. Verifique o email e a senha informados.";
+            Sessao::gravaErro("T faltano dado porra.");
             $this->redirect('/user/login');
         }
-    
-        $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+
+        echo "setado";
+        $email = $_POST['email'];
         $password = $_POST['password'];
-    
+        session_start();
         $userDAO = new UserDAO(); // Verifique se a classe UserDAO está definida corretamente.
-    
-        $user = $userDAO->realizar($email);
-    
+
+        $user = $userDAO->verificar($email);
+        echo "alalaala";
+        
         if (!$user || !password_verify($password, $user->getPassword())) {
             $_SESSION['erro'] = "Credenciais inválidas. Verifique o email e a senha informados.";
             $this->redirect('/user/login');
         }
-    
-        // Autenticação bem-sucedida, armazene as informações do usuário na sessão ou execute ação apropriada.
-    
-        unset($_SESSION['erro']);
-        $_SESSION['user'] = $user; // Armazene as informações do usuário na sessão, se necessário.
+        
+        $_SESSION['idUser'] = $user->getIdUser(); // Armazene as informações do usuário na sessão, se necessário.
         $this->redirect('/home');
+        var_dump($user);
+        // Autenticação bem-sucedida, armazene as informações do usuário na sessão ou execute ação apropriada.
     }
-    
+
     public function cadastro()
     {
         $this->render('/user/cadastro');
@@ -58,50 +88,50 @@ class UserController extends Controller
         Sessao::limpaMensagem();
         Sessao::limpaErro();
     }
- 
+
     public function salvar()
     {
         $user = new User();
         $user->setName($_POST['name']);
         $user->setEmail($_POST['email']);
         $user->setPassword($_POST['password']);
-    
+
         Sessao::gravaFormulario($_POST);
-    
+
         $userValidador = new UserValidador();
         $resultadoValidacao = $userValidador->validar($user);
-    
+
         if ($resultadoValidacao->getErros()) {
             Sessao::gravaErro($resultadoValidacao->getErros());
             $this->redirect('/user/cadastro');
         }
-    
+
         try {
             $userDao = new UserDAO();
             $existingUser = $userDao->verificaEmail($user->getEmail());
-    
+
             if ($existingUser) {
                 Sessao::gravaErro("O email informado já está em uso.");
                 $this->redirect('/user/erro');
             }
-    
+
             $userDao->salvar($user);
         } catch (\Exception $e) {
             Sessao::gravaMensagem($e->getMessage());
             $this->redirect('/home/index');
         }
-    
+
         Sessao::limpaFormulario();
         Sessao::limpaMensagem();
         Sessao::limpaErro();
-    
+
         Sessao::gravaMensagem("Usuário adicionado com sucesso!");
-    
+
         $this->redirect('/home');
     }
 
-    
-    
+
+
     public function edicao($params)
     {
         $idUser = $params[0];
