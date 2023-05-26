@@ -28,55 +28,29 @@ class UserController extends Controller
 
     public function validar()
     {
-        //if (!isset($_POST['email']) || !isset($_POST['password'])) {
-            //     Sessao::gravaErro("T faltano dado porra.");
-            //     $this->redirect('/user/login');
-            // } else {
-            //         $email = $_POST['email'];
-            //         $password = $_POST['password'];
-            //         session_start();
-            //         $userDAO = new UserDAO(); // Verifique se a classe UserDAO está definida corretamente.
 
-            //         $user = $userDAO->verificar($email);
-            //         echo "alalaala";
-            //         var_dump($user);
-
-            //         if (!$user || password_verify($password,$user->getPassword())) {
-            //             $_SESSION['erro'] = "Credenciais inválidas. Verifique o email e a senha informados.";
-            //             $this->redirect('/user/login');
-            //         } else {
-            //             echo "<script> console.log('oii'); </script>";
-            //             $_SESSION['idUser'] = $user->getIdUser(); // Armazene as informações do usuário na sessão, se necessário.
-            //             $this->redirect('/home');
-            //         }
-            //             // Autenticação bem-sucedida, armazene as informações do usuário na sessão ou execute ação apropriada.
-
-            //     }  
-            
-        //}
+        Sessao::limpaFormulario();
+        Sessao::limpaMensagem();
+        Sessao::limpaErro();
 
         if (!isset($_POST['email']) || !isset($_POST['password'])) {
-            Sessao::gravaErro("T faltano dado porra.");
-            $this->redirect('/user/login');
+            Sessao::gravaMensagem("Ta faltano dado porra.");
+            $this->redirect('/');
         }
 
-        echo "setado";
         $email = $_POST['email'];
         $password = $_POST['password'];
-        session_start();
         $userDAO = new UserDAO(); // Verifique se a classe UserDAO está definida corretamente.
 
         $user = $userDAO->verificar($email);
-        echo "alalaala";
         
         if (!$user || !password_verify($password, $user->getPassword())) {
-            $_SESSION['erro'] = "Credenciais inválidas. Verifique o email e a senha informados.";
-            $this->redirect('/user/login');
+            Sessao::gravaMensagem("Credenciais inválidas. Verifique o email e a senha informados.");
+            $this->redirect('/');
         }
         
         $_SESSION['idUser'] = $user->getIdUser(); // Armazene as informações do usuário na sessão, se necessário.
         $this->redirect('/home');
-        var_dump($user);
         // Autenticação bem-sucedida, armazene as informações do usuário na sessão ou execute ação apropriada.
     }
 
