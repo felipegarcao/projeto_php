@@ -11,26 +11,26 @@
 
         </button>
         <div class="popover-content">
-          <a href="http://<?php echo APP_HOST; ?>/user/perfil">
+          <a class="popover-item" href="http://<?php echo APP_HOST; ?>/user/perfil">
             Meu Perfil
           </a>
 
-          <a href="http://<?php echo APP_HOST; ?>/posts/meus-posts">
+          <a class="popover-item" href="http://<?php echo APP_HOST; ?>/posts/meus-posts">
             Meus Posts
           </a>
 
-          <a href="http://<?php echo APP_HOST; ?>/posts/cadastrar">
+          <a class="popover-item" href="http://<?php echo APP_HOST; ?>/posts/cadastrar">
             Cadastrar
           </a>
 
           <!-- caso seja adm -->
 
-          <a href="http://<?php echo APP_HOST; ?>/posts/solicitacoes">
+          <a class="popover-item" href="http://<?php echo APP_HOST; ?>/posts/solicitacoes">
             Solicitações
           </a>
 
 
-          <a href="">Sair</a>
+          <a class="popover-item" href="">Sair</a>
 
         </div>
       </div>

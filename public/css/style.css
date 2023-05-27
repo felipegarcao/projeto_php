@@ -68,9 +68,15 @@ html {
     font-size: 12px;
   }
 
+  
+
   .popover-content a {
     display: block;
     margin-bottom: 0.5rem;
+  }
+
+  .popover-item:hover {
+    color: #ff57b2 !important;
   }
 
   .popover-content a:last-child {

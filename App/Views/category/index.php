@@ -20,7 +20,9 @@
             <?php } else { ?>      
                 
                 <div class="row mx-auto">
-                <div class="col-md-3" style="width: 200px;">TESTE</div>
+                <div class="col-md-3" style="width: 200px;">
+                    
+                </div>
                 <div class="col-md-3" style="width: 200px;">TESTE</div>
                 <div class="col-md-3" style="width: 200px;">TESTE</div>
                 <div class="col-md-3" style="width: 200px;">TESTE</div>
