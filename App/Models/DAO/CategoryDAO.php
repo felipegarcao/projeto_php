@@ -22,15 +22,12 @@ class CategoryDAO extends BaseDAO
     }
 
 
-    public function salvar (Category $category)
+    public function salvar(Category $category)
     {
         try {
-
             $nome = $category->getName();
-
             return $this->insert('category', ":name", [':name'=>$nome]);
-            
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             throw new \Exception("Erro na gravação dos dados. " . $e->getMessage(), 500);
         }
     }

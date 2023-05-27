@@ -18,53 +18,24 @@
             <?php if (!count($viewVar['listCategory'])) { ?>
                 <div class="alert alert-info" role="alert">Nenhum fornecedor encontrado</div>
             <?php } else { ?>
-
+                <?php foreach ($viewVar['listCategory'] as $category) { ?>
                 <div class="containerCategory">
                     <div class="col-md-3 m-1 card-category">
-                        <strong>Comedia</strong>
+                        <strong><?= $category->getName() ?></strong>
                         <div class="d-flex justify-content-end gap-3 align-items-end mt-5">
-                            <a href="" class="editar">
+                            <a href="http://<?= APP_HOST ?>/category/edicao/<?= $category->getIdCategory() ?>" class="editar">
                                 <img src="http://<?php echo APP_HOST; ?>/public/icons/pencil.png" alt="editar" />
                             </a>
-                            <a href="" class="excluir">
+                            <a href="http://<?= APP_HOST ?>/category/exclusao/<?= $category->getIdCategory() ?>" class="excluir">
                                 <img src="http://<?php echo APP_HOST; ?>/public/icons/x.png" alt="apagar" />
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-3 m-1 card-category">
-                        <strong>Comedia</strong>
-                        <div class="d-flex justify-content-end gap-3 align-items-end mt-5">
-                            <a href="" class="editar">
-                                <img src="http://<?php echo APP_HOST; ?>/public/icons/pencil.png" alt="editar" />
-                            </a>
-                            <a href="" class="excluir">
-                                <img src="http://<?php echo APP_HOST; ?>/public/icons/x.png" alt="apagar" />
-                            </a>
-                        </div>
-                    </div>
-
+                    <?php } ?>
+            <?php } ?>
                 </div>
 
 
-
-                <!-- <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
-                        <tr class="table-success" style="font-weight: bold">
-                            <td class="info">Nome</td>
-                            <td class="info text-center">Ação</td>
-                        </tr>
-                        <?php foreach ($viewVar['listCategory'] as $category) { ?>
-                            <tr>
-                                <td><?= $category->getName() ?></td>
-                                <td style="width:15%">
-                                    <a href="http://<?= APP_HOST ?>/category/edicao/<?= $category->getIdCategory() ?>" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editar </a>
-                                    <a href="http://<?= APP_HOST ?>/category/exclusao/<?= $category->getIdCategory() ?>" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Excluir </a>   
-                                </td>
-                            </tr>
-                        <?php } ?>
-                    </table> -->
-                <!-- </div> -->
-            <?php } ?>
         </div>
     </div>
 </div>
