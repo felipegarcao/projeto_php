@@ -1,16 +1,17 @@
 <?php
 
 namespace App\Models\Entidades;
-
+use Date;
 class Article
 {
     private int $idArticle;
-    private User $user;
+    private User $idUser;
     private string $text;
-    private string $image;
-    private string $feedback;
+    private ?string $image;
+    private ?string $feedback;
     private string $status;
-    private Category $category;
+    private Category $idCategory;
+    private $createdAt;
 
     public function getIdArticle(): int {
         return $this->idArticle;
@@ -21,14 +22,6 @@ class Article
         return $this;
     }
 
-    public function getUser(): User {
-        return $this->user;
-    }
-
-    public function setUser(User $user): self {
-        $this->user = $user;
-        return $this;
-    }
 
     public function getText(): string {
         return $this->text;
@@ -66,12 +59,52 @@ class Article
         return $this;
     }
 
-    public function getCategory(): Category {
-        return $this->category;
-    }
 
-    public function setCategory(Category $category): self {
-        $this->category = $category;
-        return $this;
-    }
+	/**
+	 * @return Category
+	 */
+	public function getIdCategory(): Category {
+		return $this->idCategory;
+	}
+	
+	/**
+	 * @param Category $idCategory 
+	 * @return self
+	 */
+	public function setIdCategory(Category $idCategory): self {
+		$this->idCategory = $idCategory;
+		return $this;
+	}
+	
+	/**
+	 * @return mixed
+	 */
+	public function getCreatedAt() {
+		return $this->createdAt;
+	}
+	
+	/**
+	 * @param mixed $createdAt 
+	 * @return self
+	 */
+	public function setCreatedAt($createdAt): self {
+		$this->createdAt = $createdAt;
+		return $this;
+	}
+
+	/**
+	 * @return User
+	 */
+	public function getIdUser(): User {
+		return $this->idUser;
+	}
+	
+	/**
+	 * @param User $idUser 
+	 * @return self
+	 */
+	public function setIdUser($idUser): self {
+		$this->idUser = $idUser;
+		return $this;
+	}
 }

@@ -32,7 +32,7 @@ class UserController extends Controller
         Sessao::limpaErro();
 
         $_SESSION["loggedin"] = false;
-        unset($_SESSION['email']);
+        unset($_SESSION['idUser']);
 
         $this->redirect('/');
     }
@@ -42,7 +42,6 @@ class UserController extends Controller
 
         $email = $_POST['email'];
         $password = $_POST['password'];
-
         Sessao::gravaFormulario($_POST);
 
         if(empty(trim($email)) && empty(trim($password))){
@@ -52,7 +51,7 @@ class UserController extends Controller
         }
 
         $userDAO = new UserDAO();
-        var_dump($userDAO);
+        
         $idUser = $userDAO->verificar($email, $password);
         
         if ($idUser == 0) {
@@ -61,7 +60,7 @@ class UserController extends Controller
             $this->redirect('/');
         }
        
-        Sessao::gravaLogin($idUser, $email);
+        Sessao::gravaLogin($idUser);
 
         Sessao::limpaFormulario();
         Sessao::limpaErro();
@@ -129,6 +128,7 @@ class UserController extends Controller
 
     public function edicao($params)
     {
+        $this->auth();
         $idUser = $params[0];
 
         $userDAO = new UserDAO();
@@ -150,6 +150,7 @@ class UserController extends Controller
 
     public function atualizar()
     {
+        $this->auth();
         $user = new User();
         $user->setIdUser($_POST['idUser']);
         $user->setName($_POST['name']);
@@ -187,6 +188,7 @@ class UserController extends Controller
 
     public function exclusao($params)
     {
+        $this->auth();
         $idUser = $params[0];
 
         $userDAO = new UserDAO();
@@ -207,6 +209,7 @@ class UserController extends Controller
 
     public function excluir()
     {
+        $this->auth();
         $idUser = $_POST['idUser'];
 
         $userDAO = new UserDAO();

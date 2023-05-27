@@ -11,6 +11,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
+        $this->auth();
         $categoryDao = new CategoryDAO();
 
         self::setViewParam('listCategory', $categoryDao->listar());
@@ -22,6 +23,7 @@ class CategoryController extends Controller
 
     public function cadastro()
     {
+        $this->auth();
         $this->render('/category/cadastro');
 
         Sessao::limpaFormulario();
@@ -31,6 +33,7 @@ class CategoryController extends Controller
 
     public function salvar()
     {
+        $this->auth();
         $category = new Category();
         $category->setName($_POST['nome']);
 
@@ -66,6 +69,7 @@ class CategoryController extends Controller
     
 public function atualizar()
 {
+    $this->auth();
     $category = new Category();
     $category->setIdCategory($_POST['idCategory']);
     $category->setName($_POST['name']);
@@ -100,6 +104,7 @@ public function atualizar()
 public function edicao($params)
 {
 
+    $this->auth();
     $idCategory = $params[0];
 
     $categoryDAO = new CategoryDAO();
@@ -121,6 +126,7 @@ public function edicao($params)
     
     public function exclusao($params)
     {
+        $this->auth();
         $idCategory = $params[0];
     
         $categoryDAO = new CategoryDAO();
@@ -142,6 +148,7 @@ public function edicao($params)
     
     public function excluir()
     {
+        $this->auth();
         $idCategory = $_POST['idCategory'];
     
         $categoryDAO = new CategoryDAO();
