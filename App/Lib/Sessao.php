@@ -4,6 +4,17 @@ namespace App\Lib;
 
 class Sessao
 {
+    public static function gravaLogin($idUser, $email){
+        $_SESSION['loggedin'] = true;
+        $_SESSION['idUser'] = $idUser;
+        $_SESSION['email'] = $email;
+    }
+
+    public static function limpaLogin(){
+        $_SESSION['loggedin'] = false;
+        unset($_SESSION['idUser']);
+        unset($_SESSION['email']);       
+    }
     public static function gravaMensagem($mensagem){
         $_SESSION['mensagem'] = $mensagem;
     }

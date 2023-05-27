@@ -25,34 +25,55 @@ class UserController extends Controller
         $this->render('/user/author');
     }
 
-
-    public function validar()
+    public function logout() 
     {
-
         Sessao::limpaFormulario();
         Sessao::limpaMensagem();
         Sessao::limpaErro();
 
-        if (!isset($_POST['email']) || !isset($_POST['password'])) {
-            Sessao::gravaMensagem("Esta faltando dados.");
-            $this->redirect('/');
-        }
+        $_SESSION["loggedin"] = false;
+        unset($_SESSION['email']);
+
+        $this->redirect('/');
+    }
+
+    public function validar()
+    {
 
         $email = $_POST['email'];
         $password = $_POST['password'];
-        $userDAO = new UserDAO(); // Verifique se a classe UserDAO está definida corretamente.
 
-        $user = $userDAO->verificar($email);
-        
-        if (!$user || !password_verify($password, $user->getPassword())) {
-            Sessao::gravaMensagem("Credenciais inválidas. Verifique o email e a senha informados.");
+        Sessao::gravaFormulario($_POST);
+
+        if(empty(trim($email)) && empty(trim($password))){
+            $erro[] = "Faltou digitar usuário e/ou senha!";
+            Sessao::gravaErro($erro);
             $this->redirect('/');
         }
+
+        $userDAO = new UserDAO();
+        var_dump($userDAO);
+        $idUser = $userDAO->verificar($email, $password);
         
-        $_SESSION['idUser'] = $user->getIdUser(); // Armazene as informações do usuário na sessão, se necessário.
+        if ($idUser == 0) {
+            $erro[] = "Usuário ou senha incorretos. Tente novamente!";
+            Sessao::gravaErro($erro);
+            $this->redirect('/');
+        }
+       
+        Sessao::gravaLogin($idUser, $email);
+
+        Sessao::limpaFormulario();
+        Sessao::limpaErro();
+
+        Sessao::gravaMensagem("Usuário logado com sucesso!");
+
         $this->redirect('/home');
-        // Autenticação bem-sucedida, armazene as informações do usuário na sessão ou execute ação apropriada.
+
+        Sessao::limpaMensagem();
     }
+
+
 
     public function cadastro()
     {
