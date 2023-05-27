@@ -1,5 +1,5 @@
 <div class="loginContainer customContainer"  style="margin-top: 3rem;">
-  <div class="containerCadastroPost">
+  <div class="containerCadastroPost" style=" padding: 2rem;">
 
     <form>
 

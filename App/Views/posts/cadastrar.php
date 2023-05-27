@@ -1,7 +1,7 @@
 
 <div class="loginContainer" style="flex-direction: column; margin-top: 2rem; height: calc(100vh - 230px)">
   <h2>Cadastro de Post</h2>
-  <div class="containerCadastroPost">
+  <div class="containerCadastroPost" style="padding: 2rem">
     <h4>Informações</h4>
     <form>
 

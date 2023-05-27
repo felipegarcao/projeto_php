@@ -34,7 +34,7 @@ class UserController extends Controller
         Sessao::limpaErro();
 
         if (!isset($_POST['email']) || !isset($_POST['password'])) {
-            Sessao::gravaMensagem("Ta faltano dado porra.");
+            Sessao::gravaMensagem("Esta faltando dados.");
             $this->redirect('/');
         }
 

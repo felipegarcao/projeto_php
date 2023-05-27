@@ -1,8 +1,8 @@
 <div class="container">
     <div class="row">
         <br />
-        <div class="col-md-12">
-            <a href="http://<?php echo APP_HOST; ?>/category/cadastro" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar</a>
+        <div class="col-md-2 mt-4">
+            <a href="http://<?php echo APP_HOST; ?>/category/cadastro" class="buttonSubmit"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar</a>
         </div>
         <div class="col-md-12">
             <hr>
@@ -17,8 +17,18 @@
 
             <?php if(!count($viewVar['listCategory'])){ ?>
                 <div class="alert alert-info" role="alert">Nenhum fornecedor encontrado</div>
-            <?php } else { ?>                
-                <div class="table-responsive">
+            <?php } else { ?>      
+                
+                <div class="row mx-auto">
+                <div class="col-md-3" style="width: 200px;">TESTE</div>
+                <div class="col-md-3" style="width: 200px;">TESTE</div>
+                <div class="col-md-3" style="width: 200px;">TESTE</div>
+                <div class="col-md-3" style="width: 200px;">TESTE</div>
+                </div>
+                
+
+
+                <!-- <div class="table-responsive">
                     <table class="table table-bordered table-hover">
                         <tr class="table-success" style="font-weight: bold">
                             <td class="info">Nome</td>
@@ -33,8 +43,8 @@
                                 </td>
                             </tr>
                         <?php } ?>
-                    </table>
-                </div>
+                    </table> -->
+                <!-- </div> -->
             <?php } ?>
         </div>
     </div>

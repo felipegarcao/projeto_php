@@ -1,25 +1,21 @@
-<div class="container">
-    <div class="col-md-9">
+<div class="loginContainer" style="flex-direction: column; margin-top: 2rem; height: calc(100vh - 230px)">
+  <h2>Cadastro de Categoria</h2>
+  <div class="containerCadastroPost" style="padding: 2rem">
 
-        <h1>Cadastro de categoria</h1>       
+    <form>
 
-        <?php if($Sessao::retornaErro()){ ?>
-            <div class="alert alert-warning" role="alert">
-                <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <?php foreach($Sessao::retornaErro() as $key => $mensagem) { echo $mensagem . "<br />"; } ?> 
-            </div>
-        <?php } ?>     
+      <label>
+        <span>
+          Nome da Categoria
+        </span>
+        <input type="text" placeholder="Digite o ome da Categoria" />
+      </label>
 
-        <form action="http://<?php echo APP_HOST; ?>/category/salvar" method="post" id="form_cadastro">
-            <br />
-            <div class="form-group">
-                <label for="nome">Nome</label>
-                <input type="text" class="form-control"  name="nome" placeholder="Nome da categoria" value="<?php echo $Sessao::retornaValorFormulario('name'); ?>" required>
-            </div>
-            <br />
-            <button type="submit" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Salvar </button>
-            <a href="http://<?php echo APP_HOST; ?>/category" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Cancelar </a>
-        </form>
-    </div>
-    <div class=" col-md-3"></div>
+
+    
+
+      <button type="submit" class="buttonSubmit">Cadastrar</button>
+
+    </form>
+  </div>
 </div>

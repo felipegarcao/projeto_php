@@ -1,27 +1,21 @@
-<div class="container">
-    <div class="col-md-9">
+<div class="loginContainer" style="flex-direction: column; margin-top: 2rem; height: calc(100vh - 230px)">
+  <h2>Alterar Categoria</h2>
+  <div class="containerCadastroPost" style="padding: 2rem">
 
-        <h1>Editar categoria</h1>
+    <form>
 
-        <?php if($Sessao::retornaErro()){ ?>
-            <div class="alert alert-warning" role="alert">
-                <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <?php foreach($Sessao::retornaErro() as $key => $mensagem) { echo $mensagem . "<br />"; } ?> 
-            </div>
-        <?php } ?>   
+      <label>
+        <span>
+          Nome da Categoria
+        </span>
+        <input type="text" placeholder="Digite o nome da Categoria" />
+      </label>
 
-        <form action="http://<?php echo APP_HOST; ?>/category/atualizar" method="post" id="form_cadastro">
-            <br />
-            <input type="hidden" class="form-control" name="idCategory" id="idCategory" value="<?php echo $viewVar['category']->getIdCategory(); ?>">
 
-            <div class="form-group">
-                <label for="nome">Nome</label>
-                <input type="text"  class="form-control" name="name" id="name" placeholder="" value="<?php echo $viewVar['category']->getName(); ?>" required>
-            </div>
-            <br />
-            <button type="submit" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Salvar </button>
-            <a href="http://<?php echo APP_HOST; ?>/category" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Cancelar </a>
-        </form>
-    </div>
-    <div class=" col-md-3"></div>
+    
+
+      <button type="submit" class="buttonSubmit">Atualizar</button>
+
+    </form>
+  </div>
 </div>
