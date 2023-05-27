@@ -58,67 +58,66 @@ class CategoryController extends Controller
         Sessao::limpaMensagem();
         Sessao::limpaErro();
 
-        Sessao::gravaMensagem("Category adicionado com sucesso!");
+        Sessao::gravaMensagem("Categoria adicionada com sucesso!");
 
         $this->redirect('/category');
     }
-    public function edicao($params)
-    {
-        $idCategory = $params[0];
 
+    
+public function atualizar()
+{
+    $category = new Category();
+    $category->setIdCategory($_POST['idCategory']);
+    $category->setName($_POST['name']);
+
+    Sessao::gravaFormulario($_POST);
+
+    $categoryValidador = new CategoryValidador();
+    $resultadoValidacao = $categoryValidador->validar($category);
+
+    if($resultadoValidacao->getErros()){
+        Sessao::gravaErro($resultadoValidacao->getErros());
+        $this->redirect('/category/edicao/'.$_POST['idCategory']);
+    }
+
+    try {
         $categoryDAO = new CategoryDAO();
-
-        $category = $categoryDAO->getById($idCategory);
-
-        if(!$category){
-            Sessao::gravaErro("Categoria (idCategory:{$idCategory}) inexistente.");
-            $this->redirect('/category');
-        }
-
-        self::setViewParam('category',$category);
-
-        $this->render('/category/editar');
-
-        Sessao::limpaMensagem();
-        Sessao::limpaErro();
+        $categoryDAO->atualizar($category);
+    } catch (\Exception $e) {
+        Sessao::gravaMensagem($e->getMessage());
+        $this->redirect('/category');            
     }
 
-    public function atualizar()
-    {
-        $category = new Category();
-        $category->setIdCategory($_POST['idCategory']);
-        $category->setName($_POST['name']);
+    Sessao::limpaFormulario();
+    Sessao::limpaMensagem();
+    Sessao::limpaErro();
 
-        Sessao::gravaFormulario($_POST);
+    Sessao::gravaMensagem("Categoria atualizada com sucesso!");
 
-        $categoryValidador = new CategoryValidador();
-        $resultadoValidacao = $categoryValidador->validar($category);
+    $this->redirect('/category');
+}
 
-        if($resultadoValidacao->getErros()){
-            Sessao::gravaErro($resultadoValidacao->getErros());
-            $this->redirect('/category/edicao/'.$_POST['idCategory']);
-        }
+public function edicao($params)
+{
 
-        try {
+    $idCategory = $params[0];
 
-            $categoryDAO = new CategoryDAO();
-            $categoryDAO->atualizar($category);
+    $categoryDAO = new CategoryDAO();
 
-        } catch (\Exception $e) {
-            Sessao::gravaMensagem($e->getMessage());
-            $this->redirect('/category');            
-        }
+    $category = $categoryDAO->getById($idCategory);
 
-        Sessao::limpaFormulario();
-        Sessao::limpaMensagem();
-        Sessao::limpaErro();
-
-        Sessao::gravaMensagem("Category atualizado com sucesso!");
-
+    if(!$category){
+        Sessao::gravaErro("Categoria (id:{$idCategory}) inexistente.");
         $this->redirect('/category');
     }
 
+    self::setViewParam('category',$category);
 
+    $this->render('/category/editar');
+
+    Sessao::limpaMensagem();
+    Sessao::limpaErro();
+}
     
     public function exclusao($params)
     {
@@ -168,7 +167,6 @@ class CategoryController extends Controller
     
         $this->redirect('/category');
     }
-    
     
     
 }

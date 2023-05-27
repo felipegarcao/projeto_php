@@ -557,11 +557,11 @@ html {
   }
   
   .actions button.aceito {
-    background: #22C55E;
+    background: #FF57B2;
   }
   
   .actions button.negado {
-    background: #D73035;
+    background: #F8F8F8;
   }
   
   
@@ -676,3 +676,34 @@ html {
   gap: 0.5rem;
 } 
 
+
+/* Container Category */
+
+.containerCategory {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+
+.card-category {
+  padding: 1rem;
+  border-radius: 4px;
+  background-color: #282C34;
+  width: 335px;
+  height: 130px;
+}
+
+.card-category a {
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.card-category a.editar {
+  background-color: #FF57B2;
+}
+
+.card-category a.excluir {
+  background-color: #F8F8F8;
+  padding: 10px;
+}
