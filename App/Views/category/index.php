@@ -18,9 +18,9 @@
             <?php if (!count($viewVar['listCategory'])) { ?>
                 <div class="alert alert-info" role="alert">Nenhum fornecedor encontrado</div>
             <?php } else { ?>
-                <?php foreach ($viewVar['listCategory'] as $category) { ?>
                 <div class="containerCategory">
-                    <div class="col-md-3 m-1 card-category">
+                <?php foreach ($viewVar['listCategory'] as $category) { ?>
+                    <div class="card-category">
                         <strong><?= $category->getName() ?></strong>
                         <div class="d-flex justify-content-end gap-3 align-items-end mt-5">
                             <a href="http://<?= APP_HOST ?>/category/edicao/<?= $category->getIdCategory() ?>" class="editar">
