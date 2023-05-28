@@ -1,37 +1,29 @@
-<div class="container">
-    <div class="col-md-9">
-        <h1>Excluir categoria</h1>
-
-        <?php if ($Sessao::retornaErro()) { ?>
-            <div class="alert alert-warning" role="alert">
-                <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <?php foreach ($Sessao::retornaErro() as $key => $mensagem) {
-                    echo $mensagem . "<br />";
-                } ?>
-            </div>
-        <?php } ?>
+<?php if ($Sessao::retornaErro()) { ?>
+    <div class="alert alert-warning" role="alert">
+        <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <?php foreach ($Sessao::retornaErro() as $key => $mensagem) {
+            echo $mensagem . "<br />";
+        } ?>
+    </div>
+<?php } ?>
+<div class="loginContainer" style="flex-direction: column; margin-top: 2rem; height: calc(100vh - 230px)">
+    <h2>Excluir categoria</h2>
+    <div class="containerCadastroPost" style="padding: 2rem">
 
         <form action="http://<?php echo APP_HOST; ?>/category/excluir" method="post" id="form_cadastro">
             <input type="hidden" class="form-control" name="idCategory" id="idCategory" value="<?php echo $viewVar['category']->getIdCategory(); ?>">
-            <br />
-
-            <div class="form-group">
-                <label for="nome">Nome</label>
+            <label>
+                <span>
+                    Nome da Categoria
+                </span>
                 <input type="text" class="form-control" name="name" id="nome" value="<?php echo $viewVar['category']->getName(); ?>" readonly>
-            </div>
+            </label>
 
-            <br />
-            <div class="panel panel-danger">
-                <div class="panel-body">
-                    Deseja realmente excluir a categoria: <b><?= $viewVar['category']->getName() ?></b>?
-                </div>
-                <br />
-                <div class="panel-footer">
-                    <button type="submit" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Excluir</button>
-                    <a href="http://<?php echo APP_HOST; ?>/category" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Cancelar</a>
-                </div>
+            <div class="d-flex gap-3 justify-content-center">
+            <a href="http://<?php echo APP_HOST; ?>/category" class="buttonCancel">Cancelar</a>
+                <button type="submit" class="buttonSubmit">Confirmar</button>
             </div>
         </form>
+
     </div>
-    <div class="col-md-3"></div>
 </div>
