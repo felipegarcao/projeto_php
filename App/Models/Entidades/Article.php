@@ -17,7 +17,8 @@ class Article
 
     public function __construct()
     {
-        $this->user = new User();        
+        $this->user = new User(); 
+        $this->category = new Category();        
     }
 
     public function getIdArticle(): int {

@@ -20,7 +20,7 @@
       <div class="authorPosts">
 
         <div class="postsAuthorSelected">
-          <a href="http://<?php echo APP_HOST; ?>/posts/detalhes">
+          <a href="http://<?php echo APP_HOST; ?>/article/detalhes">
             <strong>Como utilizar Hooks</strong>
             <p>Pensando em sincronização em vez de ciclos de vida.</p>
             <ul>
@@ -31,7 +31,7 @@
 
             </ul>
           </a>
-          <a href="http://<?php echo APP_HOST; ?>/posts/detalhes">
+          <a href="http://<?php echo APP_HOST; ?>/article/detalhes">
             <strong>Como utilizar Hooks</strong>
             <p>Pensando em sincronização em vez de ciclos de vida.</p>
             <ul>
@@ -42,19 +42,7 @@
 
             </ul>
           </a>
-          <a href="http://<?php echo APP_HOST; ?>/posts/detalhes">
-            <strong>Como utilizar Hooks</strong>
-            <p>Pensando em sincronização em vez de ciclos de vida.</p>
-            <ul>
-              <li>
-                <img src="http://<?php echo APP_HOST; ?>/public/icons/calendar.png" alt="calendario" />
-                <time>16/05/2003</time>
-              </li>
-
-            </ul>
-          </a>
-
-          <a href="http://<?php echo APP_HOST; ?>/posts/detalhes">
+          <a href="http://<?php echo APP_HOST; ?>/article/detalhes">
             <strong>Como utilizar Hooks</strong>
             <p>Pensando em sincronização em vez de ciclos de vida.</p>
             <ul>
@@ -66,8 +54,7 @@
             </ul>
           </a>
 
-
-          <a href="http://<?php echo APP_HOST; ?>/posts/detalhes">
+          <a href="http://<?php echo APP_HOST; ?>/article/detalhes">
             <strong>Como utilizar Hooks</strong>
             <p>Pensando em sincronização em vez de ciclos de vida.</p>
             <ul>
@@ -80,7 +67,20 @@
           </a>
 
 
-          <a href="http://<?php echo APP_HOST; ?>/posts/detalhes">
+          <a href="http://<?php echo APP_HOST; ?>/article/detalhes">
+            <strong>Como utilizar Hooks</strong>
+            <p>Pensando em sincronização em vez de ciclos de vida.</p>
+            <ul>
+              <li>
+                <img src="http://<?php echo APP_HOST; ?>/public/icons/calendar.png" alt="calendario" />
+                <time>16/05/2003</time>
+              </li>
+
+            </ul>
+          </a>
+
+
+          <a href="http://<?php echo APP_HOST; ?>/article/detalhes">
             <strong>Como utilizar Hooks</strong>
             <p>Pensando em sincronização em vez de ciclos de vida.</p>
             <ul>

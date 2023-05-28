@@ -94,6 +94,17 @@ class ArticleController extends Controller
         $this->redirect('/home'); // corrigir o redirecionamento para meus posts
     }
 
+    public function detalhes($params)
+    {
+        $this->auth();
+        $idArticle = $params[0];
+
+        $article = new ArticleDAO; 
+        self::setViewParam('article', $article->getById($idArticle));
+
+        $this->render('/article/detalhes');
+    }
+
     public function edicao(){
         $this->auth();
 

@@ -10,7 +10,8 @@ class ArticleDAO extends BaseDAO
     public function getById($id)
     {
         $resultado = $this->select(
-            "SELECT a.title, a.resume, a.text, a.image, a.status, a.createdAt, c.idCategory, c.name as category, u.idUser, u.name as user 
+            "SELECT a.title, a.resume, a.text, a.image, a.status, a.createdAt, c.idCategory, 
+            c.name as category, u.idUser, u.name as user, u.avatar
                 FROM article as a INNER JOIN user as u ON a.idUser = u.idUser 
                 INNER JOIN category as c ON a.idCategory = c.idCategory
                 WHERE a.idArticle = $id"
@@ -20,14 +21,17 @@ class ArticleDAO extends BaseDAO
 
         if($dataSetArticle) {
             $article = new Article();
-            $article->setIdArticle($dataSetArticle['idArticle']);
+            $article->setIdArticle($id);
             $article->setTitle($dataSetArticle['title']);
             $article->setStatus($dataSetArticle['status']);
             $article->setText($dataSetArticle['text']);
             $article->setResume($dataSetArticle['resume']);
             $article->setCreatedAt($dataSetArticle['createdAt']);
             $article->getUser()->setIdUser($dataSetArticle['idUser']);
+            $article->getUser()->setName($dataSetArticle['user']);
+            $article->getUser()->setAvatar($dataSetArticle['avatar']);
             $article->getCategory()->setIdCategory($dataSetArticle['idCategory']);
+            $article->getCategory()->setName($dataSetArticle['category']);
             $article->setImage($dataSetArticle['image']);
 
             return $article;
