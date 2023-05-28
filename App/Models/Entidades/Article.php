@@ -1,16 +1,19 @@
 <?php
 
 namespace App\Models\Entidades;
-
+use DateTime;
 class Article
 {
     private int $idArticle;
     private User $user;
+    private string $title;
+    private string $resume;
     private string $text;
-    private string $image;
-    private string $feedback;
+    private ?string $image;
+    private ?string $feedback;
     private string $status;
     private Category $category;
+    private string $createdAt;
 
     public function getIdArticle(): int {
         return $this->idArticle;
@@ -21,14 +24,6 @@ class Article
         return $this;
     }
 
-    public function getUser(): User {
-        return $this->user;
-    }
-
-    public function setUser(User $user): self {
-        $this->user = $user;
-        return $this;
-    }
 
     public function getText(): string {
         return $this->text;
@@ -36,6 +31,15 @@ class Article
 
     public function setText(string $text): self {
         $this->text = $text;
+        return $this;
+    }
+
+    public function getResume(): string {
+        return $this->resume;
+    }
+
+    public function setResume(string $resume): self {
+        $this->resume = $resume;
         return $this;
     }
 
@@ -66,12 +70,49 @@ class Article
         return $this;
     }
 
-    public function getCategory(): Category {
-        return $this->category;
-    }
 
-    public function setCategory(Category $category): self {
-        $this->category = $category;
-        return $this;
-    }
+		public function getCategory()
+		{
+				return $this->category;
+		}
+	
+		public function setCategory(Category $category)
+		{
+				$this->category = $category;
+		}
+	
+	public function getCreatedAt() {
+		return new DateTime($this->createdAt);
+	}
+
+	public function setCreatedAt($createdAt): self {
+		$this->createdAt = $createdAt;
+		return $this;
+	}
+
+	public function getUser()
+	{
+		return $this->user;
+	}
+
+	public function setUser(User $user)
+	{
+		$this->user = $user;
+	}
+
+	/**
+	 * @return 
+	 */
+	public function getTitle(): string {
+		return $this->title;
+	}
+	
+	/**
+	 * @param  $title 
+	 * @return self
+	 */
+	public function setTitle(string $title): self {
+		$this->title = $title;
+		return $this;
+	}
 }

@@ -25,34 +25,54 @@ class UserController extends Controller
         $this->render('/user/author');
     }
 
-
-    public function validar()
+    public function logout() 
     {
-
         Sessao::limpaFormulario();
         Sessao::limpaMensagem();
         Sessao::limpaErro();
 
-        if (!isset($_POST['email']) || !isset($_POST['password'])) {
-            Sessao::gravaMensagem("Esta faltando dados.");
-            $this->redirect('/');
-        }
+        $_SESSION["loggedin"] = false;
+        unset($_SESSION['idUser']);
+
+        $this->redirect('/');
+    }
+
+    public function validar()
+    {
 
         $email = $_POST['email'];
         $password = $_POST['password'];
-        $userDAO = new UserDAO(); // Verifique se a classe UserDAO está definida corretamente.
+        Sessao::gravaFormulario($_POST);
 
-        $user = $userDAO->verificar($email);
-        
-        if (!$user || !password_verify($password, $user->getPassword())) {
-            Sessao::gravaMensagem("Credenciais inválidas. Verifique o email e a senha informados.");
+        if(empty(trim($email)) && empty(trim($password))){
+            $erro[] = "Faltou digitar usuário e/ou senha!";
+            Sessao::gravaErro($erro);
             $this->redirect('/');
         }
+
+        $userDAO = new UserDAO();
         
-        $_SESSION['idUser'] = $user->getIdUser(); // Armazene as informações do usuário na sessão, se necessário.
+        $idUser = $userDAO->verificar($email, $password);
+        
+        if ($idUser == 0) {
+            $erro[] = "Usuário ou senha incorretos. Tente novamente!";
+            Sessao::gravaErro($erro);
+            $this->redirect('/');
+        }
+       
+        Sessao::gravaLogin($idUser);
+
+        Sessao::limpaFormulario();
+        Sessao::limpaErro();
+
+        Sessao::gravaMensagem("Usuário logado com sucesso!");
+
         $this->redirect('/home');
-        // Autenticação bem-sucedida, armazene as informações do usuário na sessão ou execute ação apropriada.
+
+        Sessao::limpaMensagem();
     }
+
+
 
     public function cadastro()
     {
@@ -108,6 +128,7 @@ class UserController extends Controller
 
     public function edicao($params)
     {
+        $this->auth();
         $idUser = $params[0];
 
         $userDAO = new UserDAO();
@@ -129,6 +150,7 @@ class UserController extends Controller
 
     public function atualizar()
     {
+        $this->auth();
         $user = new User();
         $user->setIdUser($_POST['idUser']);
         $user->setName($_POST['name']);
@@ -166,6 +188,7 @@ class UserController extends Controller
 
     public function exclusao($params)
     {
+        $this->auth();
         $idUser = $params[0];
 
         $userDAO = new UserDAO();
@@ -186,6 +209,7 @@ class UserController extends Controller
 
     public function excluir()
     {
+        $this->auth();
         $idUser = $_POST['idUser'];
 
         $userDAO = new UserDAO();

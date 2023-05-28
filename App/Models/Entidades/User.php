@@ -8,9 +8,9 @@ class User
     private string $name;
     private string $email;
     private string $password;
-    private string $avatar;
-    private string $description;
-    private string $type;
+    private ?string $avatar;
+    private ?string $description;
+    private ?string $type;
     
 
 	/**
@@ -80,7 +80,7 @@ class User
 	/**
 	 * @return 
 	 */
-	public function getAvatar(): string {
+	public function getAvatar(): ?string {
 		return $this->avatar;
 	}
 	

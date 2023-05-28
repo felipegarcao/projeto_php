@@ -13,6 +13,13 @@ abstract class Controller
     {
         $this->setViewParam('nameController', $app->getControllerName());
     }
+    public function auth()
+    {
+        if (!isset($_SESSION["loggedin"]) || !$_SESSION["loggedin"]) {
+            $this->redirect('/');
+        }
+        return true;
+    }
 
     public function render($view)
     {
