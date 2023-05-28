@@ -63,7 +63,7 @@ class ArticleController extends Controller
             $lastId = $articleDAO->salvar($article);
             $article->setIdArticle($lastId);
 
-            if (!empty($_FILES['imagem']['name'])) {      
+            if (!empty($_FILES['image']['name'])) {      
 
                 $objUpload = new Upload($_FILES['image']);
                 $objUpload->setName('img-id'.$lastId);
