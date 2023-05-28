@@ -38,7 +38,7 @@ class ArticleDAO extends BaseDAO
 
     public function listar()
     {
-        $resultado = $this->select("SELECT * FROM article");
+        $resultado = $this->select("SELECT * from article");
 
         return $resultado->fetchAll(\PDO::FETCH_CLASS, Article::class);
     }
@@ -75,7 +75,10 @@ class ArticleDAO extends BaseDAO
             throw new \Exception("Erro na gravação de dados." . $e->getMessage(), 500);
         }
     }
-
+    public function getLastInsertedId(PDO $conexao) {
+        return $conexao->lastInsertId();
+    }
+    
     public  function atualizar(Article $article)
     {
         try {
@@ -112,7 +115,7 @@ class ArticleDAO extends BaseDAO
     {
         try {
 
-            $idArticle             = $article->getIdArticle();
+            $idArticle      = $article->getIdArticle();
             $image         = $article->getImage();
 
             return $this->update(

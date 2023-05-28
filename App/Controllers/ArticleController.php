@@ -11,6 +11,19 @@ use App\Models\Validacao\ArticleValidador;
 
 class ArticleController extends Controller
 {
+    public function index()
+    {
+        $this->auth();
+        
+        $articleDAO = new ArticleDAO();
+
+        self::setViewParam('listArticle'  , $articleDAO->listar());
+
+        $this->render('/article/index');
+
+        Sessao::limpaErro();
+        Sessao::limpaMensagem();
+    }
 
     public function cadastro(){
         $this->auth();
@@ -25,6 +38,7 @@ class ArticleController extends Controller
         Sessao::limpaErro();
 
     }
+    
     public function salvar(){
         $this->auth();
 
@@ -58,41 +72,39 @@ class ArticleController extends Controller
         }
 
         try { 
-
             $articleDAO = new ArticleDAO(); 
+
             $lastId = $articleDAO->salvar($article);
             $article->setIdArticle($lastId);
 
             if (!empty($_FILES['image']['name'])) {      
-
                 $objUpload = new Upload($_FILES['image']);
                 $objUpload->setName('img-id'.$lastId);
                 $article->setImage($objUpload->getBasename());
                 $dir = 'public/images/articles';
-                
+        
                 $sucesso = $objUpload->upload($dir); 
-    
+        
                 if (!$sucesso) {
                     $resultadoValidacao->addErro('imagem',"Imagem: Problemas ao enviar a imagem do ARTICLE. Código de erro: ".$objUpload->getError());
                     Sessao::gravaErro($resultadoValidacao->getErros());
                     $this->redirect('/article/cadastro');
                 }
-                
+        
                 $articleDAO->atualizarImagem($article);
             }  
-
         } catch (\Exception $e) {
             Sessao::gravaMensagem($e->getMessage());
-            $this->redirect('/home');
+            $this->redirect('/article');
+            
         }
+        
 
         Sessao::limpaFormulario();
         Sessao::limpaMensagem();
         Sessao::limpaErro();
 
-        Sessao::gravaMensagem("Artigo enviado com sucesso!");
-        
-        $this->redirect('/home'); // corrigir o redirecionamento para meus posts
+        $this->redirect('/article'); // corrigir o redirecionamento para meus posts
     }
 
     public function edicao(){
