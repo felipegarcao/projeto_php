@@ -12,6 +12,7 @@ class Article
     private string $status;
     private Category $idCategory;
     private $createdAt;
+    private string $title;
 
     public function getIdArticle(): int {
         return $this->idArticle;
@@ -105,6 +106,22 @@ class Article
 	 */
 	public function setIdUser($idUser): self {
 		$this->idUser = $idUser;
+		return $this;
+	}
+
+	/**
+	 * @return 
+	 */
+	public function getTitle(): string {
+		return $this->title;
+	}
+	
+	/**
+	 * @param  $title 
+	 * @return self
+	 */
+	public function setTitle(string $title): self {
+		$this->title = $title;
 		return $this;
 	}
 }
