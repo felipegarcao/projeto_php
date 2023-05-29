@@ -121,7 +121,7 @@
         </form>
       </div>
       <div class="actions">
-        <button type="button" class="negado" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="negado" style="color: #FF57B2;" data-bs-dismiss="modal">Cancelar</button>
         <button type="button" class="aceito">Finalizar</button>
       </div>
     </div>

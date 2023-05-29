@@ -1,4 +1,4 @@
-<div class="loginContainer" style="flex-direction: column; margin-top: 2rem; height: calc(100vh - 230px)">
+<div class="loginContainer" style="flex-direction: column; margin-top: 2rem;">
   <h2>Cadastro de Post</h2>
   <div class="containerCadastroPost" style="padding: 2rem">
     <h4>Informações</h4>
@@ -28,12 +28,17 @@
         <input type="text" placeholder="Esse aqui vai aparecer destacado :)" name="resume" id="resume" value="<?php echo $Sessao::retornaValorFormulario('resume'); ?>" required />
       </label>
 
-      <label for="idCategory">Categoria</label>
-      <select class="form-control" name="idCategory" id="idCategory" required>
+      <label for="idCategory">
+        <span>
+        Categoria
+        </span>
+      <select class="select"  name="idCategory" id="idCategory" required>
         <?php foreach ($viewVar['listCategory'] as $category) { ?>
           <option value="<?= $category->getIdCategory() ?>"><?= $category->getName() ?></option>
         <?php } ?>
-      </select> <br>
+      </select> 
+        </label>
+
 
       <label>
         <span>
@@ -52,7 +57,8 @@
 
 
       <button type="submit" class="buttonSubmit">Cadastrar</button>
-      <a href="http://<?php echo APP_HOST; ?>/home" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Cancelar </a>
+      <a href="http://<?php echo APP_HOST; ?>/home" class="buttonCancel">
+       Cancelar </a>
     </form>
   </div>
 </div>

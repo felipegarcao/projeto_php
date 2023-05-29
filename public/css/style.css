@@ -3,6 +3,7 @@
 html {
     position: relative;
     min-height: 100%;
+    overflow-x: hidden;
   }
   
   * {
@@ -459,6 +460,31 @@ html {
     margin-bottom: 2rem;
   } 
   
+  .select {
+    background-color: #202024;
+    padding: 8px;
+    border: 0;
+    border-radius: 4px;
+    color: #D7D7D7;
+    margin-bottom: 1rem;
+    font-size: 14px;
+  }
+
+
+  .buttonCancel {
+    color: #FF57B2;
+    padding: 1rem;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F8F8F8;
+    outline: 0;
+    border: 0;
+    margin-bottom: 1rem;
+  }
+
+
   /* Solicitações */
   
   
