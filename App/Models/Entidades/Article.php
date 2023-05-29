@@ -15,6 +15,11 @@ class Article
     private Category $category;
     private string $createdAt;
 
+    public function __construct()
+    {
+        $this->user = new User();        
+    }
+
     public function getIdArticle(): int {
         return $this->idArticle;
     }
@@ -71,15 +76,15 @@ class Article
     }
 
 
-		public function getCategory()
-		{
-				return $this->category;
-		}
-	
-		public function setCategory(Category $category)
-		{
-				$this->category = $category;
-		}
+    public function getCategory()
+    {
+            return $this->category;
+    }
+
+    public function setCategory(Category $category)
+    {
+            $this->category = $category;
+    }
 	
 	public function getCreatedAt() {
 		return new DateTime($this->createdAt);

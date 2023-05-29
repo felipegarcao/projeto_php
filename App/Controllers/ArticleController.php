@@ -11,19 +11,6 @@ use App\Models\Validacao\ArticleValidador;
 
 class ArticleController extends Controller
 {
-    public function index()
-    {
-        $this->auth();
-        
-        $articleDAO = new ArticleDAO();
-
-        self::setViewParam('listArticle'  , $articleDAO->listar());
-
-        $this->render('/article/index');
-
-        Sessao::limpaErro();
-        Sessao::limpaMensagem();
-    }
 
     public function cadastro(){
         $this->auth();
@@ -95,7 +82,7 @@ class ArticleController extends Controller
             }  
         } catch (\Exception $e) {
             Sessao::gravaMensagem($e->getMessage());
-            $this->redirect('/article');
+            $this->redirect('/home');
             
         }
         
@@ -104,7 +91,7 @@ class ArticleController extends Controller
         Sessao::limpaMensagem();
         Sessao::limpaErro();
 
-        $this->redirect('/article'); // corrigir o redirecionamento para meus posts
+        $this->redirect('/home'); // corrigir o redirecionamento para meus posts
     }
 
     public function edicao(){

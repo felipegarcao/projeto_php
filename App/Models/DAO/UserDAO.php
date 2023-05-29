@@ -116,4 +116,12 @@ class UserDAO extends BaseDAO
             throw new \Exception("Erro ao excluir o usuário. " . $e->getMessage(), 500);
         }
     }
+
+    public function listar ()
+    {
+        $resultado = $this->select("SELECT * FROM user");
+
+        return $resultado->fetchAll(\PDO::FETCH_CLASS, User::class);
+    }
+
 }
