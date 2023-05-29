@@ -10,7 +10,8 @@ class ArticleDAO extends BaseDAO
     public function getById($id)
     {
         $resultado = $this->select(
-            "SELECT a.title, a.resume, a.text, a.image, a.status, a.createdAt, c.idCategory, c.name as category, u.idUser, u.name as user 
+            "SELECT a.title, a.resume, a.text, a.image, a.status, a.createdAt, c.idCategory, 
+            c.name as category, u.idUser, u.name as user, u.avatar
                 FROM article as a INNER JOIN user as u ON a.idUser = u.idUser 
                 INNER JOIN category as c ON a.idCategory = c.idCategory
                 WHERE a.idArticle = $id"
@@ -20,14 +21,17 @@ class ArticleDAO extends BaseDAO
 
         if($dataSetArticle) {
             $article = new Article();
-            $article->setIdArticle($dataSetArticle['idArticle']);
+            $article->setIdArticle($id);
             $article->setTitle($dataSetArticle['title']);
             $article->setStatus($dataSetArticle['status']);
             $article->setText($dataSetArticle['text']);
             $article->setResume($dataSetArticle['resume']);
             $article->setCreatedAt($dataSetArticle['createdAt']);
             $article->getUser()->setIdUser($dataSetArticle['idUser']);
+            $article->getUser()->setName($dataSetArticle['user']);
+            $article->getUser()->setAvatar($dataSetArticle['avatar']);
             $article->getCategory()->setIdCategory($dataSetArticle['idCategory']);
+            $article->getCategory()->setName($dataSetArticle['category']);
             $article->setImage($dataSetArticle['image']);
 
             return $article;
@@ -38,7 +42,7 @@ class ArticleDAO extends BaseDAO
 
     public function listar()
     {
-        $resultado = $this->select("SELECT * from article");
+        $resultado = $this->select("SELECT * FROM article");
 
         return $resultado->fetchAll(\PDO::FETCH_CLASS, Article::class);
     }
@@ -75,10 +79,7 @@ class ArticleDAO extends BaseDAO
             throw new \Exception("Erro na gravação de dados." . $e->getMessage(), 500);
         }
     }
-    public function getLastInsertedId(PDO $conexao) {
-        return $conexao->lastInsertId();
-    }
-    
+
     public  function atualizar(Article $article)
     {
         try {
@@ -115,7 +116,7 @@ class ArticleDAO extends BaseDAO
     {
         try {
 
-            $idArticle      = $article->getIdArticle();
+            $idArticle             = $article->getIdArticle();
             $image         = $article->getImage();
 
             return $this->update(
@@ -131,6 +132,53 @@ class ArticleDAO extends BaseDAO
         }catch (\Exception $e){
             throw new \Exception("Erro na gravação de dados." . $e->getMessage(), 500);
         }
+    }
+
+    public function aproved(Article $article)
+    {
+        try {
+            $status = "Aproved";
+            $idArticle = $article->getIdArticle();
+            return $this->update(
+                'article',
+                "status = :status",
+                [
+                    ':status' => $status
+                ],
+                "idArticle = $idArticle"
+            );
+            
+
+        }catch (\Exception $e){
+            throw new \Exception("Erro na gravação de dados." . $e->getMessage(), 500);
+        }
+    }
+
+    public function denied(Article $article)
+    {
+        try {
+            $status = "Denied";
+            $idArticle = $article->getIdArticle();
+            return $this->update(
+                'article',
+                "status = :status",
+                [
+                    ':status' => $status
+                ],
+                "idArticle = $idArticle"
+            );
+            
+
+        }catch (\Exception $e){
+            throw new \Exception("Erro na gravação de dados." . $e->getMessage(), 500);
+        }
+    }
+
+
+    public  function listarSolicitacoes()
+    {
+            $resultado = $this->select("SELECT * FROM article WHERE status='Pending'");
+            return $resultado->fetchAll(\PDO::FETCH_CLASS, Article::class);
     }
 
     public function excluir(Article $article)

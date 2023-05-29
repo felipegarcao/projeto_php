@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Models\DAO\ArticleDAO;
+use App\Models\DAO\UserDAO;
 use App\Lib\Sessao;
 
 class HomeController extends Controller
@@ -9,12 +10,14 @@ class HomeController extends Controller
     public function index()
     {
             $this->auth();
+            $this->auth();
 
+            
             $articleDAO = new ArticleDAO();
             self::setViewParam('listArticle', $articleDAO->listar());
+            $user = new UserDAO; 
+            self::setViewParam('user', $user->getById($_SESSION['idUser']));
+            
             $this->render('/home/index');
-
-            Sessao::limpaMensagem();
-            Sessao::limpaErro();
     }
 }

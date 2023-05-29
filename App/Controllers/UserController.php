@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Lib\Sessao;
+use App\Lib\Upload;
 use App\Models\DAO\UserDAO;
 use App\Models\Entidades\User;
 use App\Models\Validacao\UserValidador;
@@ -17,6 +18,11 @@ class UserController extends Controller
 
     public function perfil()
     {
+        $this->auth();
+
+        $user = new UserDAO; 
+        self::setViewParam('user', $user->getById($_SESSION['idUser']));
+        
         $this->render('/user/perfil');
     }
 
@@ -65,8 +71,6 @@ class UserController extends Controller
         Sessao::limpaFormulario();
         Sessao::limpaErro();
 
-        Sessao::gravaMensagem("Usuário logado com sucesso!");
-
         $this->redirect('/home');
 
         Sessao::limpaMensagem();
@@ -85,10 +89,17 @@ class UserController extends Controller
 
     public function salvar()
     {
+        $description = " ";
+        $image = "profileFixed.jpg";
+        $type = "user";
+        
         $user = new User();
         $user->setName($_POST['name']);
         $user->setEmail($_POST['email']);
         $user->setPassword($_POST['password']);
+        $user->setDescription($description);
+        $user->setAvatar($image);
+        $user->setType($type);
 
         Sessao::gravaFormulario($_POST);
 
@@ -142,7 +153,7 @@ class UserController extends Controller
 
         self::setViewParam('user', $user);
 
-        $this->render('/user/editar');
+        $this->render('/user/perfil');
 
         Sessao::limpaMensagem();
         Sessao::limpaErro();
@@ -151,14 +162,14 @@ class UserController extends Controller
     public function atualizar()
     {
         $this->auth();
+        
         $user = new User();
-        $user->setIdUser($_POST['idUser']);
+        $user->setIdUser($_SESSION['idUser']);
         $user->setName($_POST['name']);
         $user->setEmail($_POST['email']);
-        $user->setAvatar($_POST['avatar']);
+        $user->setAvatar("");
         $user->setDescription($_POST['description']);
-        $user->setType($_POST['type']);
-
+        
         Sessao::gravaFormulario($_POST);
 
         $userValidador = new UserValidador();
@@ -166,15 +177,39 @@ class UserController extends Controller
 
         if ($resultadoValidacao->getErros()) {
             Sessao::gravaErro($resultadoValidacao->getErros());
-            $this->redirect('/user/edicao/' . $_POST['idUser']);
+            $this->redirect('/user/edicao/' . $_SESSION['idUser']);
         }
 
         try {
+            $dir = 'public/images/users';
+            $file = $dir .'/'.$_POST['avatar'];
+
+            if (empty($_POST['avatar'])) {
+                if (file_exists($file)) unlink($file);
+            }
+
+            if (!empty($_FILES['avatar']['name'])) {      
+                $objUpload = new Upload($_FILES['avatar']);
+                $objUpload->setName('img-id'.$user->getIdUser());
+                $user->setAvatar($objUpload->getBasename());
+
+                if (file_exists($file)) unlink($file);
+                
+                $sucesso = $objUpload->upload($dir); 
+    
+                if (!$sucesso) {
+                    $resultadoValidacao->addErro('imagem',"Imagem: Problemas ao enviar a imagem do user. Código de erro: ".$objUpload->getError());
+                    Sessao::gravaErro($resultadoValidacao->getErros());
+                    $this->redirect('/user'.$_POST['id'].'?busca='.$_GET['busca'].'&paginaSelecionada='.$_GET['paginaSelecionada']);
+                }               
+            }
+
             $userDAO = new UserDAO();
             $userDAO->atualizar($user);
+
         } catch (\Exception $e) {
             Sessao::gravaMensagem($e->getMessage());
-            $this->redirect('/user');
+            $this->redirect('/user/perfil');
         }
 
         Sessao::limpaFormulario();

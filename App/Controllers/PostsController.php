@@ -7,7 +7,7 @@ class PostsController extends Controller
     public function detalhes()
     {
         $this->auth();
-        $this->render('/posts/detalhes');
+        $this->render('/article/detalhes');
     }
 
     public function meusposts() {

@@ -30,7 +30,7 @@
 
           <!-- caso seja adm -->
 
-          <a class="popover-item" href="http://<?php echo APP_HOST; ?>/posts/solicitacoes">
+          <a class="popover-item" href="http://<?php echo APP_HOST; ?>/article/solicitation">
             Solicitações
           </a>
 

@@ -11,19 +11,6 @@ use App\Models\Validacao\ArticleValidador;
 
 class ArticleController extends Controller
 {
-    public function index()
-    {
-        $this->auth();
-        
-        $articleDAO = new ArticleDAO();
-
-        self::setViewParam('listArticle'  , $articleDAO->listar());
-
-        $this->render('/article/index');
-
-        Sessao::limpaErro();
-        Sessao::limpaMensagem();
-    }
 
     public function cadastro(){
         $this->auth();
@@ -95,7 +82,7 @@ class ArticleController extends Controller
             }  
         } catch (\Exception $e) {
             Sessao::gravaMensagem($e->getMessage());
-            $this->redirect('/article');
+            $this->redirect('/home');
             
         }
         
@@ -104,7 +91,55 @@ class ArticleController extends Controller
         Sessao::limpaMensagem();
         Sessao::limpaErro();
 
-        $this->redirect('/article'); // corrigir o redirecionamento para meus posts
+        $this->redirect('/home'); // corrigir o redirecionamento para meus posts
+    }
+
+    public function detalhes($params)
+    {
+        $this->auth();
+        $idArticle = $params[0];
+
+        $article = new ArticleDAO; 
+        self::setViewParam('article', $article->getById($idArticle));
+
+        $this->render('/article/detalhes');
+    }
+
+
+    public function solicitation($params)
+    {
+
+        $this->auth();
+
+        $article = new ArticleDAO; 
+        self::setViewParam('articleSolicitation', $article->listarSolicitacoes());
+        $this->render('/article/solicitation');
+
+    }
+
+
+    public function aproved ($params)
+    {
+        $this->auth();
+        $idArticle = $params[0];
+        $article = new Article();
+        $articleDAO = new ArticleDAO(); 
+        $article->setIdArticle($idArticle);
+        $articleDAO->aproved($article);
+
+        $this->redirect('/article/solicitation');
+    }
+
+    public function denied ($params)
+    {
+        $this->auth();
+        $idArticle = $params[0];
+        $article = new Article();
+        $articleDAO = new ArticleDAO(); 
+        $article->setIdArticle($idArticle);
+        $articleDAO->denied($article);
+
+        $this->redirect('/article/solicitation');
     }
 
     public function edicao(){
