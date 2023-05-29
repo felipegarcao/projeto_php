@@ -19,12 +19,8 @@
               <li>
                 <time> &#128466; <?= $article->getCreatedAt()->format('d-m-Y') ?></time>
               </li>
-              <li>
-                <?php
-                if (isset($article->user) && $article->user !== null) {
-                  echo $article->user->getName();
-                }
-                ?>
+              <li> &#128100;
+                <?= $viewVar['user']->getName() ?>
               </li>
             </ul>
           </a>

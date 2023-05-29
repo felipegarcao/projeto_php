@@ -10,9 +10,13 @@ class HomeController extends Controller
     public function index()
     {
             $this->auth();
+            $this->auth();
 
+            
             $articleDAO = new ArticleDAO();
             self::setViewParam('listArticle', $articleDAO->listar());
+            $user = new UserDAO; 
+            self::setViewParam('user', $user->getById($_SESSION['idUser']));
             
             $this->render('/home/index');
     }

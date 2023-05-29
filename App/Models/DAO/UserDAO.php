@@ -91,18 +91,20 @@ class UserDAO extends BaseDAO
             $email = $user->getEmail();
             $avatar = $user->getAvatar();
             $description = $user->getDescription();
-            $type = $user->getType();
 
-            $params = [
+            return $this->update (
+                'user',
+                "name = :name, email = :email, avatar = :avatar, description = :description, idUser = :idUser",
+            
+            [
                 ':idUser' => $idUser,
                 ':name' => $name,
                 ':email' => $email,
                 ':avatar' => $avatar,
                 ':description' => $description,
-                ':type' => $type
-            ];
-
-            return $this->update('user', "name = :name, email = :email, avatar = :avatar, description = :description, type = :type", $params, "idUser = :idUser");
+            ],
+            "idUser = :idUser"
+        );
         } catch (\Exception $e) {
             throw new \Exception("Erro na atualização dos dados. " . $e->getMessage(), 500);
         }
@@ -117,11 +119,26 @@ class UserDAO extends BaseDAO
         }
     }
 
-    public function listar ()
+    public  function atualizarImagem(USER $user)
     {
-        $resultado = $this->select("SELECT * FROM user");
+        try {
 
-        return $resultado->fetchAll(\PDO::FETCH_CLASS, User::class);
+            $idUser             = $user->getIdUser();
+            $avatar         = $user->getAvatar();
+
+            return $this->update(
+                'user',
+                "avatar= :avatar",
+                [
+                    ':idUser'           =>$idUser,
+                    ':avatar'       =>$avatar
+                ],
+                "idUser = :idUser"
+            );
+
+        }catch (\Exception $e){
+            throw new \Exception("Erro na gravação de dados." . $e->getMessage(), 500);
+        }
     }
 
 }
