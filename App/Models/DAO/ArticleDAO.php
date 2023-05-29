@@ -24,8 +24,8 @@ class ArticleDAO extends BaseDAO
             $article->setTitle($dataSetArticle['title']);
             $article->setStatus($dataSetArticle['status']);
             $article->setCreatedAt($dataSetArticle['createdAt']);
-            $article->getIdUser()->setIdUser($dataSetArticle['idUser']);
-            $article->getIdCategory()->setIdCategory($dataSetArticle['idCategory']);
+            $article->getUser()->setIdUser($dataSetArticle['idUser']);
+            $article->getCategory()->setIdCategory($dataSetArticle['idCategory']);
             $article->setImage($dataSetArticle['image']);
 
             return $article;
@@ -51,8 +51,8 @@ class ArticleDAO extends BaseDAO
             $text          = $article->getText();
             $image     = $article->getImage();
             $status      = $article->getStatus();
-            $idUser   = $article->getIdUser()->getIdUser();
-            $idCategory   = $article->getIdCategory()->getIdCategory();
+            $idUser   = $article->getUser()->getIdUser();
+            $idCategory   = $article->getCategory()->getIdCategory();
          
             return $this->insert(
                 'article',
@@ -80,8 +80,8 @@ class ArticleDAO extends BaseDAO
             $text          = $article->getText();
             $image     = $article->getImage();
             $status      = $article->getStatus();
-            $idUser   = $article->getIdUser()->getIdUser();
-            $idCategory   = $article->getIdCategory()->getIdCategory();
+            $idUser   = $article->getUser()->getIdUser();
+            $idCategory   = $article->getCategory()->getIdCategory();
 
             return $this->update(
                 'article',

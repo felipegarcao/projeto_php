@@ -5,12 +5,12 @@ use DateTime;
 class Article
 {
     private int $idArticle;
-    private User $idUser;
+    private User $user;
     private string $text;
     private ?string $image;
     private ?string $feedback;
     private string $status;
-    private Category $idCategory;
+    private Category $category;
     private string $createdAt;
     private string $title;
 
@@ -61,21 +61,15 @@ class Article
     }
 
 
-	/**
-	 * @return Category
-	 */
-	public function getIdCategory(): Category {
-		return $this->idCategory;
-	}
+		public function getCategory()
+		{
+				return $this->category;
+		}
 	
-	/**
-	 * @param Category $idCategory 
-	 * @return self
-	 */
-	public function setIdCategory(Category $idCategory): self {
-		$this->idCategory = $idCategory;
-		return $this;
-	}
+		public function setCategory(Category $category)
+		{
+				$this->category = $category;
+		}
 	
 	/**
 	 * @return mixed
@@ -93,20 +87,14 @@ class Article
 		return $this;
 	}
 
-	/**
-	 * @return User
-	 */
-	public function getIdUser(): User {
-		return $this->idUser;
+	public function getUser()
+	{
+			return $this->user;
 	}
-	
-	/**
-	 * @param User $idUser 
-	 * @return self
-	 */
-	public function setIdUser($idUser): self {
-		$this->idUser = $idUser;
-		return $this;
+
+	public function setUser(User $user)
+	{
+			$this->user = $user;
 	}
 
 	/**

@@ -51,8 +51,8 @@ class ArticleController extends Controller
         $article->setTitle($_POST['title']);
         $article->setText($_POST['text']);
         $article->setStatus($status);
-        $article->setIdCategory($category);
-        $article->setIdUser($user);
+        $article->setCategory($category);
+        $article->setUser($user);
         $article->setImage("");
         
         $articleValidador = new ArticleValidador();
@@ -98,7 +98,7 @@ class ArticleController extends Controller
 
         Sessao::gravaMensagem("Artigo enviado com sucesso!");
         
-        $this->redirect('/home'); // corrigir o redirecionamento para meus posts
+        $this->redirect('/article'); // corrigir o redirecionamento para meus posts
     }
 
     public function edicao(){
