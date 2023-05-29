@@ -20,7 +20,7 @@
             Meu Perfil
           </a>
 
-          <a class="popover-item" href="http://<?php echo APP_HOST; ?>/posts/meus-posts">
+          <a class="popover-item" href="http://<?php echo APP_HOST; ?>/article/myArticles">
             Meus Posts
           </a>
 
@@ -28,8 +28,8 @@
             Cadastrar
           </a>
 
-          <!-- caso seja adm -->
-
+          
+      <?php //if ($viewVar['user']->getType() == "adm") {?>
           <a class="popover-item" href="http://<?php echo APP_HOST; ?>/article/solicitation">
             Solicitações
           </a>
@@ -37,7 +37,9 @@
           <a class="popover-item" href="http://<?php echo APP_HOST; ?>/category/index">
             Categorias
           </a>
-
+<?php
+    //  }
+?>
 
 
           <a class="popover-item" href="http://<?= APP_HOST.'/user/logout'?>">Sair</a>

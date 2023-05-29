@@ -42,7 +42,7 @@ class ArticleDAO extends BaseDAO
 
     public function listar()
     {
-        $resultado = $this->select("SELECT * FROM article");
+        $resultado = $this->select("SELECT * FROM article WHERE status='Aproved'");
 
         return $resultado->fetchAll(\PDO::FETCH_CLASS, Article::class);
     }
@@ -178,6 +178,12 @@ class ArticleDAO extends BaseDAO
     public  function listarSolicitacoes()
     {
             $resultado = $this->select("SELECT * FROM article WHERE status='Pending'");
+            return $resultado->fetchAll(\PDO::FETCH_CLASS, Article::class);
+    }
+
+    public  function listarArtigos($idUserLog)
+    {
+            $resultado = $this->select("SELECT * FROM article WHERE idUser='$idUserLog'");
             return $resultado->fetchAll(\PDO::FETCH_CLASS, Article::class);
     }
 

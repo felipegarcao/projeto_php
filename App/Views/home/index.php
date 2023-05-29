@@ -17,7 +17,7 @@
             <p><?= $article->getResume() ?></p>
             <ul>
               <li>
-                <time> &#128466; <?= $article->getCreatedAt()->format('d-m-Y') ?></time>
+                <time> &#128466; <?= $article->getCreatedAt()->format('d/m/Y') ?></time>
               </li>
               <li> &#128100;
                 <?= $viewVar['user']->getName() ?>

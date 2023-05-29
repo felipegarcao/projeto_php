@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 29/05/2023 às 07:34
+-- Tempo de geração: 29-Maio-2023 às 04:04
 -- Versão do servidor: 10.4.28-MariaDB
--- Versão do PHP: 8.2.4
+-- versão do PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `article`
+-- Estrutura da tabela `article`
 --
 
 CREATE TABLE `article` (
@@ -41,18 +41,17 @@ CREATE TABLE `article` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `article`
+-- Extraindo dados da tabela `article`
 --
 
 INSERT INTO `article` (`idArticle`, `idUser`, `resume`, `text`, `image`, `feedback`, `status`, `idCategory`, `createdAt`, `title`) VALUES
-(8, 11, 'Crie componentes encapsulados que gerenciam seu próprio estado e então, combine-os para criar UIs complexas', 'React faz com que a criação de UIs interativas seja uma tarefa fácil. Crie views simples para cada estado na sua aplicação, e o React irá atualizar e renderizar de forma eficiente apenas os componentes necessários na medida em que os dados mudam.\r\n\r\nViews declarativas fazem com que seu código seja mais previsível e simples de depurar.', '', NULL, 'Pending', 5, '2023-05-29', 'React e seus componentes'),
-(9, 11, 'fasf', 'sadasdasd', '', NULL, 'Pending', 5, '2023-05-29', 'asfas'),
-(10, 11, 'fsdafsdf', 'asfSDFSD', '', NULL, 'Pending', 4, '2023-05-29', 'dsfds');
+(1, 11, 'Crie componentes encapsulados que gerenciam seu próprio estado e então, combine-os para criar UIs complexas', 'React faz com que a criação de UIs interativas seja uma tarefa fácil. Crie views simples para cada estado na sua aplicação, e o React irá atualizar e renderizar de forma eficiente apenas os componentes necessários na medida em que os dados mudam.\r\n\r\nViews declarativas fazem com que seu código seja mais previsível e simples de depurar.', 'img-id1.png', NULL, 'Denied', 5, '2023-05-29', 'React e seus componentes'),
+(11, 11, 'Ruby bão bão', 'Ruby é bão Ruby é bão Ruby é bão', '', NULL, 'Pending', 4, '2023-05-29', 'Ruby');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `category`
+-- Estrutura da tabela `category`
 --
 
 CREATE TABLE `category` (
@@ -61,7 +60,7 @@ CREATE TABLE `category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `category`
+-- Extraindo dados da tabela `category`
 --
 
 INSERT INTO `category` (`idCategory`, `name`) VALUES
@@ -72,7 +71,7 @@ INSERT INTO `category` (`idCategory`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `comment`
+-- Estrutura da tabela `comment`
 --
 
 CREATE TABLE `comment` (
@@ -85,7 +84,7 @@ CREATE TABLE `comment` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `like`
+-- Estrutura da tabela `like`
 --
 
 CREATE TABLE `like` (
@@ -97,7 +96,7 @@ CREATE TABLE `like` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `user`
+-- Estrutura da tabela `user`
 --
 
 CREATE TABLE `user` (
@@ -111,22 +110,20 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `user`
+-- Extraindo dados da tabela `user`
 --
 
 INSERT INTO `user` (`idUser`, `name`, `email`, `password`, `avatar`, `description`, `type`) VALUES
-(8, 'Nicole', 'nicolealvesraimundo@gmail.com', '$2y$10$KhFLl6M2w6bSrNkucW0t7eLBmgQCt31rk8En60RPyUVyeGBZyvm2e', NULL, NULL, NULL),
-(9, 'Nicole', 'nick@gmail.com', '$2y$10$Jwb730FEL3kTFJUaUpgm..AHYXvUdd/XwrK0TWJYdrtpcXrsnNAdK', NULL, NULL, NULL),
-(10, 'teste', 'teste@gmail.com', '$2y$10$c6pYgP9LXTQgKrKYsCunhOdDjDGWS73ddnUOu21bXgohxwYnla8SW', NULL, NULL, NULL),
-(11, 'dor', 'gabizinha@gmail.com', '$2y$10$cRIxNsa4sk3CJcwO2TupZOUxVoF035tGD388257lI0bM.waJJQlVW', NULL, NULL, NULL),
-(12, 'aaaaaaaaaaaaaaaaaaaaa', 'alua64177@gmail.com', '$2y$10$norEwHgA46Y.Z9iP6X7PLe.Y9D1oILNXsOxOdhs4k/5gETJ9nzUly', NULL, NULL, NULL);
+(8, 'Nicole', 'nicolealvesraimundo@gmail.com', '$2y$10$KhFLl6M2w6bSrNkucW0t7eLBmgQCt31rk8En60RPyUVyeGBZyvm2e', 'img-id8.jpg', '  aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'user'),
+(11, 'dor213asd', 'gabizinha@gmail.com', '$2y$10$cRIxNsa4sk3CJcwO2TupZOUxVoF035tGD388257lI0bM.waJJQlVW', 'img-id11.png', 'sfasdsdsdx', 'user'),
+(14, 'Gabi Moreno', 'gabizinha123@gmail.com', '$2y$10$A1usLtWNIfeUK.jJVXiIs.4s8viABDqmaRehLhca7t2A/kFk5uxuW', 'profileFixed.jpg', '  ', 'user');
 
 --
 -- Índices para tabelas despejadas
 --
 
 --
--- Índices de tabela `article`
+-- Índices para tabela `article`
 --
 ALTER TABLE `article`
   ADD PRIMARY KEY (`idArticle`),
@@ -134,13 +131,13 @@ ALTER TABLE `article`
   ADD KEY `idCategory` (`idCategory`);
 
 --
--- Índices de tabela `category`
+-- Índices para tabela `category`
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`idCategory`);
 
 --
--- Índices de tabela `comment`
+-- Índices para tabela `comment`
 --
 ALTER TABLE `comment`
   ADD PRIMARY KEY (`idLike`),
@@ -148,7 +145,7 @@ ALTER TABLE `comment`
   ADD KEY `Article_idArticle` (`Article_idArticle`);
 
 --
--- Índices de tabela `like`
+-- Índices para tabela `like`
 --
 ALTER TABLE `like`
   ADD PRIMARY KEY (`idLike`),
@@ -156,26 +153,26 @@ ALTER TABLE `like`
   ADD KEY `idArticle` (`idArticle`);
 
 --
--- Índices de tabela `user`
+-- Índices para tabela `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`idUser`);
 
 --
--- AUTO_INCREMENT para tabelas despejadas
+-- AUTO_INCREMENT de tabelas despejadas
 --
 
 --
 -- AUTO_INCREMENT de tabela `article`
 --
 ALTER TABLE `article`
-  MODIFY `idArticle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idArticle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de tabela `category`
 --
 ALTER TABLE `category`
-  MODIFY `idCategory` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idCategory` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `comment`
@@ -193,28 +190,28 @@ ALTER TABLE `like`
 -- AUTO_INCREMENT de tabela `user`
 --
 ALTER TABLE `user`
-  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- Restrições para tabelas despejadas
+-- Restrições para despejos de tabelas
 --
 
 --
--- Restrições para tabelas `article`
+-- Limitadores para a tabela `article`
 --
 ALTER TABLE `article`
   ADD CONSTRAINT `article_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`),
   ADD CONSTRAINT `article_ibfk_2` FOREIGN KEY (`idCategory`) REFERENCES `category` (`idCategory`);
 
 --
--- Restrições para tabelas `comment`
+-- Limitadores para a tabela `comment`
 --
 ALTER TABLE `comment`
   ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`User_idUser`) REFERENCES `user` (`idUser`),
   ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`Article_idArticle`) REFERENCES `article` (`idArticle`);
 
 --
--- Restrições para tabelas `like`
+-- Limitadores para a tabela `like`
 --
 ALTER TABLE `like`
   ADD CONSTRAINT `like_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`),

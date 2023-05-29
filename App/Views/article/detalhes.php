@@ -21,7 +21,7 @@
           </li>
           <li>
             <img src="http://<?php echo APP_HOST; ?>/public/icons/calendar.png" alt="calendario" />
-            <?= $viewVar['article']->getCreatedAt()->format('d-m-Y') ?>
+            <?= $viewVar['article']->getCreatedAt()->format('d/m/Y') ?>
           </li>
         </ul>
       </div>

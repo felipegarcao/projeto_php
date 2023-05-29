@@ -117,6 +117,19 @@ class ArticleController extends Controller
 
     }
 
+    public function myArticles($params)
+    {
+        $this->auth();
+        $idUserLog = $_SESSION['idUser'];
+        $article = new ArticleDAO; 
+        self::setViewParam('articleExibition', $article->listarArtigos($idUserLog));
+        $user = new UserDAO; 
+        self::setViewParam('user', $user->getById($_SESSION['idUser']));
+        
+    
+        $this->render('/article/myArticles');
+    }
+    
 
     public function aproved ($params)
     {

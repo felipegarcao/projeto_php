@@ -216,9 +216,7 @@ class UserController extends Controller
         Sessao::limpaMensagem();
         Sessao::limpaErro();
 
-        Sessao::gravaMensagem("Usuário atualizado com sucesso!");
-
-        $this->redirect('/user');
+        $this->redirect('/user/perfil');
     }
 
     public function exclusao($params)
