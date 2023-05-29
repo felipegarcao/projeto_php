@@ -143,7 +143,8 @@ class ArticleDAO extends BaseDAO
                 'article',
                 "status = :status",
                 [
-                    ':status' => $status
+                    ':status' => $status,
+
                 ],
                 "idArticle = $idArticle"
             );
@@ -159,11 +160,13 @@ class ArticleDAO extends BaseDAO
         try {
             $status = "Denied";
             $idArticle = $article->getIdArticle();
+            $feedback = $article->getFeedback();
             return $this->update(
                 'article',
-                "status = :status",
+                "status = :status, feedback =:feedback",
                 [
-                    ':status' => $status
+                    ':status' => $status,
+                    ':feedback' => $feedback
                 ],
                 "idArticle = $idArticle"
             );

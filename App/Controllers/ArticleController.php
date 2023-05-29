@@ -43,7 +43,7 @@ class ArticleController extends Controller
         
         $article = new Article();
         $article->setTitle($_POST['title']);
-        $article->setText($_POST['text']);
+        $article->setText(nl2br($_POST['text']));
         $article->setResume($_POST['resume']);
         $article->setStatus($status);
         $article->setCategory($category);
@@ -125,7 +125,6 @@ class ArticleController extends Controller
         self::setViewParam('articleExibition', $article->listarArtigos($idUserLog));
         $user = new UserDAO; 
         self::setViewParam('user', $user->getById($_SESSION['idUser']));
-        
     
         $this->render('/article/myArticles');
     }
@@ -150,6 +149,9 @@ class ArticleController extends Controller
         $article = new Article();
         $articleDAO = new ArticleDAO(); 
         $article->setIdArticle($idArticle);
+        $feedback = isset($_POST['feedback']) ? $_POST['feedback'] : '';
+        $article->setFeedback($feedback);
+        
         $articleDAO->denied($article);
 
         $this->redirect('/article/solicitation');

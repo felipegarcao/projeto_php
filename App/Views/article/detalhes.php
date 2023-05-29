@@ -64,7 +64,7 @@
                 </li>
 
                 <div class="actions">
-                <button class="negado"><img src="http://<?php echo APP_HOST; ?>/public/icons/trash.png" alt="apagar comentario" /></button>
+                <button class="negado"  style="background-color: #FF57B2;"><img src="http://<?php echo APP_HOST; ?>/public/icons/trash.png" alt="apagar comentario" /></button>
                   </div>
 
               </ul>
@@ -76,64 +76,8 @@
 
           </div>
         </div>
-        <div class="CommentsContainer">
-          <div class="avatar">
-            <img src="http://github.com/felipegarcao.png" alt="" />
-          </div>
-          <div class="Comments">
-            <div class="postsTop">
-              <ul>
-                <li>
-                  <img src="http://<?php echo APP_HOST; ?>/public/icons/user.png" alt="user" />
-                  Luis Felipe Garção Silva
-                </li>
-                <li>
-                  <img src="http://<?php echo APP_HOST; ?>/public/icons/calendar.png" alt="calendario" />
-                  16/05/2023
-                </li>
-
-                <div class="actions">
-                <button class="negado"><img src="http://<?php echo APP_HOST; ?>/public/icons/trash.png" alt="apagar comentario" /></button>
-                  </div>
-
-              </ul>
-            </div>
-
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius saepe molestias pariatur tempora beatae
-              possimus voluptatum aut sequi magni laborum atque eos iste, accusamus fugiat illo quia ipsum nihil animi?
-            </p>
-
-          </div>
-        </div>
-
-        <div class="CommentsContainer">
-          <div class="avatar">
-            <img src="http://github.com/felipegarcao.png" alt="" />
-          </div>
-          <div class="Comments">
-            <div class="postsTop">
-              <ul>
-                <li>
-                  <img src="http://<?php echo APP_HOST; ?>/public/icons/user.png" alt="user" />
-                  Luis Felipe Garção Silva
-                </li>
-                <li>
-                  <img src="http://<?php echo APP_HOST; ?>/public/icons/calendar.png" alt="calendario" />
-                  16/05/2023
-                </li>
-
-                <div class="actions">
-                <button class="negado"><img src="http://<?php echo APP_HOST; ?>/public/icons/trash.png" alt="apagar comentario" /></button>
-                  </div>
-
-              </ul>
-            </div>
-
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius saepe molestias pariatur tempora beatae
-              possimus voluptatum aut sequi magni laborum atque eos iste, accusamus fugiat illo quia ipsum nihil animi?
-            </p>
-          </div>
-        </div>
+       
+          
       </footer>
 
     </div>

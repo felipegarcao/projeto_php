@@ -62,11 +62,11 @@ class Article
         return $this->feedback;
     }
 
-    public function setFeedback(string $feedback): self {
-        $this->feedback = $feedback;
+    public function setFeedback(?string $feedback): self {
+        $this->feedback = $feedback ?? '';
         return $this;
     }
-
+    
     public function getStatus(): string {
         return $this->status;
     }

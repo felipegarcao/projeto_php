@@ -40,11 +40,9 @@
         <img src="http://<?php echo APP_HOST; ?>/public/icons/confirm.png" alt="confirmar postagem" />
       </button>
   </a>
-  <!-- <a  href="http://<?php echo APP_HOST; ?>/article/denied//<?= $article->getIdArticle(); ?>"> -->
       <button class="negado" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
         <img src="http://<?php echo APP_HOST; ?>/public/icons/x.png" alt="negar postagem" />
       </button>
-  <!-- </a> -->
     </div>
   </div>
 
@@ -64,13 +62,13 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
-          <textarea rows="9"></textarea>
-        </form>
+        <form method="post" action="http://<?php echo APP_HOST; ?>/article/denied/<?= $article->getIdArticle(); ?>">
+        <textarea rows="9" name="feedback" id="feedback"><?php echo $Sessao::retornaValorFormulario('feedback'); ?></textarea>
+        
       </div>
       <div class="actions">
-        <button type="button" class="negado" style="color: #FF57B2;" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="aceito">Finalizar</button>
+        <button type="submit" class="aceito">Finalizar</button>
+        </form>
       </div>
     </div>
   </div>
