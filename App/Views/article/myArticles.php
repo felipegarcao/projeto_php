@@ -17,7 +17,7 @@
         <a href="http://<?= APP_HOST ?>/article/detalhes/<?= $article->getIdArticle() ?>">
             <div class="cardContainer">
                 <div class="flag aceito">
-                    <span><?= $article->getStatus() ?></span>
+                    <span>Aprovado</span>
                 </div>
                 <header>
                     <strong><?= $article->getTitle() ?></strong>
