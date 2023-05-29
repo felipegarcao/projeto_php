@@ -28,16 +28,22 @@ class UserDAO extends BaseDAO
         try {
             $name = $user->getName();
             $email = $user->getEmail();
+            $avatar = $user->getAvatar();
+            $description = $user->getDescription();
+            $type = $user->getType();
             $password = password_hash($user->getPassword(), PASSWORD_DEFAULT);
 
             $params = [
                 ':name' => $name,
                 ':email' => $email,
                 ':password' => $password,
+                ':avatar' => $avatar,
+                ':description' => $description,
+                ':type' => $type,
  
             ];
 
-            return $this->insert('user', ":name, :email, :password", $params);
+            return $this->insert('user', ":name, :email, :password, :avatar, :description, :type", $params);
         } catch (\Exception $e) {
             throw new \Exception("Erro na gravação dos dados. " . $e->getMessage(), 500);
         }

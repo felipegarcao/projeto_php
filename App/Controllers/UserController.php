@@ -89,10 +89,17 @@ class UserController extends Controller
 
     public function salvar()
     {
+        $description = " ";
+        $image = "profileFixed.jpg";
+        $type = "user";
+        
         $user = new User();
         $user->setName($_POST['name']);
         $user->setEmail($_POST['email']);
         $user->setPassword($_POST['password']);
+        $user->setDescription($description);
+        $user->setAvatar($image);
+        $user->setType($type);
 
         Sessao::gravaFormulario($_POST);
 
