@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models\Entidades;
-use Date;
+use DateTime;
 class Article
 {
     private int $idArticle;
@@ -11,7 +11,7 @@ class Article
     private ?string $feedback;
     private string $status;
     private Category $idCategory;
-    private $createdAt;
+    private string $createdAt;
     private string $title;
 
     public function getIdArticle(): int {
@@ -81,7 +81,7 @@ class Article
 	 * @return mixed
 	 */
 	public function getCreatedAt() {
-		return $this->createdAt;
+		return new DateTime($this->createdAt);
 	}
 	
 	/**

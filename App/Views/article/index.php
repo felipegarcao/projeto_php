@@ -2,7 +2,7 @@
 <body>
   <main class="container">
     <div class="posts">
-      <a href="http://<?php echo APP_HOST; ?>/posts/detalhes">
+      <a href="http://<?php echo APP_HOST; ?>/article/">
         <strong>Como utilizar Hooks</strong>
         <p>Pensando em sincronização em vez de ciclos de vida.</p>
         <ul>

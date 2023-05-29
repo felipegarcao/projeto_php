@@ -51,19 +51,17 @@ class ArticleDAO extends BaseDAO
             $text          = $article->getText();
             $image     = $article->getImage();
             $status      = $article->getStatus();
-            $createdAt      = $article->getCreatedAt();
             $idUser   = $article->getIdUser()->getIdUser();
             $idCategory   = $article->getIdCategory()->getIdCategory();
          
             return $this->insert(
                 'article',
-                ":title,:text,:image,:status,:createdAt,:idUser,:idCategory",
+                ":title,:text,:image,:status,:idUser,:idCategory",
                 [
                     ':title'         =>$title,
                     ':text'        =>$text,
                     ':image'   =>$image,
                     ':status'    =>$status,
-                    ':createdAt' =>$createdAt,
                     ':idUser'       =>$idUser,
                     ':idCategory'       =>$idCategory
                 ]
@@ -82,7 +80,6 @@ class ArticleDAO extends BaseDAO
             $text          = $article->getText();
             $image     = $article->getImage();
             $status      = $article->getStatus();
-            $createdAt      = $article->getCreatedAt();
             $idUser   = $article->getIdUser()->getIdUser();
             $idCategory   = $article->getIdCategory()->getIdCategory();
 
@@ -94,7 +91,6 @@ class ArticleDAO extends BaseDAO
                     ':text'        =>$text,
                     ':image'   =>$image,
                     ':status'    =>$status,
-                    ':createdAt' =>$createdAt,
                     ':idUser'       =>$idUser,
                     ':idCategory'       =>$idCategory
                 ],
@@ -120,7 +116,7 @@ class ArticleDAO extends BaseDAO
                     ':idArticle'           =>$idArticle,
                     ':image'       =>$image
                 ],
-                "idUser = :idUser"
+                "idArticle = :idArticle"
             );
 
         }catch (\Exception $e){

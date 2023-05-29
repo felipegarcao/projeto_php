@@ -5,10 +5,9 @@ use App\Models\DAO\ArticleDAO;
 use App\Lib\Sessao;
 use App\Lib\Upload;
 use App\Models\Entidades\Article;
-use App\Models\Entidades\Category;
-use App\Models\Entidades\User;
+use App\Models\DAO\CategoryDAO;
+use App\Models\DAO\UserDAO;
 use App\Models\Validacao\ArticleValidador;
-use App\Validacao\ResultadoValidacao;
 
 class ArticleController extends Controller
 {
@@ -22,9 +21,9 @@ class ArticleController extends Controller
 
     public function cadastro(){
         $this->auth();
-        $articleDAO = new ArticleDAO();
+        $categoryDAO = new CategoryDAO();
 
-        self::setViewParam('listArticle', $articleDAO->listar());
+        self::setViewParam('listCategory', $categoryDAO->listar());
 
         $this->render('/article/cadastro');
 
@@ -36,22 +35,25 @@ class ArticleController extends Controller
     public function salvar(){
         $this->auth();
 
-            
-        $category = new Category();
-        $category->setIdCategory($_POST['idCategory']);
+        Sessao::gravaFormulario($_POST);
+    
+        $status = "Pending";
+        $idUserLog = $_SESSION['idUser'];
+        $viewVar['idUserLog'] = $idUserLog;
+        
+        $user = new UserDAO();
+        $cat = new CategoryDAO();
 
-        $user = new User();
-        $user->setIdUser($_POST['idUser']);
+        $user = $user->getById($idUserLog);
+        $category = $cat->getById($_POST['idCategory']);
         
         $article = new Article();
-        $article->setTitle($_POST['nome']);
-        $article->setText($_POST['preco']);
-        $article->setStatus($_POST['quantidade']);
+        $article->setTitle($_POST['title']);
+        $article->setText($_POST['text']);
+        $article->setStatus($status);
         $article->setIdCategory($category);
         $article->setIdUser($user);
         $article->setImage("");
-
-        Sessao::gravaFormulario($_POST);
         
         $articleValidador = new ArticleValidador();
         $resultadoValidacao = $articleValidador->validar($article);
@@ -94,10 +96,11 @@ class ArticleController extends Controller
         Sessao::limpaMensagem();
         Sessao::limpaErro();
 
-        Sessao::gravaMensagem("Produto adicionado com sucesso!");
+        Sessao::gravaMensagem("Artigo enviado com sucesso!");
         
-        $this->redirect('/article');
+        $this->redirect('/home'); // corrigir o redirecionamento para meus posts
     }
+
     public function edicao(){
         $this->auth();
 
