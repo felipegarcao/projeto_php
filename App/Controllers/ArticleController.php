@@ -105,6 +105,43 @@ class ArticleController extends Controller
         $this->render('/article/detalhes');
     }
 
+
+    public function solicitation($params)
+    {
+
+        $this->auth();
+
+        $article = new ArticleDAO; 
+        self::setViewParam('articleSolicitation', $article->listarSolicitacoes());
+        $this->render('/article/solicitation');
+
+    }
+
+
+    public function aproved ($params)
+    {
+        $this->auth();
+        $idArticle = $params[0];
+        $article = new Article();
+        $articleDAO = new ArticleDAO(); 
+        $article->setIdArticle($idArticle);
+        $articleDAO->aproved($article);
+
+        $this->redirect('/article/solicitation');
+    }
+
+    public function denied ($params)
+    {
+        $this->auth();
+        $idArticle = $params[0];
+        $article = new Article();
+        $articleDAO = new ArticleDAO(); 
+        $article->setIdArticle($idArticle);
+        $articleDAO->denied($article);
+
+        $this->redirect('/article/solicitation');
+    }
+
     public function edicao(){
         $this->auth();
 

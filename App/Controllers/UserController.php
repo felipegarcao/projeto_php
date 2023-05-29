@@ -71,8 +71,6 @@ class UserController extends Controller
         Sessao::limpaFormulario();
         Sessao::limpaErro();
 
-        Sessao::gravaMensagem("Usuário logado com sucesso!");
-
         $this->redirect('/home');
 
         Sessao::limpaMensagem();

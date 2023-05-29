@@ -134,6 +134,53 @@ class ArticleDAO extends BaseDAO
         }
     }
 
+    public function aproved(Article $article)
+    {
+        try {
+            $status = "Aproved";
+            $idArticle = $article->getIdArticle();
+            return $this->update(
+                'article',
+                "status = :status",
+                [
+                    ':status' => $status
+                ],
+                "idArticle = $idArticle"
+            );
+            
+
+        }catch (\Exception $e){
+            throw new \Exception("Erro na gravação de dados." . $e->getMessage(), 500);
+        }
+    }
+
+    public function denied(Article $article)
+    {
+        try {
+            $status = "Denied";
+            $idArticle = $article->getIdArticle();
+            return $this->update(
+                'article',
+                "status = :status",
+                [
+                    ':status' => $status
+                ],
+                "idArticle = $idArticle"
+            );
+            
+
+        }catch (\Exception $e){
+            throw new \Exception("Erro na gravação de dados." . $e->getMessage(), 500);
+        }
+    }
+
+
+    public  function listarSolicitacoes()
+    {
+            $resultado = $this->select("SELECT * FROM article WHERE status='Pending'");
+            return $resultado->fetchAll(\PDO::FETCH_CLASS, Article::class);
+    }
+
     public function excluir(Article $article)
     {
         try {
