@@ -72,7 +72,6 @@
 <?php
     } elseif ($article->getStatus() == "Denied") {
 ?>
-<a href="http://<?= APP_HOST ?>/article/detalhes/<?= $article->getIdArticle() ?>">
         <div class="cardContainer" style="position: relative;">
             <div class="flag negado">
                 <span>Negado</span>
@@ -80,6 +79,7 @@
             <button class="position-absolute btn" style="right: 20px; top: 10px;" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <img src="http://<?php echo APP_HOST; ?>/public/icons/warning.png" alt="visualizar justificativa de negação" />
             </button>
+    <a href="http://<?= APP_HOST ?>/article/detalhes/<?= $article->getIdArticle() ?>">
             <header>
                 <strong><?= $article->getTitle() ?></strong>
                 <div class="detalhesPostInfo">
@@ -113,7 +113,7 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Justificativa</h1>
+                <p class="modal-title fs-5" id="exampleModalLabel">Justificativa</p>
                 <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
                     <img src="http://<?php echo APP_HOST; ?>/public/icons/x.png" alt="negar postagem" />
                 </button>
