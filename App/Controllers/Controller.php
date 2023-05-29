@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Lib\Sessao;
+use App\Models\DAO\UserDAO;
 
 abstract class Controller
 {
@@ -26,6 +27,8 @@ abstract class Controller
         $viewVar = $this->getViewVar();
         $Sessao  = Sessao::class;
         if ($view != "/user/login"  && $view != "/user/cadastro") {
+            $user = new UserDAO; 
+            self::setViewParam('user', $user->getById($_SESSION['idUser']));
             require_once PATH . '/App/Views/layouts/header.php';
             require_once PATH . '/App/Views/layouts/menu.php';
             require_once PATH . '/App/Views/' . $view . '.php';
