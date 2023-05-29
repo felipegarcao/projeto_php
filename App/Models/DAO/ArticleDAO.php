@@ -10,7 +10,7 @@ class ArticleDAO extends BaseDAO
     public function getById($id)
     {
         $resultado = $this->select(
-            "SELECT a.title, a.text, a.image, a.status, a.createdAt, c.idCategory, c.name as category, u.idUser, u.name as user 
+            "SELECT a.title, a.resume, a.text, a.image, a.status, a.createdAt, c.idCategory, c.name as category, u.idUser, u.name as user 
                 FROM article as a INNER JOIN user as u ON a.idUser = u.idUser 
                 INNER JOIN category as c ON a.idCategory = c.idCategory
                 WHERE a.idArticle = $id"
@@ -23,6 +23,8 @@ class ArticleDAO extends BaseDAO
             $article->setIdArticle($dataSetArticle['idArticle']);
             $article->setTitle($dataSetArticle['title']);
             $article->setStatus($dataSetArticle['status']);
+            $article->setText($dataSetArticle['text']);
+            $article->setResume($dataSetArticle['resume']);
             $article->setCreatedAt($dataSetArticle['createdAt']);
             $article->getUser()->setIdUser($dataSetArticle['idUser']);
             $article->getCategory()->setIdCategory($dataSetArticle['idCategory']);
@@ -49,6 +51,7 @@ class ArticleDAO extends BaseDAO
 
             $title           = $article->getTitle();
             $text          = $article->getText();
+            $resume          = $article->getResume();
             $image     = $article->getImage();
             $status      = $article->getStatus();
             $idUser   = $article->getUser()->getIdUser();
@@ -56,9 +59,10 @@ class ArticleDAO extends BaseDAO
          
             return $this->insert(
                 'article',
-                ":title,:text,:image,:status,:idUser,:idCategory",
+                ":title,:resume,:text,:image,:status,:idUser,:idCategory",
                 [
                     ':title'         =>$title,
+                    ':resume'        =>$resume,
                     ':text'        =>$text,
                     ':image'   =>$image,
                     ':status'    =>$status,
@@ -78,6 +82,7 @@ class ArticleDAO extends BaseDAO
 
             $title           = $article->getTitle();
             $text          = $article->getText();
+            $resume          = $article->getResume();
             $image     = $article->getImage();
             $status      = $article->getStatus();
             $idUser   = $article->getUser()->getIdUser();
@@ -85,9 +90,10 @@ class ArticleDAO extends BaseDAO
 
             return $this->update(
                 'article',
-                "title = :title, text = :text, image = :image, status = :status, createdAt= :createdAt, idUser= :idUser, idCategory= :idCategory",
+                "title = :title, resume = :resume, text = :text, image = :image, status = :status, createdAt= :createdAt, idUser= :idUser, idCategory= :idCategory",
                 [
                     ':title'         =>$title,
+                    ':resume'        =>$resume,
                     ':text'        =>$text,
                     ':image'   =>$image,
                     ':status'    =>$status,

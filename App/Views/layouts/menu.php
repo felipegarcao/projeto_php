@@ -5,7 +5,7 @@
                 <?php } else { ?>
 <header class="headerContainer">
   <div class="headerContent">
-    <a href="http://<?php echo APP_HOST; ?>/home/">
+    <a href="http://<?php echo APP_HOST; ?>/home">
       <img src=" http://<?php echo APP_HOST; ?>/public/icons/logo.png" alt="Logo" />
     </a>
    
@@ -24,7 +24,7 @@
             Meus Posts
           </a>
 
-          <a class="popover-item" href="http://<?php echo APP_HOST; ?>/posts/cadastrar">
+          <a class="popover-item"  href="http://<?php echo APP_HOST; ?>/article/cadastro">
             Cadastrar
           </a>
 

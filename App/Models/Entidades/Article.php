@@ -6,13 +6,14 @@ class Article
 {
     private int $idArticle;
     private User $user;
+    private string $title;
+    private string $resume;
     private string $text;
     private ?string $image;
     private ?string $feedback;
     private string $status;
     private Category $category;
     private string $createdAt;
-    private string $title;
 
     public function getIdArticle(): int {
         return $this->idArticle;
@@ -30,6 +31,15 @@ class Article
 
     public function setText(string $text): self {
         $this->text = $text;
+        return $this;
+    }
+
+    public function getResume(): string {
+        return $this->resume;
+    }
+
+    public function setResume(string $resume): self {
+        $this->resume = $resume;
         return $this;
     }
 
@@ -71,17 +81,10 @@ class Article
 				$this->category = $category;
 		}
 	
-	/**
-	 * @return mixed
-	 */
 	public function getCreatedAt() {
 		return new DateTime($this->createdAt);
 	}
-	
-	/**
-	 * @param mixed $createdAt 
-	 * @return self
-	 */
+
 	public function setCreatedAt($createdAt): self {
 		$this->createdAt = $createdAt;
 		return $this;
@@ -89,12 +92,12 @@ class Article
 
 	public function getUser()
 	{
-			return $this->user;
+		return $this->user;
 	}
 
 	public function setUser(User $user)
 	{
-			$this->user = $user;
+		$this->user = $user;
 	}
 
 	/**
