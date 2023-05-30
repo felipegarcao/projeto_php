@@ -1,5 +1,5 @@
 <div class="container containerSolicitacao">
-  <h1>Solicitações</h1>
+  <h1 >Solicitações</h1>
   <div class="cardContainer">
     <header>
       <h3>Titulo da Postagem</h3>

@@ -43,6 +43,15 @@ class UserController extends Controller
         self::setViewParam('user', $user);
         $this->render('/user/author');
     }
+
+    public function listUser() {
+
+        $this->auth();
+        
+        $this->render('/user/list-user');
+
+        
+    }
     
     
 

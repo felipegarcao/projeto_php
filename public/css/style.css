@@ -652,6 +652,8 @@ html {
   text-align: justify;
   margin-top: 1rem;
   color: #BBBBBB;
+  word-wrap: break-word;
+  width: 300px;
 }
 
 
