@@ -190,6 +190,12 @@ class ArticleDAO extends BaseDAO
             return $resultado->fetchAll(\PDO::FETCH_CLASS, Article::class);
     }
 
+    public function listarArtigosAprovados($idUserLog)
+{
+    $resultado = $this->select("SELECT * FROM article WHERE idUser = '$idUserLog' AND status = 'Aproved'");
+    return $resultado->fetchAll(\PDO::FETCH_CLASS, Article::class);
+}
+
     public function excluir(Article $article)
     {
         try {

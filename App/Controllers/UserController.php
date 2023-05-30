@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Lib\Sessao;
 use App\Lib\Upload;
+use App\Models\DAO\ArticleDAO;
 use App\Models\DAO\UserDAO;
 use App\Models\Entidades\User;
 use App\Models\Validacao\UserValidador;
@@ -22,14 +23,28 @@ class UserController extends Controller
 
         $user = new UserDAO; 
         self::setViewParam('user', $user->getById($_SESSION['idUser']));
-        
         $this->render('/user/perfil');
     }
 
+
     public function author()
     {
+        $this->auth();
+        $userDAO = new UserDAO();
+        $idUser = func_get_args()[0];
+        
+        if (is_array($idUser)) {
+            $idUser = $idUser[0]; // Acessar o primeiro elemento do array
+        }
+        
+        $user = $userDAO->getById($idUser);
+        $article = new ArticleDAO; 
+        self::setViewParam('articleExibitionUser', $article->listarArtigosAprovados($idUser));
+        self::setViewParam('user', $user);
         $this->render('/user/author');
     }
+    
+    
 
     public function logout() 
     {

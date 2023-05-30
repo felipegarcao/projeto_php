@@ -15,6 +15,13 @@ class UserDAO extends BaseDAO
         return $resultado->fetchObject(User::class);
     }
 
+    public function listar()
+    {
+        $resultado = $this->select("SELECT * FROM user");
+
+        return $resultado->fetchObject(User::class);
+    }
+
     public function getByEmail(string $email)
     {
         $resultado = $this->select("SELECT idUser, email, password FROM user WHERE email = '$email'");
