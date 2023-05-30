@@ -76,9 +76,10 @@
                     <div class="flag negado">
                         <span>Negado</span>
                     </div>
-                    <button class="position-absolute btn" style="right: 20px; top: 10px;" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        <img src="http://<?php echo APP_HOST; ?>/public/icons/warning.png" alt="visualizar justificativa de negação" />
-                    </button>
+                        <button class="position-absolute btn" style="right: 20px; top: 10px;" data-bs-toggle="modal" data-bs-target="#exampleModal<?= $article->getIdArticle() ?>">
+        <img src="http://<?php echo APP_HOST; ?>/public/icons/warning.png" alt="visualizar justificativa de negação" />
+    </button>
+
                     <a href="http://<?= APP_HOST ?>/article/detalhes/<?= $article->getIdArticle() ?>">
                         <header>
                             <strong class="text-center"><?= $article->getTitle() ?></strong>
@@ -104,7 +105,7 @@
                 </div>
 
 
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="exampleModal<?= $article->getIdArticle() ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
