@@ -19,70 +19,49 @@
         <td>Luis Felipe Garção Silva</td>
         <td class="text-center">
           <select class="select" name="idCategory" id="idCategory" required style="margin-bottom: 0px; width: 80%;">
-
             <option value="2">Administrador</option>
             <option value="2">Usuario</option>
-
           </select>
         </td>
         <td class="text-right">
           <div class="actions" style="justify-content: center;">
-            <button class="negado" style="background-color: #FF57B2;"><img
-                src="http://<?php echo APP_HOST; ?>/public/icons/trash.png" alt="apagar comentario" /></button>
+            <button class="negado" type="button" style="background-color: #FF57B2;" data-bs-toggle="modal" data-bs-target="#exampleModal"><img src="http://<?php echo APP_HOST; ?>/public/icons/trash.png" alt="apagar comentario" /></button>
+
+
           </div>
         </td>
       </tr>
 
-      <tr>
-        <td class="text-center">21</td>
-        <td>
-          <div class="avatar" style="height: 36px; width: 36px;">
-            <img src="http://github.com/felipegarcao.png" alt="" />
-          </div>
-        </td>
-        <td>Luis Felipe Garção Silva</td>
-        <td class="text-center">
-          <select class="select" name="idCategory" id="idCategory" required style="margin-bottom: 0px; width: 80%;">
-
-            <option value="2">Administrador</option>
-            <option value="2">Usuario</option>
-
-          </select>
-        </td>
-        <td class="text-right">
-          <div class="actions" style="justify-content: center;">
-            <button class="negado" style="background-color: #FF57B2;"><img
-                src="http://<?php echo APP_HOST; ?>/public/icons/trash.png" alt="apagar comentario" /></button>
-          </div>
-        </td>
-      </tr>
-
-      <tr>
-        <td class="text-center">21</td>
-        <td>
-          <div class="avatar" style="height: 36px; width: 36px;">
-            <img src="http://github.com/felipegarcao.png" alt="" />
-          </div>
-        </td>
-        <td>Luis Felipe Garção Silva</td>
-        <td class="text-center">
-          <select class="select" name="idCategory" id="idCategory" required style="margin-bottom: 0px; width: 80%;">
-
-            <option value="2">Administrador</option>
-            <option value="2">Usuario</option>
-
-          </select>
-        </td>
-        <td class="text-right">
-          <div class="actions" style="justify-content: center;">
-            <button class="negado" style="background-color: #FF57B2;"><img
-                src="http://<?php echo APP_HOST; ?>/public/icons/trash.png" alt="apagar comentario" /></button>
-          </div>
-        </td>
-      </tr>
-    
 
 
     </tbody>
   </table>
 </div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Excluir</h1>
+        <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+          <img src="http://<?php echo APP_HOST; ?>/public/icons/x.png" alt="negar postagem" />
+        </button>
+      </div>
+      <div class="modal-body">
+      <div class="d-flex flex-column align-items-center justify-content-center gap-3">
+          <img src="http://<?php echo APP_HOST; ?>/public/icons/question.png" alt="question" />
+          <h3>Deseja Realmente Apagar?</h3>
+          <p class="obs-modal">OBS: Lembrando que isso é permanente</p>
+          <div class="actions" style="margin-left: 0px;">
+            <button class="aceito">
+              <img src="http://<?php echo APP_HOST; ?>/public/icons/confirm.png" alt="confirmar postagem" />
+            </button>
+            <button class="negado" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <img src="http://<?php echo APP_HOST; ?>/public/icons/x.png" alt="negar postagem" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
