@@ -16,3 +16,10 @@
 .table tbody td {
   border: none;
 }
+
+.obs-modal {
+  font-size: 13px;
+  font-style: italic;
+  text-decoration: underline;
+
+}
