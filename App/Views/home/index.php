@@ -35,7 +35,7 @@
           <li>
             <img src="http://<?php echo APP_HOST; ?>/public/icons/user.png" alt="user" />
 
-            <?= $viewVar['user']->getName() ?>
+            <?= $article->getUser()->getName() ?>
           </li>
         </ul>
       </a>
