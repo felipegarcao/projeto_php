@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use App\Models\DAO\ArticleDAO;
 use App\Models\DAO\UserDAO;
+use App\Models\DAO\CategoryDAO;
 use App\Lib\Sessao;
 
 class HomeController extends Controller
@@ -10,7 +11,10 @@ class HomeController extends Controller
     public function index()
     {
             $this->auth();
-            $this->auth();
+            
+            $categoryDAO = new CategoryDAO();
+
+            self::setViewParam('listCategory', $categoryDAO->listar());
 
             
             $articleDAO = new ArticleDAO();
