@@ -118,6 +118,27 @@ class ArticleController extends Controller
     
         $this->render('/article/detalhes');
     }
+
+    public function edit($params) {
+        $this->auth();
+        $user = new UserDAO; 
+        self::setViewParam('user', $user->getById($_SESSION['idUser']));
+        $idArticle = $params[0];
+        $article = new ArticleDAO; 
+        self::setViewParam('article', $article->getById($idArticle));
+        $comment = new CommentDAO; 
+        self::setViewParam('comments', $comment->getByArticleId($idArticle));
+        $user = new UserDAO; 
+        self::setViewParam('user', $user->getById($_SESSION['idUser']));
+    
+    
+        Sessao::limpaErro();
+    
+        $this->render('/article/edit');
+    }
+
+
+
     public function comment()
     {
         $this->auth();
