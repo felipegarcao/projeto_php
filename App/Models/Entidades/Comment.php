@@ -1,30 +1,16 @@
 <?php
 
 namespace App\Models\Entidades;
+use DateTime;
 
 class Comment
 {
-    private int $idLike;
+    private int $idComment;
     private string $text;
-    private int $User_idUser;
-    private int $Article_idArticle;
+    private User $user;
+    private Article $article;
+	private string $createdAt;
 
-
-	/**
-	 * @return 
-	 */
-	public function getIdLike(): int {
-		return $this->idLike;
-	}
-	
-	/**
-	 * @param  $idLike 
-	 * @return self
-	 */
-	public function setIdLike(int $idLike): self {
-		$this->idLike = $idLike;
-		return $this;
-	}
 	
 	/**
 	 * @return 
@@ -42,35 +28,61 @@ class Comment
 		return $this;
 	}
 	
+
+	public function getCreatedAt() {
+		return new DateTime($this->createdAt);
+	}
+
+	public function setCreatedAt($createdAt): self {
+		$this->createdAt = $createdAt;
+		return $this;
+	}
+
 	/**
-	 * @return 
+	 * @return User
 	 */
-	public function getUser_idUser(): int {
-		return $this->User_idUser;
+	public function getUser() {
+		return $this->user;
 	}
 	
 	/**
-	 * @param  $User_idUser 
+	 * @param User $user 
 	 * @return self
 	 */
-	public function setUser_idUser(int $User_idUser): self {
-		$this->User_idUser = $User_idUser;
+	public function setUser($user): self {
+		$this->user = $user;
 		return $this;
 	}
 	
 	/**
-	 * @return 
+	 * @return Article
 	 */
-	public function getArticle_idArticle(): int {
-		return $this->Article_idArticle;
+	public function getArticle() {
+		return $this->article;
 	}
 	
 	/**
-	 * @param  $Article_idArticle 
+	 * @param Article $article 
 	 * @return self
 	 */
-	public function setArticle_idArticle(int $Article_idArticle): self {
-		$this->Article_idArticle = $Article_idArticle;
+	public function setArticle($article): self {
+		$this->article = $article;
+		return $this;
+	}
+
+	/**
+	 * @return 
+	 */
+	public function getIdComment(): int {
+		return $this->idComment;
+	}
+	
+	/**
+	 * @param  $idComment 
+	 * @return self
+	 */
+	public function setIdComment(int $idComment): self {
+		$this->idComment = $idComment;
 		return $this;
 	}
 }

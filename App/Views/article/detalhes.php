@@ -43,10 +43,10 @@
             <div class="avatar">
               <img src="http://github.com/felipegarcao.png" alt="" />
             </div>
-            <form class="newCommentsForm">
-              <textarea cols="70" rows="5"></textarea>
+            <form class="newCommentsForm" action="http://<?php echo APP_HOST; ?>/article/comment/<?= $viewVar['article']->getIdArticle(); ?>" method="post" id="form_cadastro" >
+              <textarea cols="70" rows="5" name="text" id="text" value="<?php echo $Sessao::retornaValorFormulario('text'); ?>" required></textarea>
               <div class="newCommentsFormFooter">
-                <button type="submit" class="buttonSubmit">Comentar</button>
+                <button type="submit" class="buttonSubmit">Comentar </button>
               </div>
             </form>
           </div>

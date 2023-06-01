@@ -6,7 +6,9 @@ use App\Lib\Sessao;
 use App\Lib\Upload;
 use App\Models\Entidades\Article;
 use App\Models\DAO\CategoryDAO;
+use App\Models\DAO\CommentDAO;
 use App\Models\DAO\UserDAO;
+use App\Models\Entidades\Comment;
 use App\Models\Validacao\ArticleValidador;
 
 class ArticleController extends Controller
@@ -102,8 +104,38 @@ class ArticleController extends Controller
         $article = new ArticleDAO; 
         self::setViewParam('article', $article->getById($idArticle));
 
+
+        Sessao::limpaErro();
+
         $this->render('/article/detalhes');
     }
+    public function comment()
+    {
+        $this->auth();
+        $idUserLog = $_SESSION['idUser'];
+    
+        $user = new UserDAO();
+        $articleDAO = new ArticleDAO();
+        $commentDAO = new CommentDAO();
+
+        $user = $user->getById($idUserLog);
+        
+        $articleId = basename($_SERVER['REQUEST_URI']);
+        $articleId = intval($articleId);
+        var_dump($articleId);
+        
+        $article = $articleDAO->getById($articleId);
+        $comment = new Comment();
+        $comment->setText(nl2br($_POST['text']));
+        $comment->setUser($user);
+        $comment->setArticle($article);
+        
+        var_dump($comment); // Verificar se os dados do comentário estão corretos
+        
+        $commentDAO->salvar($comment);
+        }
+    
+    
 
 
     public function solicitation($params)

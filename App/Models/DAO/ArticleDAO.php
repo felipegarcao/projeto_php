@@ -200,8 +200,28 @@ class ArticleDAO extends BaseDAO
 
     public  function listarSolicitacoes()
     {
-            $resultado = $this->select("SELECT * FROM article WHERE status='Pending'");
-            return $resultado->fetchAll(\PDO::FETCH_CLASS, Article::class);
+        $resultado = $this->select("SELECT a.*, u.idUser as idusuario, u.name 
+        FROM article as a, user as u WHERE a.idUser=u.idUser AND status='Pending'");
+
+        $dataSet = $resultado->fetchAll();
+        $listaArticle = [];
+
+        if($dataSet){
+        foreach ($dataSet as $data) 
+        {
+            $article = new Article();
+            $article->setIdArticle($data['idArticle']);
+            $article->setResume($data['resume']);
+            $article->getUser()->setName($data['name']);
+            $article->setCreatedAt($data['createdAt']);
+            $article->setTitle($data['title']);
+
+            $listaArticle[]= $article;
+        }
+
+        }
+        return $listaArticle;
+
     }
 
     public  function listarArtigos($idUserLog)

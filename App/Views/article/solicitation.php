@@ -20,11 +20,11 @@
           <li>
             <img src="http://<?php echo APP_HOST; ?>/public/icons/calendar.png" alt="calendario" />
 
-            <?= $article->getCreatedAt()->format('d-m-Y') ?>
+            <?= $article->getCreatedAt()->format('d/m/Y') ?>
           </li>
           <li>
             <img src="http://<?php echo APP_HOST; ?>/public/icons/user.png" alt="user" />
-            Nome do usuário 
+            <?= $article->getUser()->getName() ?>
           </li>
         </ul>
       </div>

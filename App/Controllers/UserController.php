@@ -154,7 +154,6 @@ class UserController extends Controller
         Sessao::limpaMensagem();
         Sessao::limpaErro();
 
-        Sessao::gravaMensagem("Usuário adicionado com sucesso!");
 
         $this->redirect('/home');
     }
