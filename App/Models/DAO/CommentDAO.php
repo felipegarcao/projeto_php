@@ -31,7 +31,7 @@ class CommentDAO extends BaseDAO
          
             return $this->insert(
                 'comment', // Altera o nome da tabela para "comment"
-                "text, User_idUser, Article_idArticle", // Colunas correspondentes na tabela "comment"
+                ":text, :User_idUser, :Article_idArticle", 
                 [
                     ':text' => $text,
                     ':User_idUser' => $idUser,

@@ -122,17 +122,16 @@ class ArticleController extends Controller
         
         $articleId = basename($_SERVER['REQUEST_URI']);
         $articleId = intval($articleId);
-        var_dump($articleId);
-        
+
         $article = $articleDAO->getById($articleId);
         $comment = new Comment();
         $comment->setText(nl2br($_POST['text']));
         $comment->setUser($user);
         $comment->setArticle($article);
-        
-        var_dump($comment); // Verificar se os dados do comentário estão corretos
-        
         $commentDAO->salvar($comment);
+
+        $this->redirect('/article/detalhes/' . $articleId);
+
         }
     
     
