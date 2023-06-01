@@ -11,6 +11,10 @@ class Comment
     private Article $article;
 	private string $createdAt;
 
+	public function __construct()
+    {
+        $this->user = new User(); // Inicialização vazia do objeto User
+    }
 	
 	/**
 	 * @return 

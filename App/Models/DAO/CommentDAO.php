@@ -8,12 +8,7 @@ use Exception;
 class CommentDAO extends BaseDAO 
 {
 
-    public function getById ($idComment)
-    {
-        $resultado = $this->select("SELECT * FROM comment WHERE idComment = $idComment");
 
-        return $resultado->fetchObject(Comment::class);
-    }
     public function listar ()
     {
         $resultado = $this->select("SELECT * FROM comment");
@@ -41,6 +36,56 @@ class CommentDAO extends BaseDAO
         } catch (\Exception $e) {
             throw new \Exception("Erro na gravação de dados." . $e->getMessage(), 500);
         }
+    }
+
+
+    public function getById($id)
+    {
+        $resultado = $this->select(
+            "SELECT c.text, c.createdAt, u.name, u.avatar as user
+            FROM comment as c
+            INNER JOIN user as u ON c.idUser = u.idUser
+            WHERE c.idComment = $id"
+        );
+    
+        $dataSetComment = $resultado->fetch();
+    
+        if($dataSetComment) {
+            $comment = new Comment();
+            $comment->setText($dataSetComment['text']);
+            $comment->setCreatedAt($dataSetComment['createdAt']);
+            $comment->getUser()->setName($dataSetComment['user']);
+            $comment->getUser()->setAvatar($dataSetComment['avatar']);
+    
+            return $comment;
+        }
+    
+        return false;
+    }
+    
+    public function getByArticleId($idArticle)
+    {
+        $resultado = $this->select(
+            "SELECT c.text, c.createdAt, u.name, u.avatar as user
+            FROM comment as c
+            INNER JOIN user as u ON c.User_idUser = u.idUser
+            WHERE c.Article_idArticle = $idArticle"
+        );
+    
+        $comments = [];
+    
+        while ($dataSetComment = $resultado->fetch()) {
+            $comment = new Comment();
+            $comment->setText($dataSetComment['text']);
+            $comment->setCreatedAt($dataSetComment['createdAt']);
+            $comment->getUser()->setName($dataSetComment['name']);
+            $comment->getUser()->setAvatar($dataSetComment['user']);
+        
+            $comments[] = $comment;
+        }
+        
+   
+        return $comments;
     }
     
 

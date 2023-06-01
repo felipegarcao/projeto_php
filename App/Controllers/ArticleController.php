@@ -100,13 +100,16 @@ class ArticleController extends Controller
     {
         $this->auth();
         $idArticle = $params[0];
-
         $article = new ArticleDAO; 
         self::setViewParam('article', $article->getById($idArticle));
-
-
+        $comment = new CommentDAO; 
+        self::setViewParam('comments', $comment->getByArticleId($idArticle));
+        $user = new UserDAO; 
+        self::setViewParam('user', $user->getById($_SESSION['idUser']));
+    
+    
         Sessao::limpaErro();
-
+    
         $this->render('/article/detalhes');
     }
     public function comment()

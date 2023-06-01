@@ -41,7 +41,8 @@
         <div class="footerCointainer">
           <div class="newCommentsContainer">
             <div class="avatar">
-              <img src="http://github.com/felipegarcao.png" alt="" />
+          <img src="http://<?php echo APP_HOST; ?>/public/images/users/<?= $viewVar['user']->getAvatar(); ?>" alt="user" />
+    
             </div>
             <form class="newCommentsForm" action="http://<?php echo APP_HOST; ?>/article/comment/<?= $viewVar['article']->getIdArticle(); ?>" method="post" id="form_cadastro" >
               <textarea cols="70" rows="5" name="text" id="text" value="<?php echo $Sessao::retornaValorFormulario('text'); ?>" required></textarea>
@@ -52,21 +53,21 @@
           </div>
         </div>
 
-
+        <?php foreach ($viewVar['comments'] as $comment) { ?>
         <div class="CommentsContainer">
-          <div class="avatar">
-            <img src="http://github.com/felipegarcao.png" alt="" />
-          </div>
+        <div class="avatar">
+                <img src="http://<?php echo APP_HOST; ?>/public/images/users/<?= $comment->getUser()->getAvatar() ?>" alt="user" />
+                </div>         
           <div class="Comments">
             <div class="postsTop">
               <ul>
                 <li>
-                  <img src="http://<?php echo APP_HOST; ?>/public/icons/user.png" alt="user" />
-                  Luis Felipe Garção Silva
+
+                <?= $comment->getUser()->getName() ?>
                 </li>
                 <li>
                   <img src="http://<?php echo APP_HOST; ?>/public/icons/calendar.png" alt="calendario" />
-                  16/05/2023
+                  <?= $comment->getCreatedAt()->format('d/m/Y') ?>
                 </li>
 
                 <div class="actions">
@@ -76,14 +77,14 @@
               </ul>
             </div>
 
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius saepe molestias pariatur tempora beatae
-              possimus voluptatum aut sequi magni laborum atque eos iste, accusamus fugiat illo quia ipsum nihil animi?
+            <p><?= $comment->getText() ?>
             </p>
 
           </div>
+          
         </div>
 
-
+        <?php }?>
       </footer>
 
     </div>
