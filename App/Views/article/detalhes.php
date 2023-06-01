@@ -40,10 +40,9 @@
       <footer>
         <div class="footerCointainer">
           <div class="newCommentsContainer">
-            <div class="avatar">
-          <img src="http://<?php echo APP_HOST; ?>/public/images/users/<?= $viewVar['user']->getAvatar(); ?>" alt="user" />
-    
-            </div>
+          <div class="avatar" style="width: 45px; height: 45px">
+          <img src="http://<?php echo APP_HOST; ?>/public/images/users/<?= $viewVar['user']->getAvatar(); ?>"  alt="user" />
+        </div>    
             <form class="newCommentsForm" action="http://<?php echo APP_HOST; ?>/article/comment/<?= $viewVar['article']->getIdArticle(); ?>" method="post" id="form_cadastro" >
               <textarea cols="70" rows="5" name="text" id="text" value="<?php echo $Sessao::retornaValorFormulario('text'); ?>" required></textarea>
               <div class="newCommentsFormFooter">
@@ -55,9 +54,9 @@
 
         <?php foreach ($viewVar['comments'] as $comment) { ?>
         <div class="CommentsContainer">
-        <div class="avatar">
-                <img src="http://<?php echo APP_HOST; ?>/public/images/users/<?= $comment->getUser()->getAvatar() ?>" alt="user" />
-                </div>         
+        <div class="avatar" style="width: 45px; height: 45px">
+          <img src="http://<?php echo APP_HOST; ?>/public/images/users/<?= $viewVar['user']->getAvatar(); ?>"  alt="user" />
+        </div>      
           <div class="Comments">
             <div class="postsTop">
               <ul>
@@ -71,7 +70,7 @@
                 </li>
 
                 <div class="actions">
-                  <button class="negado" style="background-color: #FF57B2;"><img src="http://<?php echo APP_HOST; ?>/public/icons/trash.png" alt="apagar comentario" /></button>
+                  <button class="negado" style="background-color: #FF57B2;"  data-bs-toggle="modal" data-bs-target="#exampleModal"><img src="http://<?php echo APP_HOST; ?>/public/icons/trash.png" alt="apagar comentario" /></button>
                 </div>
 
               </ul>
@@ -90,6 +89,29 @@
     </div>
   </main>
 </body>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Comentario</h1>
+        <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+          <img src="http://<?php echo APP_HOST; ?>/public/icons/x.png" alt="negar postagem" />
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="post" >
+        <textarea rows="9" name="feedback" id="feedback"></textarea>
+        
+      </div>
+      <div class="actions">
+        <button type="submit" class="aceito">Finalizar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <script>

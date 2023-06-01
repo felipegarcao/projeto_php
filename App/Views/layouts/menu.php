@@ -11,10 +11,10 @@
    
     <div class="container-popover">
       <div class="popover-trigger">
-        <button class="popover-btn">
-          <img src="http://<?php echo APP_HOST; ?>/public/images/users/<?= $viewVar['user']->getAvatar(); ?>" style="width: 40px; border-radius:100px;" alt="user" />
-
-        </button>
+        <div class="popover-btn avatar" style="width: 45px; height: 45px">
+          <img src="http://<?php echo APP_HOST; ?>/public/images/users/<?= $viewVar['user']->getAvatar(); ?>"  alt="user" />
+        </div>
+       
         <div class="popover-content">
           <a class="popover-item" href="http://<?php echo APP_HOST; ?>/user/perfil">
             Meu Perfil

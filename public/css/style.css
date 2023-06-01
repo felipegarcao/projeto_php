@@ -44,10 +44,11 @@ html {
   }
   
   .popover-btn {
-    background-color: #f9f9f9;
+    /* background-color: #f9f9f9;
     border: none;
     padding: 10px;
     border-radius: 99999px;
+     */
   }
   
   .popover-content {
