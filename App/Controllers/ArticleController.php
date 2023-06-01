@@ -19,8 +19,11 @@ class ArticleController extends Controller
         $categoryDAO = new CategoryDAO();
 
         self::setViewParam('listCategory', $categoryDAO->listar());
+        $user = new UserDAO; 
+        self::setViewParam('user', $user->getById($_SESSION['idUser']));
 
         $this->render('/article/cadastro');
+       
 
         Sessao::limpaFormulario();
         Sessao::limpaMensagem();
@@ -30,7 +33,8 @@ class ArticleController extends Controller
     
     public function salvar(){
         $this->auth();
-
+        $user = new UserDAO; 
+        self::setViewParam('user', $user->getById($_SESSION['idUser']));
         Sessao::gravaFormulario($_POST);
     
         $status = "Pending";
@@ -99,6 +103,8 @@ class ArticleController extends Controller
     public function detalhes($params)
     {
         $this->auth();
+        $user = new UserDAO; 
+        self::setViewParam('user', $user->getById($_SESSION['idUser']));
         $idArticle = $params[0];
         $article = new ArticleDAO; 
         self::setViewParam('article', $article->getById($idArticle));
@@ -116,6 +122,8 @@ class ArticleController extends Controller
     {
         $this->auth();
         $idUserLog = $_SESSION['idUser'];
+        $user = new UserDAO; 
+        self::setViewParam('user', $user->getById($_SESSION['idUser']));
     
         $user = new UserDAO();
         $articleDAO = new ArticleDAO();
@@ -144,6 +152,8 @@ class ArticleController extends Controller
     {
 
         $this->auth();
+        $user = new UserDAO; 
+        self::setViewParam('user', $user->getById($_SESSION['idUser']));
 
         $article = new ArticleDAO; 
         self::setViewParam('articleSolicitation', $article->listarSolicitacoes());

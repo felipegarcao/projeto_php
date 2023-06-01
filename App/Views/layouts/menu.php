@@ -12,7 +12,7 @@
     <div class="container-popover">
       <div class="popover-trigger">
         <button class="popover-btn">
-          <img src="http://<?php echo APP_HOST; ?>/public/images/users/profileFixed.jpg" style="width: 40px; border-radius:100px;" alt="user" />
+          <img src="http://<?php echo APP_HOST; ?>/public/images/users/<?= $viewVar['user']->getAvatar(); ?>" style="width: 40px; border-radius:100px;" alt="user" />
 
         </button>
         <div class="popover-content">

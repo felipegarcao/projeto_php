@@ -11,7 +11,8 @@ class HomeController extends Controller
     public function index()
     {
             $this->auth();
-            
+            $user = new UserDAO; 
+            self::setViewParam('user', $user->getById($_SESSION['idUser']));
             $categoryDAO = new CategoryDAO();
             self::setViewParam('listCategory', $categoryDAO->listar());
             $articleDAO = new ArticleDAO();

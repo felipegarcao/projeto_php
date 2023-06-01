@@ -32,9 +32,11 @@ class UserController extends Controller
         $this->auth();
         $userDAO = new UserDAO();
         $idUser = func_get_args()[0];
+        $user = new UserDAO; 
+        self::setViewParam('user', $user->getById($_SESSION['idUser']));
         
         if (is_array($idUser)) {
-            $idUser = $idUser[0]; // Acessar o primeiro elemento do array
+            $idUser = $idUser[0]; 
         }
         
         $user = $userDAO->getById($idUser);
@@ -47,8 +49,10 @@ class UserController extends Controller
     public function listUser() {
 
         $this->auth();
-        
+        $user = new UserDAO; 
+        self::setViewParam('user', $user->getById($_SESSION['idUser']));
         $this->render('/user/list-user');
+
 
         
     }
@@ -185,7 +189,8 @@ class UserController extends Controller
     public function atualizar()
     {
         $this->auth();
-        
+        $user = new UserDAO; 
+        self::setViewParam('user', $user->getById($_SESSION['idUser']));
         $user = new User();
         $user->setIdUser($_SESSION['idUser']);
         $user->setName($_POST['name']);

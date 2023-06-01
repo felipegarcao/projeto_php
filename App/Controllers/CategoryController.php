@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Lib\Sessao;
 use App\Models\DAO\CategoryDAO;
+use App\Models\DAO\UserDAO;
 use App\Models\Entidades\Category;
 use App\Models\Validacao\CategoryValidador;
 
@@ -11,6 +12,8 @@ class CategoryController extends Controller
 {
     public function index()
     {
+        $user = new UserDAO; 
+        self::setViewParam('user', $user->getById($_SESSION['idUser']));
         $this->auth();
         $categoryDao = new CategoryDAO();
 
@@ -24,6 +27,8 @@ class CategoryController extends Controller
     public function cadastro()
     {
         $this->auth();
+        $user = new UserDAO; 
+        self::setViewParam('user', $user->getById($_SESSION['idUser']));
         $this->render('/category/cadastro');
 
         Sessao::limpaFormulario();
@@ -34,6 +39,8 @@ class CategoryController extends Controller
     public function salvar()
     {
         $this->auth();
+        $user = new UserDAO; 
+        self::setViewParam('user', $user->getById($_SESSION['idUser']));
         $category = new Category();
         $category->setName($_POST['nome']);
 
@@ -73,7 +80,8 @@ public function atualizar()
     $category = new Category();
     $category->setIdCategory($_POST['idCategory']);
     $category->setName($_POST['name']);
-
+    $user = new UserDAO; 
+    self::setViewParam('user', $user->getById($_SESSION['idUser']));
     Sessao::gravaFormulario($_POST);
 
     $categoryValidador = new CategoryValidador();
@@ -105,6 +113,8 @@ public function edicao($params)
 {
 
     $this->auth();
+    $user = new UserDAO; 
+    self::setViewParam('user', $user->getById($_SESSION['idUser']));
     $idCategory = $params[0];
 
     $categoryDAO = new CategoryDAO();
