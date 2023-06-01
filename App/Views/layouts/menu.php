@@ -29,7 +29,7 @@
           </a>
 
           
-      <?php //if ($viewVar['user']->getType() == "adm") {?>
+      <?php if ($viewVar['user']->getType() == "adm") {?>
           <a class="popover-item" href="http://<?php echo APP_HOST; ?>/article/solicitation">
             Solicitações
           </a>
@@ -38,7 +38,7 @@
             Categorias
           </a>
 <?php
-    //  }
+     }
 ?>
 
 
