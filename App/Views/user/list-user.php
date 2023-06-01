@@ -1,6 +1,7 @@
 <div class="container">
   <h2 class="text-center" style="margin-top: 5rem;">Controle de Usuarios</h2>
   <table class="table">
+  
     <thead>
       <th class="text-center">ID</th>
       <th class="text-center" style="width: 40px;"></th> <!-- AVATAr -->
@@ -8,19 +9,24 @@
       <th class="text-center">Tipo De Permissão</th>
       <th class="text-center"></th> <!-- Excluir -->
     </thead>
+    
     <tbody>
+    <?php foreach ($viewVar['users'] as $user) { ?>
       <tr>
-        <td class="text-center">21</td>
+        <td class="text-center"><?= $user->getIdUser() ?></td>
         <td>
           <div class="avatar" style="height: 36px; width: 36px;">
-            <img src="http://github.com/felipegarcao.png" alt="" />
+          <img src="http://<?php echo APP_HOST; ?>/public/images/users/<?= $user->getAvatar() ?>" alt="user" />
           </div>
         </td>
-        <td>Luis Felipe Garção Silva</td>
+        <td><?= $user->getName() ?></td>
         <td class="text-center">
           <select class="select" name="idCategory" id="idCategory" required style="margin-bottom: 0px; width: 80%;">
+          <?php if ($user->getType() == "adm"){ ?>
             <option value="2">Administrador</option>
+            <?php } else {?>
             <option value="2">Usuario</option>
+            <?php } ?>
           </select>
         </td>
         <td class="text-right">
@@ -32,7 +38,7 @@
         </td>
       </tr>
 
-
+<?php }?>
 
     </tbody>
   </table>

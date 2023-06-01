@@ -37,6 +37,10 @@
           <a class="popover-item" href="http://<?php echo APP_HOST; ?>/category/index">
             Categorias
           </a>
+
+          <a class="popover-item" href="http://<?php echo APP_HOST; ?>/user/list-user">
+            Usuários
+          </a>
 <?php
      }
 ?>

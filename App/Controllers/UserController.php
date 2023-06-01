@@ -51,6 +51,9 @@ class UserController extends Controller
         $this->auth();
         $user = new UserDAO; 
         self::setViewParam('user', $user->getById($_SESSION['idUser']));
+        $users = new UserDAO; 
+        self::setViewParam('users', $users->listar());
+
         $this->render('/user/list-user');
 
 

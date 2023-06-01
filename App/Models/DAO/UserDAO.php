@@ -17,9 +17,26 @@ class UserDAO extends BaseDAO
 
     public function listar()
     {
-        $resultado = $this->select("SELECT * FROM user");
+        $resultado = $this->select("SELECT idUser, name, avatar, type from user" );
 
-        return $resultado->fetchObject(User::class);
+            $dataSet = $resultado->fetchAll();
+            $listaUser = [];
+
+            if($dataSet){
+            foreach ($dataSet as $data) 
+            {
+                $user = new User();
+                $user->setIdUser($data['idUser']);
+                $user->setName($data['name']);
+                $user->setAvatar($data['avatar']);
+                $user->setType($data['type']);
+
+                $listaUser[]= $user;
+            }
+
+            }
+            return $listaUser;
+
     }
 
     public function getByEmail(string $email)
