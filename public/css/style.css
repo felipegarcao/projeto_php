@@ -43,8 +43,6 @@ html {
     display: inline-block;
   }
   
- 
-  
   .popover-content {
     position: absolute;
     top: calc(100% + 0px);
