@@ -4,12 +4,12 @@
 
       <div>
         <div class="avatar">
-          <img src="http://<?= APP_HOST ?>/public/images/users/<?= $viewVar['user']->getAvatar() ?>" alt="" />
+          <img src="http://<?= APP_HOST ?>/public/images/users/<?= $viewVar['userList']->getAvatar() ?>" alt="" />
         </div>
 
-        <strong><?= $viewVar['user']->getName() ?></strong>
+        <strong><?= $viewVar['userList']->getName() ?></strong>
 
-        <p><?php echo $viewVar['user']->getDescription(); ?></p>
+        <p><?php echo $viewVar['userList']->getDescription(); ?></p>
 
         <button class="buttonSubmit">Voltar</button>
       </div>
@@ -18,6 +18,9 @@
     <div class="authorPostsContainer">
       <h2>Meus Posts</h2>
       <div class="authorPosts">
+      <?php if (empty($viewVar['articleExibitionUser'])) { ?>
+    <div class="alert alert-info" role="alert">Nenhum artigo postado :c</div>
+<?php } ?>
 
         <div class="postsAuthorSelected">
           <?php foreach ($viewVar['articleExibitionUser'] as $article) { ?>

@@ -42,7 +42,7 @@ class UserController extends Controller
         $user = $userDAO->getById($idUser);
         $article = new ArticleDAO; 
         self::setViewParam('articleExibitionUser', $article->listarArtigosAprovados($idUser));
-        self::setViewParam('user', $user);
+        self::setViewParam('userList', $user);
         $this->render('/user/author');
     }
 
@@ -59,8 +59,6 @@ class UserController extends Controller
 
         
     }
-    
-    
 
     public function logout() 
     {
