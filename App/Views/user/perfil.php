@@ -1,4 +1,4 @@
-<div class="loginContainer customContainer" style="margin-top: 3rem;">
+<div class="loginContainer customContainer" style="margin-top: 8rem;">
   <div class="containerCadastroPost" style=" padding: 2rem;">
     <?php if ($Sessao::retornaErro()) { ?>
       <div class="alert alert-warning" role="alert">
@@ -38,6 +38,8 @@
       </label>
 
       <button type="submit" class="buttonSubmit">Confirmar</button>
+      <a href="http://<?php echo APP_HOST; ?>/user/resetPassword" class="buttonCancel">
+       Resetar Senha </a>
 
     </form>
   </div>

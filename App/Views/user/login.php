@@ -26,5 +26,8 @@
     <a href="http://<?php echo htmlspecialchars(APP_HOST); ?>/user/cadastro">
       Não possui conta? Crie uma agora!
     </a>
+    <a class="mt-2" href="http://<?php echo htmlspecialchars(APP_HOST); ?>/user/resetPassword">
+      Esqueci minha senha
+    </a>
   </div>
 </div>

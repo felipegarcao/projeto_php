@@ -106,6 +106,21 @@ class UserController extends Controller
     }
 
 
+    public function resetPassword() {
+
+        $this->auth();
+        $userDAO = new UserDAO();
+        
+            $user = new UserDAO; 
+        self::setViewParam('user', $user->getById($_SESSION['idUser']));
+        
+        Sessao::limpaFormulario();
+        Sessao::limpaMensagem();
+        Sessao::limpaErro();
+
+        $this->render('/user/resetPassword');
+
+    }
 
     public function cadastro()
     {
