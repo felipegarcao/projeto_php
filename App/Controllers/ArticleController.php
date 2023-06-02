@@ -110,9 +110,7 @@ class ArticleController extends Controller
         self::setViewParam('article', $article->getById($idArticle));
         $comment = new CommentDAO; 
         self::setViewParam('comments', $comment->getByArticleId($idArticle));
-        $user = new UserDAO; 
-        self::setViewParam('user', $user->getById($_SESSION['idUser']));
-    
+       
     
         Sessao::limpaErro();
     

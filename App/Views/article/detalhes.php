@@ -62,9 +62,10 @@
             <div class="postsTop">
               <ul>
                 <li>
-
                 <?= $comment->getUser()->getName() ?>
+               
                 </li>
+              
                 <li>
                   <img src="http://<?php echo APP_HOST; ?>/public/icons/calendar.png" alt="calendario" />
                   <?= $comment->getCreatedAt()->format('d/m/Y') ?>
