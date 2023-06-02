@@ -95,9 +95,13 @@ class CommentDAO extends BaseDAO
     }
     
 
-    public function excluir(int $idComment){
- 
-    
+    public function excluir(int $idComment)
+    {
+        try {
+            return $this->delete('comment', "idComment = $idComment");
+        } catch (\Exception $e) {
+            throw new \Exception("Erro ao excluir a comentario. " . $e->getMessage(), 500);
+        }
     }
 }
     
