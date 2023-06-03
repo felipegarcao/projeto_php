@@ -15,7 +15,7 @@
 
 
 <form class="d-flex align-items-center gap-2">
-<select class="select" name="idCategory" id="idCategory" required>
+<select class="select" name="idCategory" id="idCategory" required  onchange="getval(this);">
         <?php foreach ($viewVar['listCategory'] as $category) { ?>
         <option value="<?= $category->getIdCategory() ?>"><?= $category->getName() ?></option>
         <?php } ?>
@@ -54,3 +54,14 @@
     <?php } ?>
   </main>
 </body>
+
+<script>
+  $('select').on('change', function() {
+  alert( this.value );
+});
+
+function getval(sel)
+{
+    alert(sel.value);
+}
+</script>

@@ -136,7 +136,7 @@
           <div class="d-flex gap-3">
 
             <div>
-              <img src="http://<?php echo APP_HOST; ?>/public/icons/warning-big.png"
+              <img src="https://i.gifer.com/SU9.gif"
                 alt="visualizar justificativa de negação" />
             </div>
             <div class="detalhesPostInfo">
@@ -160,9 +160,6 @@
 
         </div>
 
-        <div class="actions">
-          <button type="button" class="negado" style="color: #FF57B2;" data-bs-dismiss="modal">Fechar</button>
-        </div>
       </div>
     </div>
   </div>
@@ -171,3 +168,5 @@
         }
     }
     ?>
+
+    

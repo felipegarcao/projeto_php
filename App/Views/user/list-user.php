@@ -21,7 +21,7 @@
         </td>
         <td><?= $user->getName() ?></td>
         <td class="text-center">
-          <select class="select" name="idCategory" id="idCategory" required style="margin-bottom: 0px; width: 80%;">
+          <select class="select" name="idCategory" id="idCategory" disabled style="margin-bottom: 0px; width: 80%;">
           <?php if ($user->getType() == "adm"){ ?>
             <option value="2">Administrador</option>
             <?php } else {?>
@@ -56,15 +56,12 @@
       </div>
       <div class="modal-body">
       <div class="d-flex flex-column align-items-center justify-content-center gap-3">
-          <img src="http://<?php echo APP_HOST; ?>/public/icons/question.png" alt="question" />
-          <h3 class="text-center">Deseja Realmente Tornar esse um usuario Administrador?</h3>
+          <img src="http://<?php echo APP_HOST; ?>/public/icons/king.svg" style="width: 200px; height: 200px;" alt="question" />
+          <h3 class="text-center">Deseja realmente tornar esse um usuário administrador?</h3>
           <p class="obs-modal">OBS: Lembrando que isso é permanente</p>
           <div class="actions" style="margin-left: 0px;">
             <button class="aceito">
               <img src="http://<?php echo APP_HOST; ?>/public/icons/confirm.png" alt="confirmar postagem" />
-            </button>
-            <button class="negado" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-              <img src="http://<?php echo APP_HOST; ?>/public/icons/x.png" alt="negar postagem" />
             </button>
           </div>
         </div>
