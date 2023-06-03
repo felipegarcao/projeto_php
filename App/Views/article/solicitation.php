@@ -14,7 +14,7 @@
     <a href="http://<?= APP_HOST ?>/article/detalhes/<?= $article->getIdArticle() ?>">
   <div class="cardContainer">
     <header>
-      <h3><?= $article->getTitle() ?></h3>
+    <h3 class='title-solicitation'><?= $article->getTitle() ?></h3>
       <div class="detalhesPostInfo">
         <ul>
           <li>

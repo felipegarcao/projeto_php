@@ -14,12 +14,18 @@
     <div class="posts">
 
 
-
-      <select class="select" name="idCategory" id="idCategory" required>
+<form class="d-flex align-items-center gap-2">
+<select class="select" name="idCategory" id="idCategory" required>
         <?php foreach ($viewVar['listCategory'] as $category) { ?>
         <option value="<?= $category->getIdCategory() ?>"><?= $category->getName() ?></option>
         <?php } ?>
       </select>
+      <button class="buttonSubmit" style="height: 33px">
+      <img src="http://<?php echo APP_HOST; ?>/public/icons/search.png" alt="buscar" />
+    </button>
+
+</form>
+      
 
 
       

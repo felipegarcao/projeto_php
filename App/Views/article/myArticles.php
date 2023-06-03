@@ -11,6 +11,18 @@
 <div class="container containerSolicitacao">
   <h1>Meus Posts</h1>
 
+  <form class="d-flex align-items-center gap-2 justify-content-center mb-4">
+<select class="select" name="idCategory" id="idCategory" required>
+        <?php foreach ($viewVar['listCategory'] as $category) { ?>
+        <option value="<?= $category->getIdCategory() ?>"><?= $category->getName() ?></option>
+        <?php } ?>
+      </select>
+      <button class="buttonSubmit" style="height: 33px">
+      <img src="http://<?php echo APP_HOST; ?>/public/icons/search.png" alt="buscar" />
+    </button>
+
+</form>
+
   <?php foreach ($viewVar['articleExibition'] as $article) {
             if ($article->getStatus() == "Aproved") {
         ?>

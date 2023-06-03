@@ -31,7 +31,7 @@
         </td>
         <td class="text-right">
           <div class="actions" style="justify-content: center;">
-            <button class="negado" type="button" style="background-color: #FF57B2;" data-bs-toggle="modal" data-bs-target="#exampleModal"><img src="http://<?php echo APP_HOST; ?>/public/icons/trash.png" alt="apagar comentario" /></button>
+            <button class="negado" type="button" style="background-color: #FF57B2;" data-bs-toggle="modal" data-bs-target="#exampleModal"><img src="http://<?php echo APP_HOST; ?>/public/icons/pencil.png" alt="apagar comentario" /></button>
 
 
           </div>
@@ -49,7 +49,7 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Excluir</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Permissão</h1>
         <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
           <img src="http://<?php echo APP_HOST; ?>/public/icons/x.png" alt="negar postagem" />
         </button>
@@ -57,7 +57,7 @@
       <div class="modal-body">
       <div class="d-flex flex-column align-items-center justify-content-center gap-3">
           <img src="http://<?php echo APP_HOST; ?>/public/icons/question.png" alt="question" />
-          <h3>Deseja Realmente Apagar?</h3>
+          <h3 class="text-center">Deseja Realmente Tornar esse um usuario Administrador?</h3>
           <p class="obs-modal">OBS: Lembrando que isso é permanente</p>
           <div class="actions" style="margin-left: 0px;">
             <button class="aceito">

@@ -70,11 +70,11 @@
                   <img src="http://<?php echo APP_HOST; ?>/public/icons/calendar.png" alt="calendario" />
                   <?= $comment->getCreatedAt()->format('d/m/Y') ?>
                 </li>
-
+<?php if ($comment->getUser()->getName() == $viewVar['user']->getName() || $viewVar['user']->getType() == "adm" ){?>
                 <div class="actions">
                   <button class="negado" style="background-color: #FF57B2;"><img src="http://<?php echo APP_HOST; ?>/public/icons/trash.png" alt="apagar comentario" /></button>
                 </div>
-
+<?php }?>
               </ul>
             </div>
 

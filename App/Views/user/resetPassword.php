@@ -12,14 +12,14 @@
                 <span>
                     Usuario:
                 </span>
-                <input type="text" disabled placeholder="Digite o nome da Categoria" id="nome" name="nome" value="<?php echo $Sessao::retornaValorFormulario('nome'); ?>"/>
+                <input type="text" disabled placeholder="" id="nome" name="nome" value="<?php echo $viewVar['user']->getName(); ?>"/>
             </label>
 
             <label>
                 <span>
                     Nova Senha:
                 </span>
-                <input type="text" placeholder="Digite o nome da Categoria" id="nome" name="nome" value="<?php echo $Sessao::retornaValorFormulario('nome'); ?>"/>
+                <input type="password" placeholder="Digite sua nova senha" id="nome" name="nome" value="<?php echo $Sessao::retornaValorFormulario('nome'); ?>"/>
             </label>
 
 
@@ -27,7 +27,7 @@
                 <span>
                     Confirmação da Nova Senha:
                 </span>
-                <input type="text" placeholder="Digite o nome da Categoria" id="nome" name="nome" value="<?php echo $Sessao::retornaValorFormulario('nome'); ?>"/>
+                <input type="password" placeholder="Digite novamente sua senha" id="nome" name="nome" value="<?php echo $Sessao::retornaValorFormulario('nome'); ?>"/>
             </label>
 
 
