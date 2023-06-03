@@ -14,8 +14,9 @@
     <div class="posts">
 
 
-<form class="d-flex align-items-center gap-2">
-<select class="select" name="idCategory" id="idCategory" required  onchange="getval(this);">
+<form class="d-flex align-items-center gap-2" action="/home/getByCategory" method="POST">
+<select class="select" name="idCategory" id="idCategory" required  onchange="this.form.submit()">
+    <option value="0">Todos</option>
         <?php foreach ($viewVar['listCategory'] as $category) { ?>
         <option value="<?= $category->getIdCategory() ?>"><?= $category->getName() ?></option>
         <?php } ?>
@@ -56,12 +57,12 @@
 </body>
 
 <script>
-  $('select').on('change', function() {
-  alert( this.value );
-});
 
 function getval(sel)
 {
+  <?php
+    
+  ?>
     alert(sel.value);
 }
 </script>
