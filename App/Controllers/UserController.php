@@ -106,20 +106,53 @@ class UserController extends Controller
     }
 
 
-    public function resetPassword() {
+public function resetPassword() {
+    $this->auth();
 
-        $this->auth();
+    $user = new UserDAO; 
+    self::setViewParam('user', $user->getById($_SESSION['idUser']));
 
-        $user = new UserDAO; 
-        self::setViewParam('user', $user->getById($_SESSION['idUser']));
-        
-        Sessao::limpaFormulario();
-        Sessao::limpaMensagem();
-        Sessao::limpaErro();
+    Sessao::limpaFormulario();
+    Sessao::limpaMensagem();
+    Sessao::limpaErro();
 
-        $this->render('/user/resetPassword');
+    $this->render('/user/resetPassword');
 
+    $this->auth();
+
+    $usuario = new User();
+
+    $usuario->setIdUser($_SESSION['idUser']);
+    $password = $_POST['password'];
+    $password_confirm = $_POST['password_confirm'];
+
+    Sessao::gravaFormulario($_POST);
+
+    $erros = [];
+    $usuarioDAO = new UserDAO();
+
+    if ($password !== $password_confirm) {
+        $erros[] = "As senhas digitadas não coincidem!";
     }
+
+
+    try {
+        $usuario->setPassword(password_hash($password, PASSWORD_DEFAULT));
+        $usuarioDAO->atualizarPassword($usuario);
+        $this->redirect('/home');
+
+    } catch (\Exception $e) {
+        Sessao::gravaMensagem($e->getMessage());
+    }
+
+    Sessao::limpaFormulario();
+    Sessao::limpaMensagem();
+    Sessao::limpaErro();
+
+    $this->redirect('/home');
+}
+
+    
 
     public function cadastro()
     {
@@ -311,4 +344,6 @@ class UserController extends Controller
 
         $this->redirect('/user');
     }
+
+ 
 }

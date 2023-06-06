@@ -7,7 +7,7 @@
 <div class="loginContainer" style="flex-direction: column; margin-top: 2rem; height: calc(100vh - 230px)">
     <h2>Resetar senha</h2>
     <div class="containerCadastroPost" style="padding: 2rem">
-        <form action="http://<?php echo APP_HOST; ?>/category/salvar" method="post" id="form_cadastro">
+        <form action="http://<?php echo APP_HOST; ?>/user/resetPassword" method="post" id="form_cadastro">
             <label>
                 <span>
                     Usuario:
@@ -19,7 +19,7 @@
                 <span>
                     Nova Senha:
                 </span>
-                <input type="password" placeholder="Digite sua nova senha" id="nome" name="nome" value="<?php echo $Sessao::retornaValorFormulario('nome'); ?>"/>
+                <input type="password" placeholder="Digite sua nova senha" name="password"/>
             </label>
 
 
@@ -27,7 +27,7 @@
                 <span>
                     Confirmação da Nova Senha:
                 </span>
-                <input type="password" placeholder="Digite novamente sua senha" id="nome" name="nome" value="<?php echo $Sessao::retornaValorFormulario('nome'); ?>"/>
+                <input type="password" placeholder="Digite novamente sua senha" name="password_confirm" />
             </label>
 
 

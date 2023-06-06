@@ -148,7 +148,28 @@ class UserDAO extends BaseDAO
             throw new \Exception("Erro ao excluir o usuário. " . $e->getMessage(), 500);
         }
     }
+    public function atualizarPassword(User $usuario)
+    {
+        try {
 
+            $idUser         = $usuario->getIdUser();
+            $password   = $usuario->getPassword();
+
+            return $this->update(
+                'user', 
+                "password = :password", 
+                
+                [
+                    ':idUser'       =>$idUser, 
+                    ':password' =>$password
+                ], 
+                "idUser = :idUser"
+            );
+            
+        } catch (\Exception $e) {
+            throw new \Exception("Erro na atualização dos dados." . $e->getMessage(), 500);
+        }
+    }
     public  function atualizarImagem(USER $user)
     {
         try {
