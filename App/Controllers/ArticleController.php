@@ -126,7 +126,24 @@ class ArticleController extends Controller
     
         $this->render('/article/detalhes');
     }
+    public function excluirComentario($params)
+{
+    $this->auth();
     
+    // Obtém o ID do comentário a ser excluído
+    $idComentario = $params[0];
+    $idArtigo = $params[1];
+    // Cria uma instância da CommentDAO
+    $commentDAO = new CommentDAO();
+    
+        // Chama a função para excluir o comentário na CommentDAO
+        $commentDAO->excluir($idComentario);
+        
+        // Redireciona para a página de detalhes do artigo
+        $this->redirect('/article/detalhes/' . $idArtigo);
+
+}
+
     public function like($params)
     {
         $this->auth();

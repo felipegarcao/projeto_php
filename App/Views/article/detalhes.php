@@ -72,7 +72,12 @@
                         <img src="http://<?php echo APP_HOST; ?>/public/icons/calendar.png" alt="calendario" />
                         <?= $comment->getCreatedAt()->format('d/m/Y') ?>
                       </div>
-                      <button class="negado" style="background-color: #FF57B2;"><img src="http://<?php echo APP_HOST; ?>/public/icons/trash.png" alt="apagar comentario" /></button>
+                      <a href="http://<?= APP_HOST ?>/article/excluirComentario/<?= $comment->getIdComment() ?>/<?= $viewVar['article']->getIdArticle() ?>" style="text-decoration: none;">
+    <button class="negado" style="background-color: #FF57B2;">
+        <img src="http://<?php echo APP_HOST; ?>/public/icons/trash.png" alt="apagar comentario" />
+    </button>
+</a>
+
                     </div>
                   <?php } ?>
                 </ul>
