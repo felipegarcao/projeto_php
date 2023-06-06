@@ -12,5 +12,7 @@
     <link href="http://<?php echo APP_HOST; ?>/public/css/style.css" rel="stylesheet">
     <link href="http://<?php echo APP_HOST; ?>/public/css/list-user.css" rel="stylesheet">
     <link href="http://<?php echo APP_HOST; ?>/public/css/like.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
 <body>

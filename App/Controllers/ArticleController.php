@@ -7,8 +7,10 @@ use App\Lib\Upload;
 use App\Models\Entidades\Article;
 use App\Models\DAO\CategoryDAO;
 use App\Models\DAO\CommentDAO;
+use App\Models\DAO\LikeDAO;
 use App\Models\DAO\UserDAO;
 use App\Models\Entidades\Comment;
+use App\Models\Entidades\Like;
 use App\Models\Validacao\ArticleValidador;
 
 class ArticleController extends Controller
@@ -103,19 +105,58 @@ class ArticleController extends Controller
     public function detalhes($params)
     {
         $this->auth();
-        $user = new UserDAO; 
-        self::setViewParam('user', $user->getById($_SESSION['idUser']));
+        $userDAO = new UserDAO();
+        $user = $userDAO->getById($_SESSION['idUser']);
+        self::setViewParam('user', $user);
+    
         $idArticle = $params[0];
-        $article = new ArticleDAO; 
-        self::setViewParam('article', $article->getById($idArticle));
-        $comment = new CommentDAO; 
-        self::setViewParam('comments', $comment->getByArticleId($idArticle));
-       
+        $articleDAO = new ArticleDAO();
+        $article = $articleDAO->getById($idArticle);
+        self::setViewParam('article', $article);
+    
+        $commentDAO = new CommentDAO();
+        $comments = $commentDAO->getByArticleId($idArticle);
+        self::setViewParam('comments', $comments);
+    
+        $likeDAO = new LikeDAO();
+        $likeCount = $likeDAO->getLikeCountByArticleId($idArticle);
+        self::setViewParam('likeCount', $likeCount);
     
         Sessao::limpaErro();
     
         $this->render('/article/detalhes');
     }
+    
+    public function like($params)
+    {
+        $this->auth();
+    
+        $idArticle = $params[0];
+        $likeDAO = new LikeDAO();
+        $articleDAO = new ArticleDAO();
+        $userDAO = new UserDAO();
+    
+        $article = $articleDAO->getById($idArticle);
+        $user = $userDAO->getById($_SESSION['idUser']);
+    
+        $like = new Like();
+        $like->setUser($user);
+        $like->setArticle($article);
+    
+        $alreadyLiked = $likeDAO->isLikedByUser($idArticle, $_SESSION['idUser']);
+    
+        if ($alreadyLiked) {
+            $likeDAO->removeLike($idArticle, $_SESSION['idUser']);
+        } else {
+            $likeDAO->save($like);
+        }
+    
+        
+    }
+    
+    
+    
+
 
     public function edit($params) {
         $this->auth();

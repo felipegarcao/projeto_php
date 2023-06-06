@@ -24,10 +24,12 @@
             <?= $viewVar['article']->getCreatedAt()->format('d/m/Y') ?>
           </li>
           <li>
-            <button class="like-button" onclick="likeButtonClick()">
-              <span class="heart">&#10084;</span>
-              <span class="like-count">0</span>
-            </button>
+          <button class="like-button" onclick="likeButtonClick(event)" data-article-id="<?= $viewVar['article']->getIdArticle(); ?>">
+  <span class="heart">&#10084;</span>
+  <span class="like-count"><?= $viewVar['likeCount'] ?></span>
+</button>
+
+           
           </li>
         </ul>
       </div>
@@ -35,78 +37,94 @@
       <article>
         <div class="postContent">
           <?= $viewVar['article']->getText(); ?>
+        </div>
       </article>
 
       <footer>
         <div class="footerCointainer">
           <div class="newCommentsContainer">
             <div class="avatar">
-          <img src="http://<?php echo APP_HOST; ?>/public/images/users/<?= $viewVar['user']->getAvatar(); ?>" alt="user" />
-    
+              <img src="http://<?php echo APP_HOST; ?>/public/images/users/<?= $viewVar['user']->getAvatar(); ?>" alt="user" />
             </div>
             <form class="newCommentsForm" action="http://<?php echo APP_HOST; ?>/article/comment/<?= $viewVar['article']->getIdArticle(); ?>" method="post" id="form_cadastro" >
               <textarea cols="70" rows="5" name="text" id="text" value="<?php echo $Sessao::retornaValorFormulario('text'); ?>" required></textarea>
               <div class="newCommentsFormFooter">
-                <button type="submit" class="buttonSubmit">Comentar </button>
+                <button type="submit" class="buttonSubmit">Comentar</button>
               </div>
             </form>
           </div>
         </div>
 
         <?php foreach ($viewVar['comments'] as $comment) { ?>
-        <div class="CommentsContainer">
-        <div class="avatar">
-                <img src="http://<?php echo APP_HOST; ?>/public/images/users/<?= $comment->getUser()->getAvatar() ?>" alt="user" />
-                </div>         
-          <div class="Comments">
-            <div class="postsTop">
-              <ul>
-                <li>
-                <?= $comment->getUser()->getName() ?>
-               
-                </li>
-              
-<?php if ($comment->getUser()->getName() == $viewVar['user']->getName() || $viewVar['user']->getType() == "adm" ){?>
-                <div class="actions">
-                  <div class="d-flex align-items-center gap-2">
-                  <img src="http://<?php echo APP_HOST; ?>/public/icons/calendar.png" alt="calendario" />
-                  <?= $comment->getCreatedAt()->format('d/m/Y') ?>
-                  </div>
-                  <button class="negado" style="background-color: #FF57B2;"><img src="http://<?php echo APP_HOST; ?>/public/icons/trash.png" alt="apagar comentario" /></button>
-                </div>
-<?php }?>
-              </ul>
+          <div class="CommentsContainer">
+            <div class="avatar">
+              <img src="http://<?php echo APP_HOST; ?>/public/images/users/<?= $comment->getUser()->getAvatar() ?>" alt="user" />
             </div>
-
-            <p><?= $comment->getText() ?>
-            </p>
-
+            <div class="Comments">
+              <div class="postsTop">
+                <ul>
+                  <li>
+                    <?= $comment->getUser()->getName() ?>
+                  </li>
+                  <?php if ($comment->getUser()->getName() == $viewVar['user']->getName() || $viewVar['user']->getType() == "adm" ) { ?>
+                    <div class="actions">
+                      <div class="d-flex align-items-center gap-2">
+                        <img src="http://<?php echo APP_HOST; ?>/public/icons/calendar.png" alt="calendario" />
+                        <?= $comment->getCreatedAt()->format('d/m/Y') ?>
+                      </div>
+                      <button class="negado" style="background-color: #FF57B2;"><img src="http://<?php echo APP_HOST; ?>/public/icons/trash.png" alt="apagar comentario" /></button>
+                    </div>
+                  <?php } ?>
+                </ul>
+              </div>
+              <p><?= $comment->getText() ?></p>
+            </div>
           </div>
-          
-        </div>
-
-        <?php }?>
+        <?php } ?>
       </footer>
-
     </div>
   </main>
 </body>
 
-
 <script>
-  function likeButtonClick() {
-            var likeCountElement = document.querySelector('.like-count');
-            var heartElement = document.querySelector('.heart');
+function likeButtonClick(event) {
+  event.preventDefault();
 
-            // Verificar se o botão foi clicado antes
-            if (heartElement.classList.contains('clicked')) {
-                // Se já foi clicado, remover o like e atualizar o contador
-                heartElement.classList.remove('clicked');
-                likeCountElement.textContent = parseInt(likeCountElement.textContent) - 1;
-            } else {
-                // Se ainda não foi clicado, adicionar o like e atualizar o contador
-                heartElement.classList.add('clicked');
-                likeCountElement.textContent = parseInt(likeCountElement.textContent) + 1;
-            }
-        }
+  var heartElement = event.target;
+  var likeCountElement = heartElement.nextElementSibling;
+  var articleId = heartElement.parentElement.getAttribute('data-article-id');
+
+  if (heartElement.classList.contains('clicked')) {
+    heartElement.classList.remove('clicked');
+    var likeCount = parseInt(likeCountElement.textContent) - 1;
+    likeCountElement.textContent = likeCount;
+    sendLikeRequest(articleId, false);
+  } else {
+    heartElement.classList.add('clicked');
+    var likeCount = parseInt(likeCountElement.textContent) + 1;
+    likeCountElement.textContent = likeCount;
+    sendLikeRequest(articleId, true);
+  }
+}
+
+function sendLikeRequest(articleId, likeStatus) {
+  var url = 'http://<?php echo APP_HOST; ?>/article/like/' + articleId + '/' + likeStatus;
+
+  // Use a biblioteca jQuery para fazer a requisição AJAX
+  $.ajax({
+    url: url,
+    type: 'GET',
+    dataType: 'json',
+    success: function(response) {
+      if (response.success) {
+        // Ação de sucesso (opcional)
+      } else {
+        // Ação em caso de falha (opcional)
+      }
+    },
+    error: function(xhr, status, error) {
+      console.log(xhr.responseText);
+    }
+  });
+}
 </script>

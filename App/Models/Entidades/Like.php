@@ -5,55 +5,39 @@ namespace App\Models\Entidades;
 class Like
 {
     private int $idLike;
-    private int $idUser;
-    private int $idArticle;
+    private User $user;
+    private Article $article;
 
+    public function getIdLike(): int
+    {
+        return $this->idLike;
+    }
 
-	/**
-	 * @return 
-	 */
-	public function getIdLike(): int {
-		return $this->idLike;
-	}
-	
-	/**
-	 * @param  $idLike 
-	 * @return self
-	 */
-	public function setIdLike(int $idLike): self {
-		$this->idLike = $idLike;
-		return $this;
-	}
-	
-	/**
-	 * @return 
-	 */
-	public function getIdUser(): int {
-		return $this->idUser;
-	}
-	
-	/**
-	 * @param  $idUser 
-	 * @return self
-	 */
-	public function setIdUser(int $idUser): self {
-		$this->idUser = $idUser;
-		return $this;
-	}
-	
-	/**
-	 * @return 
-	 */
-	public function getIdArticle(): int {
-		return $this->idArticle;
-	}
-	
-	/**
-	 * @param  $idArticle 
-	 * @return self
-	 */
-	public function setIdArticle(int $idArticle): self {
-		$this->idArticle = $idArticle;
-		return $this;
-	}
+    public function setIdLike(int $idLike): self
+    {
+        $this->idLike = $idLike;
+        return $this;
+    }
+
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
+        return $this;
+    }
+
+    public function getArticle(): Article
+    {
+        return $this->article;
+    }
+
+    public function setArticle(Article $article): self
+    {
+        $this->article = $article;
+        return $this;
+    }
 }
