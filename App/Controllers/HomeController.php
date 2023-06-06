@@ -10,31 +10,50 @@ class HomeController extends Controller
 {
     public function index()
     {
-            $this->auth();
-            $user = new UserDAO; 
-            self::setViewParam('user', $user->getById($_SESSION['idUser']));
-            $categoryDAO = new CategoryDAO();
-            self::setViewParam('listCategory', $categoryDAO->listar());
-            $articleDAO = new ArticleDAO();
-            self::setViewParam('listArticle', $articleDAO->listar());
-            
-            $this->render('/home/index');
+        $this->auth();
+        
+        $userDAO = new UserDAO; 
+        self::setViewParam('user', $userDAO->getById($_SESSION['idUser']));
+        
+        $categoryDAO = new CategoryDAO();
+        $listCategory = $categoryDAO->listar();
+        self::setViewParam('listCategory', $listCategory);
+        
+        $articleDAO = new ArticleDAO();
+        $listArticle = $articleDAO->listar();
+        self::setViewParam('listArticle', $listArticle);
+        
+        $this->render('/home/index');
     }
-
+    
     public function getByCategory()
     {
-            $this->auth();
-            
-            $user = new UserDAO; 
-            self::setViewParam('user', $user->getById($_SESSION['idUser']));
-            $categoryDAO = new CategoryDAO();
-            self::setViewParam('listCategory', $categoryDAO->listar());
-            $articleDAO = new ArticleDAO();
-            
-            
-            $idCategory = $_POST['idCategory'];
-            self::setViewParam('listArticle', $articleDAO->listarCategoria($idCategory));
-            
+        $this->auth();
+        
+        $userDAO = new UserDAO; 
+        self::setViewParam('user', $userDAO->getById($_SESSION['idUser']));
+        
+        $categoryDAO = new CategoryDAO();
+        $listCategory = $categoryDAO->listar();
+        self::setViewParam('listCategory', $listCategory);
+        
+        $articleDAO = new ArticleDAO();
+        
+        $idCategory = $_POST['idCategory'];
+        
+        if ($idCategory == 0) {
             $this->redirect('/home/index');
+        }
+        
+        $listArticle = $articleDAO->listarCategoria($idCategory);
+        self::setViewParam('listArticle', $listArticle);
+        $selectedCategory = $categoryDAO->getById($idCategory);
+        self::setViewParam('selectedCategory', $selectedCategory);
+        
+        if (empty($listArticle)) {
+            self::setViewParam('noArticlesMessage', 'Sem artigos aprovados nesta categoria.');
+        }
+        
+        $this->render('/home/index');
     }
 }

@@ -154,6 +154,27 @@ public function resetPassword() {
 
     
 
+
+public function reset()
+{
+    $id = $_SESSION['iduser'];
+
+    $usuarioDAO = new UserDAO();
+
+    $usuario = $usuarioDAO->getById($id);
+
+    if(!$usuario){
+        Sessao::gravaMensagem("Usuário inexistente");
+        $this->redirect('/home');
+    }
+
+    self::setViewParam('usuario', $usuario);
+
+    $this->render('user/resetPassword');
+
+    Sessao::limpaMensagem();
+    Sessao::limpaErro();
+}
     public function cadastro()
     {
         $this->render('/user/cadastro');

@@ -19,7 +19,7 @@
                 <span>
                     Nova Senha:
                 </span>
-                <input type="password" placeholder="Digite sua nova senha" name="password"/>
+                <input type="password" placeholder="Digite sua nova senha" id= "password" name="password"/>
             </label>
 
 
@@ -27,7 +27,7 @@
                 <span>
                     Confirmação da Nova Senha:
                 </span>
-                <input type="password" placeholder="Digite novamente sua senha" name="password_confirm" />
+                <input type="password" placeholder="Digite novamente sua senha" id="password_confirm" name="password_confirm" />
             </label>
 
 
