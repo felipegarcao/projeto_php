@@ -68,7 +68,7 @@ class ArticleDAO extends BaseDAO
     public function listarCategoria(int $idCategory)
     {
         $resultado = $this->select("SELECT a.*, u.idUser as idusuario, u.name 
-                                FROM article as a, user as u WHERE a.idUser=u.idUser AND status='Aproved' AND idCategory= $idCategory");
+                                FROM article as a, user as u WHERE a.idUser=u.idUser AND status='Aproved' AND idCategory= $idCategory ORDER BY a.createdAt DESC");
 
         $dataSet = $resultado->fetchAll();
         $listaArticle = [];
