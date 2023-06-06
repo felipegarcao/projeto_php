@@ -1,4 +1,4 @@
-<div class="loginContainer" style="flex-direction: column; margin-top: 8rem;">
+<div class="loginContainer" style="flex-direction: column; margin-top: 2rem;">
   <h2>Cadastro de Post</h2>
   <div class="containerCadastroPost" style="padding: 2rem">
     <h4>Informações</h4>

@@ -131,25 +131,34 @@ public function resetPassword() {
     $erros = [];
     $usuarioDAO = new UserDAO();
 
-    if ($password !== $password_confirm) {
-        $erros[] = "As senhas digitadas não coincidem!";
-    }
+    if ($password == $password_confirm) {
 
+        try {
+            $usuario->setPassword(password_hash($password, PASSWORD_DEFAULT));
+            $usuarioDAO->atualizarPassword($usuario);
+            $this->redirect('/home');
+    
+        } catch (\Exception $e) {
+            Sessao::gravaMensagem($e->getMessage());
+        }
 
-    try {
-        $usuario->setPassword(password_hash($password, PASSWORD_DEFAULT));
-        $usuarioDAO->atualizarPassword($usuario);
+        Sessao::limpaFormulario();
+        Sessao::limpaMensagem();
+        Sessao::limpaErro();
+
         $this->redirect('/home');
+       
+    } else {
+        echo "Senha e confirmação de senha não correspondem. Por favor, tente novamente.";
+        $erros[] = "As senhas digitadas não coincidem!";
 
-    } catch (\Exception $e) {
-        Sessao::gravaMensagem($e->getMessage());
     }
 
-    Sessao::limpaFormulario();
-    Sessao::limpaMensagem();
-    Sessao::limpaErro();
 
-    $this->redirect('/home');
+   
+
+    
+
 }
 
     
