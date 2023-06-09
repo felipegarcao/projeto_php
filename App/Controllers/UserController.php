@@ -26,7 +26,6 @@ class UserController extends Controller
         $this->render('/user/perfil');
     }
 
-
     public function author()
     {
         $this->auth();
@@ -55,8 +54,6 @@ class UserController extends Controller
         self::setViewParam('users', $users->listar());
 
         $this->render('/user/list-user');
-
-
         
     }
 
@@ -152,16 +149,9 @@ public function resetPassword() {
         echo "Senha e confirmação de senha não correspondem. Por favor, tente novamente.";
         $erros[] = "As senhas digitadas não coincidem!";
 
-    }
-
-
-   
-
-    
+    }   
 
 }
-
-    
 
 
 public function reset()
@@ -375,5 +365,23 @@ public function reset()
         $this->redirect('/user');
     }
 
+    public function permissao($params)
+    {
+        $this->auth();
+        $idUser = $params[0];
+        $user = new User();
+        $userDAO = new UserDAO();
+        $user->setIdUser($idUser);
+        $type = "adm";
+        $user->setType($type);
+
+        try {
+            $userDAO->permissao($user);
+            $this->redirect('/user/list-user');
+        } catch (\Exception $e) {
+            // Tratar o erro adequadamente
+            echo "Erro na atualização dos dados: " . $e->getMessage();
+        }
+    }
  
 }

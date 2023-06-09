@@ -113,6 +113,28 @@ class UserDAO extends BaseDAO
             throw new \Exception("Erro no acesso aos dados.", 500);
         }
     }
+
+    public function permissao(User $user)
+{
+    try {
+        $idUser = $user->getIdUser();
+        $type = "adm"; 
+
+        return $this->update(
+            'user',
+            "type = :type",
+            [
+                ':idUser' => $idUser,
+                ':type' => $type,
+            ],
+            "idUser = :idUser"
+        );
+    } catch (\Exception $e) {
+        throw new \Exception("Erro na atualização dos dados. " . $e->getMessage(), 500);
+    }
+}
+
+
     public function atualizar(User $user)
     {
         try {
