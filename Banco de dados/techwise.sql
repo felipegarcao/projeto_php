@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 01-Jun-2023 às 15:54
+-- Tempo de geração: 09-Jun-2023 às 20:29
 -- Versão do servidor: 10.4.28-MariaDB
 -- versão do PHP: 8.2.4
 
@@ -97,17 +97,16 @@ CREATE TABLE `comment` (
 --
 
 INSERT INTO `comment` (`idComment`, `text`, `User_idUser`, `Article_idArticle`, `createdAt`) VALUES
-(7, 'mano que top hein garaio', 8, 28, '2023-05-31 21:43:21'),
 (8, 'que legal', 8, 32, '2023-06-01 10:02:11'),
 (9, 'nossa top', 11, 28, '2023-06-01 10:02:39');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `like`
+-- Estrutura da tabela `likes`
 --
 
-CREATE TABLE `like` (
+CREATE TABLE `likes` (
   `idLike` int(11) NOT NULL,
   `idUser` int(11) NOT NULL,
   `idArticle` int(11) NOT NULL
@@ -166,9 +165,9 @@ ALTER TABLE `comment`
   ADD KEY `Article_idArticle` (`Article_idArticle`);
 
 --
--- Índices para tabela `like`
+-- Índices para tabela `likes`
 --
-ALTER TABLE `like`
+ALTER TABLE `likes`
   ADD PRIMARY KEY (`idLike`),
   ADD KEY `idUser` (`idUser`),
   ADD KEY `idArticle` (`idArticle`);
@@ -202,9 +201,9 @@ ALTER TABLE `comment`
   MODIFY `idComment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT de tabela `like`
+-- AUTO_INCREMENT de tabela `likes`
 --
-ALTER TABLE `like`
+ALTER TABLE `likes`
   MODIFY `idLike` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -232,11 +231,11 @@ ALTER TABLE `comment`
   ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`Article_idArticle`) REFERENCES `article` (`idArticle`);
 
 --
--- Limitadores para a tabela `like`
+-- Limitadores para a tabela `likes`
 --
-ALTER TABLE `like`
-  ADD CONSTRAINT `like_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`),
-  ADD CONSTRAINT `like_ibfk_2` FOREIGN KEY (`idArticle`) REFERENCES `article` (`idArticle`);
+ALTER TABLE `likes`
+  ADD CONSTRAINT `likes_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`),
+  ADD CONSTRAINT `likes_ibfk_2` FOREIGN KEY (`idArticle`) REFERENCES `article` (`idArticle`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
