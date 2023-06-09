@@ -121,11 +121,40 @@ class ArticleController extends Controller
         $likeDAO = new LikeDAO();
         $likeCount = $likeDAO->getLikeCountByArticleId($idArticle);
         self::setViewParam('likeCount', $likeCount);
+
+        $likeStatus = $likeDAO->getLikeStatus($idArticle, $user->getIdUser());
+        self::setViewParam('likeStatus', $likeStatus);
+
+     
+
     
         Sessao::limpaErro();
     
         $this->render('/article/detalhes');
     }
+
+    public function like($params)
+    {
+        $this->auth();
+        $userDAO = new UserDAO();
+        $user = $userDAO->getById($_SESSION['idUser']);
+    
+        $idArticle = $params[0];
+        $likeDAO = new LikeDAO();
+        $likeStatus = $likeDAO->getLikeStatus($idArticle, $user->getIdUser());
+        var_dump($likeStatus);
+    
+        if ($likeStatus) {
+            $likeDAO->deleteLike($idArticle, $user->getIdUser());
+        } else {
+            $likeDAO->createLike($idArticle, $user->getIdUser());
+        }
+    
+        $this->redirect('/article/detalhes/' . $idArticle);
+    }
+    
+     
+
     public function excluirComentario($params)
 {
     $this->auth();
@@ -144,37 +173,8 @@ class ArticleController extends Controller
 
 }
 
-    public function like($params)
-    {
-        $this->auth();
+   
     
-        $idArticle = $params[0];
-        $likeDAO = new LikeDAO();
-        $articleDAO = new ArticleDAO();
-        $userDAO = new UserDAO();
-    
-        $article = $articleDAO->getById($idArticle);
-        $user = $userDAO->getById($_SESSION['idUser']);
-    
-        $like = new Like();
-        $like->setUser($user);
-        $like->setArticle($article);
-    
-        $alreadyLiked = $likeDAO->isLikedByUser($idArticle, $_SESSION['idUser']);
-    
-        if ($alreadyLiked) {
-            $likeDAO->removeLike($idArticle, $_SESSION['idUser']);
-        } else {
-            $likeDAO->save($like);
-        }
-    
-        
-    }
-    
-    
-    
-
-
     public function edit($params) {
         $this->auth();
         $user = new UserDAO; 

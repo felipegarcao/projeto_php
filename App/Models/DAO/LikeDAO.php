@@ -23,58 +23,47 @@ class LikeDAO extends BaseDAO
         return 0;
     }
     
-    public function isLikedByUser($idArticle, $idUser)
+    public function createLike($idArticle, $idUser)
+    {
+        try {
+            return $this->insert(
+                'likes',
+                ":idArticle, :idUser",
+                [
+                    ':idArticle' => $idArticle,
+                    ':idUser' => $idUser
+                ]
+            );
+            
+        } catch (\Exception $e) {
+            throw new \Exception("Erro na gravação de dados." . $e->getMessage(), 500);
+        }
+    }
+    
+    public function deleteLike($idArticle, $idUser)
+    {
+        try {
+            return $this->delete('likes', "idArticle = $idArticle AND idUser = $idUser");
+        } catch (\Exception $e) {
+            throw new \Exception("Erro ao excluir o like. " . $e->getMessage(), 500);
+        }
+    }
+    
+    public function getLikeStatus($idArticle, $idUser)
     {
         $resultado = $this->select(
-            'SELECT COUNT(*) AS count
-            FROM likes
-            WHERE idArticle = :idArticle AND idUser = :idUser',
-            [':idArticle' => $idArticle, ':idUser' => $idUser]
+            "SELECT COUNT(*) as likeCount FROM likes WHERE idArticle = $idArticle AND idUser = $idUser"
         );
     
         $dataSet = $resultado->fetch();
     
-        return $dataSet['count'] > 0;
-    }
-    
-    public function addLike($idArticle, $idUser)
-    {
-        try {
-            $this->insert(
-                'likes',
-                'idArticle, idUser',
-                [':idArticle' => $idArticle, ':idUser' => $idUser]
-            );
-    
-            return true;
-        } catch (Exception $e) {
-            throw new Exception('Erro ao adicionar o like: ' . $e->getMessage());
+        if ($dataSet && $dataSet['likeCount'] > 0) {
+            return true; // O like existe
         }
+    
+        return false; // O like não existe
     }
     
-    public function save(Like $like)
-    {
-        try {
-            $idUser = $like->getUser()->getIdUser();
-            $idArticle = $like->getArticle()->getIdArticle();
-
-            return $this->insert(
-                'likes',
-                'idUser, idArticle',
-                [':idUser' => $idUser, ':idArticle' => $idArticle]
-            );
-        } catch (Exception $e) {
-            throw new Exception('Erro ao salvar o like: ' . $e->getMessage());
-        }
-    }
-
-    public function removeLike($idArticle, $idUser)
-    {
-        $this->delete(
-            'likes',
-            'idArticle = :idArticle AND idUser = :idUser',
-            [':idArticle' => $idArticle, ':idUser' => $idUser]
-        );
-    }
+        
     
 }
