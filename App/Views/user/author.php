@@ -11,7 +11,6 @@
 
         <p><?php echo $viewVar['userList']->getDescription(); ?></p>
 
-        <button class="buttonSubmit">Voltar</button>
       </div>
 
     </div>
