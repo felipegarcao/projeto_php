@@ -3,9 +3,9 @@
   <main class="container">
     <?php
 
-                                                            use App\Models\DAO\LikeDAO;
+    use App\Models\DAO\LikeDAO;
 
- if ($Sessao::retornaErro()) { ?>
+    if ($Sessao::retornaErro()) { ?>
       <div class="alert alert-warning" role="alert">
         <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <?php foreach ($Sessao::retornaErro() as $key => $mensagem) {
@@ -28,13 +28,15 @@
             <?= $viewVar['article']->getCreatedAt()->format('d/m/Y') ?>
           </li>
           <li>
-          <form method="POST" action="http://<?php echo APP_HOST; ?>/article/like/<?= $viewVar['article']->getIdArticle(); ?>">
-            <button id="likeButton" type="submit" name="likeButton" class="like-button">
-    <span class="heart">&#10084;</span>
-    <span class="like-count"><?= $viewVar['likeCount'] ?></span>
-</button>
+            <form method="POST" action="http://<?php echo APP_HOST; ?>/article/like/<?= $viewVar['article']->getIdArticle(); ?>">
 
-</form>
+
+              <button id="likeButton" type="submit" name="likeButton" class="like-button" onclick="likeButtonClick(this);">
+                <span class="heart">&#10084;</span>
+                <span class="like-count"><?= $viewVar['likeCount'] ?></span>
+              </button>
+
+            </form>
           </li>
         </ul>
       </div>
@@ -72,16 +74,20 @@
                     <?= $comment->getUser()->getName() ?>
                   </li>
                   <?php if ($comment->getUser()->getName() == $viewVar['user']->getName() || $viewVar['user']->getType() == "adm") { ?>
+
                     <div class="actions">
                       <div class="d-flex align-items-center gap-2">
                         <img src="http://<?php echo APP_HOST; ?>/public/icons/calendar.png" alt="calendario" />
                         <?= $comment->getCreatedAt()->format('d/m/Y') ?>
                       </div>
-                      <a href="http://<?= APP_HOST ?>/article/excluirComentario/<?= $comment->getIdComment() ?>/<?= $viewVar['article']->getIdArticle() ?>" style="text-decoration: none;">
+                      <a href="http://<?= APP_HOST ?>/article/excluirComentario/<?= $comment->getIdComment() ?>/<?= $viewVar['article']->getIdArticle() ?>" style="text-decoration: none; padding-bottom: 0px; border-bottom: 0px;">
                         <button class="negado" style="background-color: #FF57B2;">
                           <img src="http://<?php echo APP_HOST; ?>/public/icons/trash.png" alt="apagar comentario" />
                         </button>
                       </a>
+                      <button class="negado" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <img src="http://<?php echo APP_HOST; ?>/public/icons/pencil.png" alt="apagar comentario" />
+                      </button>
                     </div>
                   <?php } ?>
                 </ul>
@@ -95,8 +101,44 @@
   </main>
 </body>
 
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Comentario</h1>
+        <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+          <img src="http://<?php echo APP_HOST; ?>/public/icons/x.png" alt="negar postagem" />
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="">
+          <textarea rows="9" name="feedback" id="feedback"></textarea>
+
+      </div>
+      <div class="actions">
+        <button type="submit" class="aceito">Finalizar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
 <script>
-    document.getElementById('likeButton').addEventListener('click', function() {
-        this.classList.toggle('liked');
-    });
+  function likeButtonClick(teste) {
+    var likeCountElement = document.querySelector('.like-count');
+    var heartElement = document.querySelector('.heart');
+
+    if (heartElement.classList.contains('clicked')) {
+      // Se já foi clicado, remover o like e atualizar o contador
+      heartElement.classList.remove('clicked');
+    } else {
+      // Se ainda não foi clicado, adicionar o like e atualizar o contador
+      heartElement.classList.add('clicked');
+    }
+
+  }
 </script>

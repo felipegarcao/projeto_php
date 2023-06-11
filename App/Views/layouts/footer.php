@@ -4,5 +4,7 @@
 <script src="http://<?php echo APP_HOST; ?>/public/js/validacao.js"type="text/javascript"></script>
 <script src="http://<?php echo APP_HOST; ?>/public/js/validacao_produto.js"type="text/javascript"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </body>
 </html>
