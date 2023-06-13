@@ -11,7 +11,7 @@ class User
     private ?string $avatar;
     private ?string $description;
     private ?string $type;
-    
+	private ?string $stats;
 
 	/**
 	 * @return 
@@ -88,4 +88,20 @@ class User
         // Use a função password_verify() para verificar a correspondência da senha
         return password_verify($password, $this->password);
     }
+
+	/**
+	 * @return 
+	 */
+	public function getStats(): ?string {
+		return $this->stats;
+	}
+	
+	/**
+	 * @param  $stats 
+	 * @return self
+	 */
+	public function setStats(?string $stats): self {
+		$this->stats = $stats;
+		return $this;
+	}
 }

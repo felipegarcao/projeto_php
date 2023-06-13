@@ -30,12 +30,12 @@
           <li>
             <form method="POST" action="http://<?php echo APP_HOST; ?>/article/like/<?= $viewVar['article']->getIdArticle(); ?>">
 
-
+              <?php if ($viewVar['user']->getType() == "adm") {?>
               <button id="likeButton" type="submit" name="likeButton" class="like-button" onclick="likeButtonClick(this);">
                 <span class="heart">&#10084;</span>
                 <span class="like-count"><?= $viewVar['likeCount'] ?></span>
               </button>
-
+           <?php }?>
             </form>
           </li>
         </ul>
@@ -48,17 +48,20 @@
       </article>
 
       <footer>
+      
         <div class="footerCointainer">
           <div class="newCommentsContainer">
+          <?php if ($viewVar['user']->getType() == "adm") {?>
             <div class="avatar">
               <img src="http://<?php echo APP_HOST; ?>/public/images/users/<?= $viewVar['user']->getAvatar(); ?>" alt="user" />
-            </div>
+            </div> 
             <form class="newCommentsForm" action="http://<?php echo APP_HOST; ?>/article/comment/<?= $viewVar['article']->getIdArticle(); ?>" method="post" id="form_cadastro">
               <textarea cols="70" rows="5" name="text" id="text" value="<?php echo $Sessao::retornaValorFormulario('text'); ?>" required></textarea>
               <div class="newCommentsFormFooter">
                 <button type="submit" class="buttonSubmit">Comentar</button>
               </div>
             </form>
+            <?php }?>
           </div>
         </div>
 

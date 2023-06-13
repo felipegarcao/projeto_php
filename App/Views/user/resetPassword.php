@@ -30,8 +30,6 @@
                 </span>
                 <input type="password" placeholder="Digite novamente sua senha" id="password_confirm" name="password_confirm" />
             </label>
-
-
             <button type="submit" class="buttonSubmit">Atualizar</button>
         </form>
     </div>

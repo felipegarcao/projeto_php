@@ -17,7 +17,8 @@ class UserDAO extends BaseDAO
 
     public function listar()
     {
-        $resultado = $this->select("SELECT idUser, name, avatar, type from user" );
+        $resultado = $this->select("SELECT idUser, name, avatar, type, stats FROM user ORDER BY (CASE WHEN type = 'adm' THEN 0 ELSE 1 END)");
+
 
             $dataSet = $resultado->fetchAll();
             $listaUser = [];
@@ -30,7 +31,7 @@ class UserDAO extends BaseDAO
                 $user->setName($data['name']);
                 $user->setAvatar($data['avatar']);
                 $user->setType($data['type']);
-
+                $user->setStats($data['stats']);
                 $listaUser[]= $user;
             }
 
@@ -134,6 +135,26 @@ class UserDAO extends BaseDAO
     }
 }
 
+
+public function banimento(User $user)
+{
+    try {
+        $idUser = $user->getIdUser();
+        $stats = "banned"; 
+
+        return $this->update(
+            'user',
+            "stats = :stats",
+            [
+                ':idUser' => $idUser,
+                ':stats' => $stats,
+            ],
+            "idUser = :idUser"
+        );
+    } catch (\Exception $e) {
+        throw new \Exception("Erro na atualização dos dados. " . $e->getMessage(), 500);
+    }
+}
 
     public function atualizar(User $user)
     {

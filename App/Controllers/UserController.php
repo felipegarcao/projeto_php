@@ -383,5 +383,24 @@ public function reset()
             echo "Erro na atualização dos dados: " . $e->getMessage();
         }
     }
+
+    public function banir($params)
+    {
+        $this->auth();
+        $idUser = $params[0];
+        $user = new User();
+        $userDAO = new UserDAO();
+        $user->setIdUser($idUser);
+        $stats = "banned";
+        $user->setStats($stats);
+
+        try {
+            $userDAO->banimento($user);
+            $this->redirect('/user/list-user');
+        } catch (\Exception $e) {
+            // Tratar o erro adequadamente
+            echo "Erro na atualização dos dados: " . $e->getMessage();
+        }
+    }
  
 }

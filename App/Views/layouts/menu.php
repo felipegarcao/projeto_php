@@ -23,11 +23,11 @@
           <a class="popover-item" href="http://<?php echo APP_HOST; ?>/article/myArticles">
             Meus Posts
           </a>
-
+          <?php if ($viewVar['user']->getStats() != "banned") {?>
           <a class="popover-item"  href="http://<?php echo APP_HOST; ?>/article/cadastro">
             Cadastrar
           </a>
-
+      <?php }?>
           
       <?php if ($viewVar['user']->getType() == "adm") {?>
           <a class="popover-item" href="http://<?php echo APP_HOST; ?>/article/solicitation">

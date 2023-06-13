@@ -24,23 +24,32 @@
             <select class="select" name="idCategory" id="idCategory" disabled style="margin-bottom: 0px; width: 80%;">
               <?php if ($user->getType() == "adm") { ?>
                 <option value="2">Administrador</option>
-              <?php } else { ?>
-                <option value="2">Usuario</option>
+              <?php } elseif ($user->getType() == "user" && $user->getStats() == "banned") { ?>
+                <option value="2">Usuário banido</option>
+              <?php } elseif ($user->getType()) { ?>
+                <option value="2">Usuário</option>
               <?php } ?>
             </select>
           </td>
           <td class="text-right">
             <div class="actions" style="justify-content: center;">
-              <?php if ($user->getType() != "adm") { ?>
+              <?php if ($user->getType() != "adm" && $user->getStats() != "banned") { ?>
                 <button class="negado" type="button" style="background-color: #FF57B2;" data-bs-toggle="modal" data-bs-target="#exampleModal<?= $user->getIdUser() ?>">
                   <img src="http://<?php echo APP_HOST; ?>/public/icons/pencil.png" alt="tornar administrador" />
+                </button>
+                <button class="banir" type="button" style="background-color: #FF57B2;" data-bs-toggle="modal" data-bs-target="#banirModal<?= $user->getIdUser() ?>">
+                  &#x1F6AB;
+                </button>
+              <?php } elseif ($user->getStats() == "banned") { ?>
+                <button class="banir" type="button" style="background-color: #FF57B2;">
+                  Banido
                 </button>
               <?php } else { ?>
                 <button class="negado" type="button" style="background-color: #FF57B2; width:40px;">
                   &#x2654;
                 </button>
               <?php } ?>
-            </div>
+
           </td>
         </tr>
       <?php } ?>
@@ -76,5 +85,32 @@
         </div>
       </div>
     </div>
-  <?php }
+<?php }
+} ?>
+
+<?php foreach ($viewVar['users'] as $user) {
+  if ($user->getType() != "adm") { ?>
+    <div class="modal fade" id="banirModal<?= $user->getIdUser() ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Banir Usuário</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>Deseja banir o usuário <?= $user->getName() ?>?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <form method="post" action="http://<?php echo APP_HOST; ?>/user/banir/<?= $user->getIdUser() ?>">
+              <button type="submit" class="btn btn-danger">
+                Banir
+              </button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+<?php }
 } ?>
