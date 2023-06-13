@@ -122,10 +122,10 @@ class ArticleController extends Controller
         $likeCount = $likeDAO->getLikeCountByArticleId($idArticle);
         self::setViewParam('likeCount', $likeCount);
 
+
         $likeStatus = $likeDAO->getLikeStatus($idArticle, $user->getIdUser());
         self::setViewParam('likeStatus', $likeStatus);
-
-     
+        
 
     
         Sessao::limpaErro();
@@ -157,18 +157,14 @@ class ArticleController extends Controller
 
     public function excluirComentario($params)
 {
-    $this->auth();
-    
-    // Obtém o ID do comentário a ser excluído
-    $idComentario = $params[0];
-    $idArtigo = $params[1];
-    // Cria uma instância da CommentDAO
-    $commentDAO = new CommentDAO();
-    
-        // Chama a função para excluir o comentário na CommentDAO
-        $commentDAO->excluir($idComentario);
+        $this->auth();
         
-        // Redireciona para a página de detalhes do artigo
+        $idComentario = $params[0];
+        $idArtigo = $params[1];
+        $commentDAO = new CommentDAO();
+    
+        $commentDAO->excluir($idComentario);
+     
         $this->redirect('/article/detalhes/' . $idArtigo);
 
 }

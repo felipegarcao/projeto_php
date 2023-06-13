@@ -20,6 +20,9 @@ html {
     height: 5rem;
   
   }
+  .like-button.liked {
+    color: red;
+  }
   
   .headerContent {
     max-width: 1120px;
