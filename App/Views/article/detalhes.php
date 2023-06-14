@@ -89,9 +89,12 @@
                           <img src="http://<?php echo APP_HOST; ?>/public/icons/trash.png" alt="apagar comentario" />
                         </button>
                       </a>
+
+                      <?php if ($comment->getUser()->getName() == $viewVar['user']->getName()){?>
                       <button class="negado" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         <img src="http://<?php echo APP_HOST; ?>/public/icons/pencil.png" alt="apagar comentario" />
                       </button>
+                      <?php }?>
                     </div>
                   <?php } ?>
                 </ul>
