@@ -74,9 +74,11 @@
             <div class="Comments">
               <div class="postsTop">
                 <ul>
+                <a class="custom" href="http://<?php echo APP_HOST; ?>/user/author/<?= $comment->getUser()->getIdUser(); ?>">
                   <li>
                     <?= $comment->getUser()->getName() ?>
                   </li>
+            </a>
                   <?php if ($comment->getUser()->getName() == $viewVar['user']->getName() || $viewVar['user']->getType() == "adm") { ?>
 
                     <div class="actions">

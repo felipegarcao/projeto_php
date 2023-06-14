@@ -66,7 +66,7 @@ class CommentDAO extends BaseDAO
     public function getByArticleId($idArticle)
     {
         $resultado = $this->select(
-            "SELECT c.idComment, c.text, c.createdAt, u.name, u.avatar as user
+            "SELECT c.idComment, c.text, c.createdAt,u.idUser, u.name, u.avatar as user
             FROM comment as c
             INNER JOIN user as u ON c.User_idUser = u.idUser
             WHERE c.Article_idArticle = $idArticle"
@@ -79,6 +79,7 @@ class CommentDAO extends BaseDAO
             $comment->setIdComment($dataSetComment['idComment']);
             $comment->setText($dataSetComment['text']);
             $comment->setCreatedAt($dataSetComment['createdAt']);
+            $comment->getUser()->setIdUser($dataSetComment['idUser']);
             $comment->getUser()->setName($dataSetComment['name']);
             $comment->getUser()->setAvatar($dataSetComment['user']);
         
