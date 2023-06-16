@@ -247,7 +247,7 @@ class ArticleController extends Controller
 
     }
 
-    public function myArticles($params)
+    public function myArticles()
     {
         $this->auth();
         $idUserLog = $_SESSION['idUser'];
@@ -294,12 +294,45 @@ class ArticleController extends Controller
     public function atualizar(){
         $this->auth();
     }
-    public function exclusao(){
+    public function exclusao($params){
         $this->auth();
+
+        $id = $params[0];
+
+        $articleDAO = new ArticleDAO();
+
+        $article = $articleDAO->getById($id);
+
+        
+        if(!$article){
+            Sessao::gravaMensagem("Artigo (id:{$id}) inexistente.");
+            $this->redirect('/article');
+        }
+        
+        self::setViewParam('article', $article);
+        
+        $this->render('/article/exclusao');
+
+        Sessao::limpaMensagem();
+        Sessao::limpaErro();
 
     }
     public function excluir(){
         $this->auth();
+
+        $article = new Article();
+        $article->setIdArticle($_POST['id']);
+
+        $articleDAO = new articleDAO();
+
+        if(!$articleDAO->excluir($article)){
+            Sessao::gravaMensagem("Usuário (id:{$article->getIdarticle()}) inexistente.");
+            $this->redirect('/article/myArticles');
+        }
+
+        Sessao::gravaMensagem("article '{$article->getTitle()}' excluido com sucesso!");
+
+        $this->redirect('/article/myArticles');
     }
     public function autorizar(){
         $this->auth();
