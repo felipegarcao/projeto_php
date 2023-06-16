@@ -10,7 +10,7 @@
     <h2>Excluir categoria</h2>
     <div class="containerCadastroPost" style="padding: 2rem">
 
-        <form action="http://<?php echo APP_HOST; ?>/category/excluir" method="post" id="form_cadastro">
+        <form action="http://<?php echo APP_HOST; ?>/category/excluir/<?= $viewVar['category']->getIdCategory() ?>" method="post" id="form_cadastro">
             <input type="hidden" class="form-control" name="idCategory" id="idCategory" value="<?php echo $viewVar['category']->getIdCategory(); ?>">
             <label>
                 <span>

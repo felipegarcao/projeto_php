@@ -324,6 +324,8 @@ class ArticleController extends Controller
         self::setViewParam('user', $user->getById($_SESSION['idUser']));
     
         $this->render('/article/myArticles');
+        Sessao::limpaMensagem();
+        Sessao::limpaErro();
     }
     
 
@@ -354,55 +356,45 @@ class ArticleController extends Controller
         $this->redirect('/article/solicitation');
     }
 
-    public function edicao(){
-        $this->auth();
-
-    }
-    public function atualizar(){
-        $this->auth();
-    }
     public function exclusao($params){
         $this->auth();
 
-        $id = $params[0];
+        $user = new UserDAO; 
+        self::setViewParam('user', $user->getById($_SESSION['idUser']));
 
+        $idArticle = $params[0];
         $articleDAO = new ArticleDAO();
-
-        $article = $articleDAO->getById($id);
-
-        
-        if(!$article){
-            Sessao::gravaMensagem("Artigo (id:{$id}) inexistente.");
+        $article = $articleDAO->getById($idArticle);
+    
+        if (!$article) {
+            Sessao::gravaMensagem("Artigo (idarticle: {$idArticle}) inexistente.");
             $this->redirect('/article');
         }
-        
+    
         self::setViewParam('article', $article);
-        
         $this->render('/article/exclusao');
-
+    
         Sessao::limpaMensagem();
         Sessao::limpaErro();
 
     }
-    public function excluir(){
+    public function excluir($params){
         $this->auth();
 
         $article = new Article();
-        $article->setIdArticle($_POST['id']);
+        $idArticle = $params[0];
+        $article->setIdArticle($idArticle);
 
         $articleDAO = new articleDAO();
 
-        if(!$articleDAO->excluir($article)){
-            Sessao::gravaMensagem("Usuário (id:{$article->getIdarticle()}) inexistente.");
+        if(!$articleDAO->excluir($article->getIdArticle())){
+            Sessao::gravaMensagem("Artigo (id:{$article->getIdArticle()}) inexistente.");
             $this->redirect('/article/myArticles');
         }
 
-        Sessao::gravaMensagem("article '{$article->getTitle()}' excluido com sucesso!");
+        Sessao::gravaMensagem("Artigo excluído com sucesso!");
 
         $this->redirect('/article/myArticles');
-    }
-    public function autorizar(){
-        $this->auth();
     }
 
 }

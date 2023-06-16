@@ -10,8 +10,7 @@
     <h2>Excluir artigo :(</h2>
     <div class="containerCadastroPost" style="padding: 2rem">
 
-        <form action="http://<?php echo APP_HOST; ?>/article/excluir" method="post" id="form_cadastro">
-            <input type="hidden" class="form-control" name="idArticle" id="idArticle" value="<?php echo $viewVar['article']->getIdArticle(); ?>">
+        <form action="http://<?php echo APP_HOST; ?>/article/excluir/<?= $viewVar['article']->getIdArticle() ?>" method="post" id="form_cadastro">
             <label>
                 <span>
                     Nome da Artigo
