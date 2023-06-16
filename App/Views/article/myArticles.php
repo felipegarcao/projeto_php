@@ -51,7 +51,7 @@
                   <span>Pendente</span>
                 </div>
                 <button class="position-absolute btn" style="right: 20px; top: 10px;">
-                  <a href="http://<?= APP_HOST ?>/article/edit/<?= $article->getIdArticle() ?>">
+                  <a href="http://<?= APP_HOST ?>/article/edit/<?= $article->getIdArticle() ?>"  class="pencilEdit">
                     <img src="http://<?php echo APP_HOST; ?>/public/icons/pencil.png" alt="editar" />
                   </a>
                 </button>
@@ -64,12 +64,12 @@
                 </button>
               <?php } ?>
 
-              <header>
-                <div class="">
-                  <a href="http://<?= APP_HOST ?>/article/exclusao/<?= $article->getIdArticle() ?>" class="excluir">
+              <header style="position: relative;"> 
+                <div style="position: absolute; top: 0; right: -135px;">
+                  <a href="http://<?= APP_HOST ?>/article/exclusao/<?= $article->getIdArticle() ?>" class="closePost" >
                       <img src="http://<?php echo APP_HOST; ?>/public/icons/x.png" alt="apagar" />
                   </a>
-              </div>
+                </div>
                 <a href="http://<?= APP_HOST ?>/article/detalhes/<?= $article->getIdArticle() ?>">
                   <strong class="text-center"><?= $article->getTitle() ?></strong>
                 </a>

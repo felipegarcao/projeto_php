@@ -734,3 +734,45 @@ html {
   background-color: #F8F8F8;
   padding: 10px;
 }
+
+
+
+
+/* posts */
+
+.pencilEdit {
+  color: #F8F8F8;
+  padding: .5rem;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FF57B2;
+  outline: 0;
+  border: 0;
+  margin-bottom: 1rem;
+}
+
+.pencilEdit:hover {
+  filter: brightness(0.9);
+}
+
+.closePost {
+  color: #FF57B2;
+  padding: .7rem;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  outline: 0;
+  border: 0;
+  margin-bottom: 1rem;
+}
+
+.closePost:hover {
+  filter: brightness(0.9);
+}
+
+
+
