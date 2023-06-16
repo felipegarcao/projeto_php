@@ -105,19 +105,16 @@ class UserController extends Controller
         Sessao::limpaMensagem();
     }
 
-    public function resetPassword() {
+    public function resetPassword()
+    {
         $this->auth();
-
-        $user = new UserDAO; 
+    
+        $user = new UserDAO;
         self::setViewParam('user', $user->getById($_SESSION['idUser']));
-
-        Sessao::limpaMensagem();
-
-        $this->render('/user/reset-password');
-        
+    
         if ($_POST) {
             $usuario = new User();
-            
+    
             $usuario->setIdUser($_SESSION['idUser']);
             $new_password = $_POST['password'];
             $password_confirm = $_POST['password_confirm'];
@@ -128,38 +125,36 @@ class UserController extends Controller
     
             if ($new_password !== $password_confirm) {
                 $erros[] = "As senhas digitadas não coincidem!";
-            } 
+            }
     
             if ($erros) {
                 Sessao::gravaErro($erros);
-                $this-> redirect('/user/resetPassword' . $usuario->getIdUser());
                 Sessao::limpaFormulario();
                 Sessao::limpaMensagem();
-                Sessao::limpaErro();
+                $this->redirect('/user/resetPassword');
             }
+            
     
             try {
                 $usuario->setPassword(password_hash($new_password, PASSWORD_DEFAULT));
                 $usuarioDAO->atualizarPassword($usuario);
     
-            } catch (\Exception $e) {
-                Sessao::gravaMensagem($e->getMessage());
-                $this->redirect('/home');
                 Sessao::limpaFormulario();
                 Sessao::limpaMensagem();
                 Sessao::limpaErro();
+    
+                Sessao::gravaMensagem("Senha atualizada com sucesso!");
+    
+                $this->redirect('/home');
+            } catch (\Exception $e) {
+                Sessao::gravaMensagem($e->getMessage());
+                $this->redirect('/user/resetPassword');
             }
-    
-            Sessao::limpaFormulario();
-            Sessao::limpaMensagem();
-            Sessao::limpaErro();
-    
-            Sessao::gravaMensagem("Usuário atualizado com sucesso!");
-    
-            $this->redirect('/home');
-
+        } else {
+            $this->render('/user/reset-password');
         }
     }
+    
 
     public function cadastro()
     {

@@ -124,38 +124,38 @@ class ArticleDAO extends BaseDAO
             throw new \Exception("Erro na gravação de dados." . $e->getMessage(), 500);
         }
     }
+    public function atualizar(Article $article)
+{
+    try {
+        $title = $article->getTitle();
+        $text = $article->getText();
+        $resume = $article->getResume();
+        $image = $article->getImage();
+        $status = $article->getStatus();
+        $idUser = $article->getUser()->getIdUser();
+        $idCategory = $article->getCategory()->getIdCategory();
+        $idArticle = $article->getIdArticle(); // Adicione essa linha para obter o ID do artigo
 
-    public  function atualizar(Article $article)
-    {
-        try {
-
-            $title           = $article->getTitle();
-            $text          = $article->getText();
-            $resume          = $article->getResume();
-            $image     = $article->getImage();
-            $status      = $article->getStatus();
-            $idUser   = $article->getUser()->getIdUser();
-            $idCategory   = $article->getCategory()->getIdCategory();
-
-            return $this->update(
-                'article',
-                "title = :title, resume = :resume, text = :text, image = :image, status = :status, createdAt= :createdAt, idUser= :idUser, idCategory= :idCategory",
-                [
-                    ':title'         =>$title,
-                    ':resume'        =>$resume,
-                    ':text'        =>$text,
-                    ':image'   =>$image,
-                    ':status'    =>$status,
-                    ':idUser'       =>$idUser,
-                    ':idCategory'       =>$idCategory
-                ],
-                "idArticle = :idArticle"
-            );
-
-        }catch (\Exception $e){
-            throw new \Exception("Erro na gravação de dados." . $e->getMessage(), 500);
-        }
+        return $this->update(
+            'article',
+            "title = :title, resume = :resume, text = :text, image = :image, status = :status, idUser = :idUser, idCategory = :idCategory",
+            [
+                ':title' => $title,
+                ':resume' => $resume,
+                ':text' => $text,
+                ':image' => $image,
+                ':status' => $status,
+                ':idUser' => $idUser,
+                ':idCategory' => $idCategory,
+                ':idArticle' => $idArticle // Adicione essa linha para vincular o ID do artigo na condição WHERE
+            ],
+            "idArticle = :idArticle"
+        );
+    } catch (\Exception $e) {
+        throw new \Exception("Erro na gravação de dados." . $e->getMessage(), 500);
     }
+}
+    
 
     public  function atualizarImagem(Article $article)
     {

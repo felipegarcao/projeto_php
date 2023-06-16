@@ -195,14 +195,81 @@ class ArticleController extends Controller
         self::setViewParam('article', $article->getById($idArticle));
         $comment = new CommentDAO; 
         self::setViewParam('comments', $comment->getByArticleId($idArticle));
-        $user = new UserDAO; 
-        self::setViewParam('user', $user->getById($_SESSION['idUser']));
-    
+        $categoryDAO = new CategoryDAO();
+        $listCategory = $categoryDAO->listar();
+        self::setViewParam('listCategory', $listCategory);
     
         Sessao::limpaErro();
     
         $this->render('/article/edit');
     }
+
+    public function update($params)
+    {
+        $this->auth();
+
+        $idArticle = $params[0];
+
+        $articleDAO = new ArticleDAO();
+        $article = $articleDAO->getById($idArticle);
+
+        if (!$article) {
+            Sessao::gravaErro("Artigo (id: {$idArticle}) inexistente.");
+            $this->redirect('/article');
+        }
+
+        $title = $_POST['title'];
+        $text = nl2br($_POST['text']);
+        $resume = $_POST['resume'];
+        $status = $article->getStatus();
+        $idUser = $article->getUser()->getIdUser();
+        $idCategory = $article->getCategory()->getIdCategory();
+
+        // Atualize os atributos do objeto $article com os novos valores
+        $article->setTitle($title);
+        $article->setText($text);
+        $article->setResume($resume);
+        $article->setStatus($status);
+        // Não atualize as propriedades User e Category
+
+        // Verifique se um novo arquivo de imagem foi enviado
+        if (!empty($_FILES['image']['name'])) {
+            $objUpload = new Upload($_FILES['image']);
+            $objUpload->setName('img-id'.$idArticle);
+            $dir = 'public/images/articles';
+
+            $sucesso = $objUpload->upload($dir);
+
+            if (!$sucesso) {
+                Sessao::gravaErro("Imagem: Problemas ao enviar a imagem do ARTICLE. Código de erro: ".$objUpload->getError());
+                $this->redirect('/article/edit/'.$idArticle);
+            }
+
+            $newImageName = $objUpload->getBasename();
+            $article->setImage($newImageName);
+        }
+
+        $articleValidador = new ArticleValidador();
+        $resultadoValidacao = $articleValidador->validar($article);
+
+        if ($resultadoValidacao->getErros()) {
+            Sessao::gravaErro($resultadoValidacao->getErros());
+            $this->redirect('/article/edit/'.$idArticle);
+        }
+
+        try {
+            $articleDAO->atualizar($article);
+        } catch (\Exception $e) {
+            Sessao::gravaMensagem($e->getMessage());
+           
+        }
+
+        Sessao::limpaMensagem();
+        Sessao::limpaErro();
+
+        $this->redirect('/home');
+    }
+
 
 
 
