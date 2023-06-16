@@ -38,7 +38,7 @@
                   <img src="http://<?php echo APP_HOST; ?>/public/icons/pencil.png" alt="tornar administrador" />
                 </button>
                 <button class="banir" type="button" style="background-color: #FF57B2;" data-bs-toggle="modal" data-bs-target="#banirModal<?= $user->getIdUser() ?>">
-                  &#x1F6AB;
+                <img src="http://<?php echo APP_HOST; ?>/public/icons/block.svg" alt="" />
                 </button>
               <?php } elseif ($user->getStats() == "banned") { ?>
                 <button class="banir" type="button" style="background-color: #FF57B2;">
@@ -46,7 +46,7 @@
                 </button>
               <?php } else { ?>
                 <button class="negado" type="button" style="background-color: #FF57B2; width:40px;">
-                  &#x2654;
+                <img src="http://<?php echo APP_HOST; ?>/public/icons/adm.svg" alt="" />
                 </button>
               <?php } ?>
 

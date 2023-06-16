@@ -41,7 +41,7 @@
         } else {
           foreach ($filteredArticles as $article) {
             ?>
-            <div class="cardContainer">
+            <div class="cardContainer" style="position: relative;">
               <?php if ($article->getStatus() == "Aproved") { ?>
                 <div class="flag aceito">
                   <span>Aprovado</span>
@@ -50,7 +50,7 @@
                 <div class="flag pendente">
                   <span>Pendente</span>
                 </div>
-                <button class="position-absolute btn" style="right: 20px; top: 10px;">
+                <button class="position-absolute btn" style="right: 30px; top: -44px;">
                   <a href="http://<?= APP_HOST ?>/article/edit/<?= $article->getIdArticle() ?>"  class="pencilEdit">
                     <img src="http://<?php echo APP_HOST; ?>/public/icons/pencil.png" alt="editar" />
                   </a>
@@ -64,8 +64,8 @@
                 </button>
               <?php } ?>
 
-              <header style="position: relative;"> 
-                <div style="position: absolute; top: 0; right: -135px;">
+              <header> 
+                <div style="position: absolute; top: -37px; right: 0;">
                   <a href="http://<?= APP_HOST ?>/article/exclusao/<?= $article->getIdArticle() ?>" class="closePost" >
                       <img src="http://<?php echo APP_HOST; ?>/public/icons/x.png" alt="apagar" />
                   </a>
