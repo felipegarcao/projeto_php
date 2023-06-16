@@ -20,6 +20,9 @@ class UserController extends Controller
     public function perfil()
     {
         $this->auth();
+        Sessao::limpaFormulario();
+        Sessao::limpaMensagem();
+        Sessao::limpaErro();
 
         $user = new UserDAO; 
         self::setViewParam('user', $user->getById($_SESSION['idUser']));
@@ -130,6 +133,9 @@ class UserController extends Controller
             if ($erros) {
                 Sessao::gravaErro($erros);
                 $this-> redirect('/user/resetPassword' . $usuario->getIdUser());
+                Sessao::limpaFormulario();
+                Sessao::limpaMensagem();
+                Sessao::limpaErro();
             }
     
             try {
@@ -139,6 +145,9 @@ class UserController extends Controller
             } catch (\Exception $e) {
                 Sessao::gravaMensagem($e->getMessage());
                 $this->redirect('/home');
+                Sessao::limpaFormulario();
+                Sessao::limpaMensagem();
+                Sessao::limpaErro();
             }
     
             Sessao::limpaFormulario();
