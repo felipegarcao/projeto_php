@@ -24,6 +24,8 @@ class HomeController extends Controller
         self::setViewParam('listArticle', $listArticle);
         
         $this->render('/home/index');
+        Sessao::limpaMensagem();
+        Sessao::limpaErro();
     }
     
     public function getByCategory()
