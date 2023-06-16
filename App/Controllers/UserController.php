@@ -239,8 +239,9 @@ class UserController extends Controller
     public function atualizar()
     {
         $this->auth();
-        $user = new UserDAO; 
-        self::setViewParam('user', $user->getById($_SESSION['idUser']));
+        $userDAO = new UserDAO; 
+        self::setViewParam('user', $userDAO->getById($_SESSION['idUser']));
+        
         $user = new User();
         $user->setIdUser($_SESSION['idUser']);
         $user->setName($_POST['name']);
@@ -260,30 +261,30 @@ class UserController extends Controller
 
         try {
             $dir = 'public/images/users';
-            $file = $dir .'/'.$_POST['avatar'];
+            $file = $dir . '/' . $_POST['avatar'];
 
-            if (empty($_POST['avatar'])) {
-                if (file_exists($file)) unlink($file);
-            }
-
-            if (!empty($_FILES['avatar']['name'])) {      
+            if (empty($_FILES['avatar']['name'])) {
+                $userDAO = new UserDAO();
+                $previousUser = $userDAO->getById($_SESSION['idUser']);
+                $user->setAvatar($previousUser->getAvatar());
+            } else {
                 $objUpload = new Upload($_FILES['avatar']);
-                $objUpload->setName('img-id'.$user->getIdUser());
+                $objUpload->setName('img-id' . $user->getIdUser());
                 $user->setAvatar($objUpload->getBasename());
 
                 if (file_exists($file)) unlink($file);
                 
                 $sucesso = $objUpload->upload($dir); 
-    
-                if (!$sucesso) {
-                    $resultadoValidacao->addErro('imagem',"Imagem: Problemas ao enviar a imagem do user. Código de erro: ".$objUpload->getError());
-                    Sessao::gravaErro($resultadoValidacao->getErros());
-                    $this->redirect('/user'.$_POST['id'].'?busca='.$_GET['busca'].'&paginaSelecionada='.$_GET['paginaSelecionada']);
-                }               
-            }
 
-            $userDAO = new UserDAO();
-            $userDAO->atualizar($user);
+                if (!$sucesso) {
+                    $resultadoValidacao->addErro('imagem', "Imagem: Problemas ao enviar a imagem do user. Código de erro: " . $objUpload->getError());
+                    Sessao::gravaErro($resultadoValidacao->getErros());
+                    $this->redirect('/user' . $_POST['id'] . '?busca=' . $_GET['busca'] . '&paginaSelecionada=' . $_GET['paginaSelecionada']);
+                }              
+                }
+
+                $userDAO = new UserDAO();
+                $userDAO->atualizar($user);
 
         } catch (\Exception $e) {
             Sessao::gravaMensagem($e->getMessage());

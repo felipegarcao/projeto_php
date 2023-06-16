@@ -136,8 +136,11 @@ public function edicao($params)
 public function exclusao($params)
 {
     $this->auth();
-    $idCategory = $params[0];
 
+    $user = new UserDAO; 
+    self::setViewParam('user', $user->getById($_SESSION['idUser']));
+    
+    $idCategory = $params[0];
     $categoryDAO = new CategoryDAO();
     $category = $categoryDAO->getById($idCategory);
 
@@ -150,10 +153,6 @@ public function exclusao($params)
 
     if ($isCategoryUsed) {
         Sessao::gravaMensagem("A categoria (idCategory: {$idCategory}) está sendo utilizada em outras tabelas e não pode ser excluída.");
-        $this->redirect('/category');
-    } else {
-        $categoryDAO->excluir($idCategory);
-        Sessao::gravaMensagem("Categoria excluída com sucesso.");
         $this->redirect('/category');
     }
 
@@ -170,8 +169,8 @@ public function exclusao($params)
     public function excluir()
     {
         $this->auth();
+        
         $idCategory = $_POST['idCategory'];
-    
         $categoryDAO = new CategoryDAO();
         $category = $categoryDAO->getById($idCategory);
     

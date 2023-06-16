@@ -261,19 +261,12 @@ class ArticleDAO extends BaseDAO
     return $resultado->fetchAll(\PDO::FETCH_CLASS, Article::class);
 }
 
-    public function excluir(Article $article)
+    public function excluir(int $idArticle)
     {
         try {
-
-            $idArticle = $article->getIdArticle();
-            $file = 'public/images/articles/'.$article->getImage();
-
-            if (file_exists($file)) unlink($file);
-
-            return $this->delete('article',"idArticle = $idArticle");
-
-        }catch (\Exception $e){
-            throw new \Exception("Erro ao deletar" . $e->getMessage(), 500);
+            return $this->delete('article', "idArticle = $idArticle");
+        } catch (\Exception $e) {
+            throw new \Exception("Erro ao excluir a artigo. " . $e->getMessage(), 500);
         }
     }
 }

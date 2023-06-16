@@ -65,6 +65,11 @@
               <?php } ?>
 
               <header>
+                <div class="">
+                  <a href="http://<?= APP_HOST ?>/article/exclusao/<?= $article->getIdArticle() ?>" class="excluir">
+                      <img src="http://<?php echo APP_HOST; ?>/public/icons/x.png" alt="apagar" />
+                  </a>
+              </div>
                 <a href="http://<?= APP_HOST ?>/article/detalhes/<?= $article->getIdArticle() ?>">
                   <strong class="text-center"><?= $article->getTitle() ?></strong>
                 </a>

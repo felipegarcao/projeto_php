@@ -7,20 +7,19 @@
     </div>
 <?php } ?>
 <div class="loginContainer" style="flex-direction: column; margin-top: 2rem; height: calc(100vh - 230px)">
-    <h2>Excluir categoria</h2>
+    <h2>Excluir artigo :(</h2>
     <div class="containerCadastroPost" style="padding: 2rem">
 
-        <form action="http://<?php echo APP_HOST; ?>/category/excluir/<?= $viewVar['category']->getIdCategory() ?>" method="post" id="form_cadastro">
-            <input type="hidden" class="form-control" name="idCategory" id="idCategory" value="<?php echo $viewVar['category']->getIdCategory(); ?>">
+        <form action="http://<?php echo APP_HOST; ?>/article/excluir/<?= $viewVar['article']->getIdArticle() ?>" method="post" id="form_cadastro">
             <label>
                 <span>
-                    Nome da Categoria
+                    Nome da Artigo
                 </span>
-                <input type="text" class="form-control" name="name" id="nome" value="<?php echo $viewVar['category']->getName(); ?>" readonly>
+                <input type="text" class="form-control" name="name" id="name" value="<?php echo $viewVar['article']->getTitle(); ?>" readonly>
             </label>
 
             <div class="d-flex gap-3 justify-content-center">
-            <a href="http://<?php echo APP_HOST; ?>/category" class="buttonCancel">Cancelar</a>
+            <a href="http://<?php echo APP_HOST; ?>/article/myArticles" class="buttonCancel">Cancelar</a>
                 <button type="submit" class="buttonSubmit">Confirmar</button>
             </div>
         </form>
