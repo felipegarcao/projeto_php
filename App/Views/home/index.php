@@ -11,6 +11,16 @@
   <br>
 </div>
 <?php } ?>
+
+<?php if ($viewVar['user']->getStats() == "banned") { ?>
+
+  <div class="alert alert-warning" role="alert">
+  <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <?php echo "Você foi banido! Suas publicações aprovadas ainda serão exibidas e você poderá ver publicações de outros usuários";?>
+  <br>
+</div>
+
+<?php } ?>
 <div class="posts">
 
 

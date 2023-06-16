@@ -22,10 +22,24 @@
           </select>
         </form>
 
-        <?php foreach ($viewVar['articleExibition'] as $article) {
-          $statusFilter = isset($_GET['status']) ? $_GET['status'] : '';
+        <?php
+        $filteredArticles = [];
+        $statusFilter = isset($_GET['status']) ? $_GET['status'] : '';
 
+        foreach ($viewVar['articleExibition'] as $article) {
           if ($statusFilter === '' || $article->getStatus() === $statusFilter) {
+            $filteredArticles[] = $article;
+          }
+        }
+
+        if (empty($filteredArticles)) {
+          if ($statusFilter === 'Denied') { ?>
+            <div class="alert alert-info" role="alert">Nenhum artigo negado encontrado</div>
+          <?php } else { ?>
+            <div class="alert alert-info" role="alert">Nenhum artigo encontrado</div>
+          <?php }
+        } else {
+          foreach ($filteredArticles as $article) {
             ?>
             <div class="cardContainer">
               <?php if ($article->getStatus() == "Aproved") { ?>
