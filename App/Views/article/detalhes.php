@@ -74,13 +74,12 @@
             <div class="Comments">
               <div class="postsTop">
                 <ul>
-                <a class="custom" href="http://<?php echo APP_HOST; ?>/user/author/<?= $comment->getUser()->getIdUser(); ?>">
-                  <li>
-                    <?= $comment->getUser()->getName() ?>
-                  </li>
-            </a>
+                  <a class="custom" href="http://<?php echo APP_HOST; ?>/user/author/<?= $comment->getUser()->getIdUser(); ?>">
+                    <li>
+                      <?= $comment->getUser()->getName() ?>
+                    </li>
+                  </a>
                   <?php if ($comment->getUser()->getName() == $viewVar['user']->getName() || $viewVar['user']->getType() == "adm") { ?>
-
                     <div class="actions">
                       <div class="d-flex align-items-center gap-2">
                         <img src="http://<?php echo APP_HOST; ?>/public/icons/calendar.png" alt="calendario" />
@@ -92,11 +91,11 @@
                         </button>
                       </a>
 
-                      <?php if ($comment->getUser()->getName() == $viewVar['user']->getName()){?>
-                      <button class="negado" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        <img src="http://<?php echo APP_HOST; ?>/public/icons/pencil.png" alt="apagar comentario" />
-                      </button>
-                      <?php }?>
+                      <?php if ($comment->getUser()->getName() == $viewVar['user']->getName()) { ?>
+                        <button class="negado edit-comment-button" data-comment-id="<?= $comment->getIdComment() ?>" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal<?= $comment->getIdComment() ?>">
+                          <img src="http://<?php echo APP_HOST; ?>/public/icons/pencil.png" alt="editar comentario" />
+                        </button>
+                      <?php } ?>
                     </div>
                   <?php } ?>
                 </ul>
@@ -110,31 +109,28 @@
   </main>
 </body>
 
-
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Comentario</h1>
-        <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
-          <img src="http://<?php echo APP_HOST; ?>/public/icons/x.png" alt="negar postagem" />
-        </button>
-      </div>
-      <div class="modal-body">
-        <form method="post" action="">
-          <textarea rows="9" name="feedback" id="feedback"></textarea>
-
-      </div>
-      <div class="actions">
-        <button type="submit" class="aceito">Finalizar</button>
-        </form>
+<?php foreach ($viewVar['comments'] as $comment) { ?>
+  <div class="modal fade" id="exampleModal<?= $comment->getIdComment() ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Comentário</h1>
+          <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+            <img src="http://<?php echo APP_HOST; ?>/public/icons/x.png" alt="fechar modal" />
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="post" action="http://<?= APP_HOST ?>/article/editarComentario/<?= $comment->getIdComment() ?>/<?= $viewVar['article']->getIdArticle() ?>">
+            <textarea rows="9" name="text" id="text"><?= $comment->getText() ?></textarea>
+        </div>
+        <div class="actions">
+          <button type="submit" class="aceito">Finalizar</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
-
-
+<?php } ?>
 
 <script>
   function likeButtonClick(teste) {

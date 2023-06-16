@@ -59,7 +59,20 @@ class CategoryDAO extends BaseDAO
         }
     }
     
+    public function isCategoryUsed($idCategory)
+    {
+        $query = "SELECT COUNT(*) as count FROM article WHERE idCategory = " . $idCategory;
+        $resultado = $this->select($query);
+        $dataSet = $resultado->fetch();
+    
+        if ($dataSet) {
+            return $dataSet['count'] > 0;
+        }
+    
+        return false;
     }
     
     
     
+    
+}

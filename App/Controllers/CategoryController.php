@@ -133,27 +133,38 @@ public function edicao($params)
     Sessao::limpaMensagem();
     Sessao::limpaErro();
 }
-    
-    public function exclusao($params)
-    {
-        $this->auth();
-        $idCategory = $params[0];
-    
-        $categoryDAO = new CategoryDAO();
-        $category = $categoryDAO->getById($idCategory);
-    
-        if (!$category) {
-            Sessao::gravaMensagem("Categoria (idCategory: {$idCategory}) inexistente.");
-            $this->redirect('/category');
-        }
-    
-        self::setViewParam('category', $category);
-    
-        $this->render('/category/exclusao');
-    
-        Sessao::limpaMensagem();
-        Sessao::limpaErro();
+public function exclusao($params)
+{
+    $this->auth();
+    $idCategory = $params[0];
+
+    $categoryDAO = new CategoryDAO();
+    $category = $categoryDAO->getById($idCategory);
+
+    if (!$category) {
+        Sessao::gravaMensagem("Categoria (idCategory: {$idCategory}) inexistente.");
+        $this->redirect('/category');
     }
+
+    $isCategoryUsed = $categoryDAO->isCategoryUsed($idCategory);
+
+    if ($isCategoryUsed) {
+        Sessao::gravaMensagem("A categoria (idCategory: {$idCategory}) está sendo utilizada em outras tabelas e não pode ser excluída.");
+        $this->redirect('/category');
+    } else {
+        $categoryDAO->excluir($idCategory);
+        Sessao::gravaMensagem("Categoria excluída com sucesso.");
+        $this->redirect('/category');
+    }
+
+    self::setViewParam('category', $category);
+
+    $this->render('/category/exclusao');
+
+    Sessao::limpaMensagem();
+    Sessao::limpaErro();
+}
+
     
     
     public function excluir()
