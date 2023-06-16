@@ -169,7 +169,23 @@ class ArticleController extends Controller
 
 }
 
-   
+
+    public function editarComentario($params)
+    {
+        $this->auth();
+    
+        $idComentario = $params[0];
+        $idArtigo = $params[1];
+        $commentDAO = new CommentDAO();
+        $comment = new Comment();
+        $comment->setIdComment($idComentario);
+        $comment->setText($_POST['text']);
+    
+        $commentDAO->atualizar($comment);
+    
+        $this->redirect('/article/detalhes/' . $idArtigo);
+    }
+
     
     public function edit($params) {
         $this->auth();

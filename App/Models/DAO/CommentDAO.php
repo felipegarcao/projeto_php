@@ -93,6 +93,20 @@ class CommentDAO extends BaseDAO
 
     public function atualizar(Comment $comment)
     {
+            try {
+                $idComment = $comment->getIdComment();
+                $text = $comment->getText();
+        
+                $params = [
+                    ':idComment' => $idComment,
+                    ':text' => $text
+                ];
+        
+                return $this->update('comment', "text = :text", $params, "idComment = :idComment");
+            } catch (\Exception $e) {
+                throw new \Exception("Erro na atualização dos dados. " . $e->getMessage(), 500);
+            }
+       
 
     }
     
