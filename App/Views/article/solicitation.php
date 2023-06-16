@@ -61,7 +61,7 @@
               <textarea rows="9" name="feedback" id="feedback"><?php echo $Sessao::retornaValorFormulario('feedback'); ?></textarea>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="aceito">Finalizar</button>
+            <button type="submit" class="negado" style="background-color: #FF57B2; width:100px; height:50px; color:white;">Finalizar</button>
             </form>
           </div>
         </div>
