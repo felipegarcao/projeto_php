@@ -32,7 +32,7 @@
             </select>
           </td>
           <td class="text-right">
-            <div class="actions" style="justify-content: center;">
+            <div class="actions" style="justify-content: flex-end;">
               <?php if ($user->getType() != "adm" && $user->getStats() != "banned") { ?>
                 <button class="negado" type="button" style="background-color: #FF57B2;" data-bs-toggle="modal" data-bs-target="#exampleModal<?= $user->getIdUser() ?>">
                   <img src="http://<?php echo APP_HOST; ?>/public/icons/pencil.png" alt="tornar administrador" />
