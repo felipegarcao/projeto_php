@@ -142,7 +142,6 @@ class ArticleController extends Controller
         $idArticle = $params[0];
         $likeDAO = new LikeDAO();
         $likeStatus = $likeDAO->getLikeStatus($idArticle, $user->getIdUser());
-        var_dump($likeStatus);
     
         if ($likeStatus) {
             $likeDAO->deleteLike($idArticle, $user->getIdUser());

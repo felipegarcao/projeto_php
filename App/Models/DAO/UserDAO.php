@@ -196,7 +196,7 @@ public function banimento(User $user)
         try {
 
             $idUser         = $usuario->getIdUser();
-            $password   = $usuario->getPassword();
+            $new_password   = $usuario->getPassword();
 
             return $this->update(
                 'user', 
@@ -204,7 +204,7 @@ public function banimento(User $user)
                 
                 [
                     ':idUser'       =>$idUser, 
-                    ':password' =>$password
+                    ':password' => $new_password
                 ], 
                 "idUser = :idUser"
             );

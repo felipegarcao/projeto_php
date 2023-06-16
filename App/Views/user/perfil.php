@@ -38,7 +38,7 @@
       </label>
 
       <button type="submit" class="buttonSubmit">Confirmar</button>
-      <a href="http://<?php echo APP_HOST; ?>/user/resetPassword/<?php echo $viewVar['user']->getIdUser(); ?>" class="buttonCancel">
+      <a href="http://<?php echo APP_HOST. '/user/resetPassword' ?>" class="buttonCancel">
        Resetar Senha </a>
 
     </form>
