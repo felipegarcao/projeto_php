@@ -32,7 +32,6 @@ abstract class Controller
             require_once PATH . '/App/Views/layouts/header.php';
             require_once PATH . '/App/Views/layouts/menu.php';
             require_once PATH . '/App/Views/' . $view . '.php';
-            require_once PATH . '/App/Views/layouts/footer.php';
         }else {
             require_once PATH . '/App/Views/layouts/header.php';
             require_once PATH . '/App/Views/' . $view . '.php';

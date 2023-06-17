@@ -110,7 +110,7 @@
               <div class="modal-body" style="padding: 2rem;">
                 <div class="d-flex gap-3">
                   <div>
-                    <img src="http://<?php echo APP_HOST; ?>/public/icons/warning-big.png" alt="visualizar justificativa de negação" />
+                    <img src="https://media.tenor.com/aae3d8PF48AAAAAC/despicable-me-minion.gif" alt="visualizar justificativa de negação" />
                   </div>
                   <div class="detalhesPostInfo">
                     <ul>
